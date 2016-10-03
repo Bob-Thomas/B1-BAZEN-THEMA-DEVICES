@@ -527,9 +527,9 @@ define Cortex
     PREFIX          := $(GCC-ARM)/bin/arm-none-eabi-
     ifeq ($(wildcard $(PREFIX)* ),)
         PREFIX          := $(GCC-ARM)/bin/arm-eabi-
-    else
-        PREIX       := $(GCC-ARM)/usr/bin/arm-eabi-
     endif
+    else
+        PREFIX       := $(GCC-ARM)/usr/bin/arm-none-eabi-
    endif
    SEARCH          += $(BMPTK)/targets/cortex $(BMPTK)/targets/cortex/cmsis
    SOURCES         += bmptk_cortex.c

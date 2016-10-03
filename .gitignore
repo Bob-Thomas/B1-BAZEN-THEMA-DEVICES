@@ -28,7 +28,9 @@
 *.lib
 
 # Executables
+
 *.out
 *.elf
 *.bin
 *.map
+*.ld
