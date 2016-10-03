@@ -3,9 +3,9 @@ project(nul_versie)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-include_directories(rtos)
-include_directories(hwlib)
-include_directories(bmptk)
+include_directories(../libs/rtos)
+include_directories(../libs/hwlib)
+include_directories(../libs/bmptk)
 
 set(SOURCE_FILES src/main.cpp)
 

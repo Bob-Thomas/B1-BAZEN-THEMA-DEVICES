@@ -4,30 +4,30 @@
 #
 # Local definitions for the bmptk makefile
 #
-# If you want to change the definitions below to match 
+# If you want to change the definitions below to match
 # the situation on your PC:
 # COPY THIS FILE TO Makefile.custom AND CHANGE THAT FILE.
 # This way you can overwrite the bmptk files without erasing
 # your changes when you download a new bmptk over the old tree.
 #
 # Distributed under the Boost Software License, Version 1.0.
-# (See accompanying file LICENSE_1_0.txt or copy at 
+# (See accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt)
-# 
+#
 #############################################################################
-                                                                 
+
 ifeq ($(OS),Windows_NT)
- 
+
    # WPF32 is the windows directory for 32-bit applications
-   
+
    # 7za command line
    # used (only) to create a bmptk zip file
    7za             ?= "$(WPF32)/7-Zip/7za"
 
    # select the windows toolchain: SysProgs (=default) or Nuwen
    # GCC-WIN         ?= C:/SysGCC/MinGW64
-   GCC-WIN         ?= C:\mingw64
-   #GCC-WIN         ?= C:/MinGW
+   #GCC-WIN         ?= C:\mingw64
+   GCC-WIN         ?= C:/MinGW
 
    # select the AVR toolchain: Atmel (=default) or Arduino
    #GCC-AVR         ?= $(WPF32)/Arduino/hardware/tools/avr
@@ -42,32 +42,32 @@ ifeq ($(OS),Windows_NT)
    GCC-MSP430      ?= C:/ti/ccsv6/tools/compiler/gcc_msp430_4.9.14r1_98
    STM32LU         ?= $(WPF32)/STMicroelectronics/STM32 ST-LINK Utility
    MSP430FLASHER   ?= C:/ti/MSP430Flasher_1.3.3/MSP430Flasher
-   
+
    # esp8266 stuff
    ESPRESSIF       ?= C:/Espressif
    ESP-SDK         ?= $(ESPRESSIF)/ESP8266_SDK
    GCC-XTENSA      ?= $(ESPRESSIF)/xtensa-lx106-elf-separate
    ESP-TOOL        ?= $(ESPRESSIF)/xtensa-lx106-elf/bin/esptool
    ESP-LOADER      ?= $(ESPRESSIF)/utils/esptool.exe
-   
+
    # serial port defaults
    SERIAL_PORT     ?= COM4
-   SERIAL_BAUDRATE ?= 38400 
-   CONSOLE_BAUDRATE ?= 38400 
-   
+   SERIAL_BAUDRATE ?= 38400
+   CONSOLE_BAUDRATE ?= 38400
+
    # python interpreter
    PYTHON          ?= "C:/Python27/Python"
-   
+
 else
 
    # on Linux the path can in most cases be omitted
-   GCC-ARM         ?= 
+   GCC-ARM         ?=
    GCC-AVR         ?=
-   GCC-MSP430      ?= 
-   
+   GCC-MSP430      ?=
+
    # serial port defaults
    SERIAL_PORT      ?= /dev/ttyUSB0
    SERIAL_BAUDRATE  ?= 38400
-   CONSOLE_BAUDRATE ?= 38400 
+   CONSOLE_BAUDRATE ?= 38400
 
 endif
