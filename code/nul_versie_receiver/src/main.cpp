@@ -3,7 +3,7 @@
 #include <rtos.hpp>
 #include "hwlib.hpp"
 
-char bits[15];
+char bits[16];
 bool bit_found = false;
 bool bit_value = false;
 
@@ -15,25 +15,25 @@ void bit_one();
 void bit_zero() {
     bit_found = true;
     bit_value = false;
+    hwlib::wait_us(400);
 }
 
 void bit_one() {
     bit_found = true;
-    bit_value = false;
+    bit_value = true;
+    hwlib::wait_us(400);
 }
 
 void signal_found(hwlib::pin_in & signal) {
 
     bool in_progress = true;
 
-    hwlib::wait_us(200);
+    hwlib::wait_us(500);
 
     if(signal.get() == 1) {
         in_progress = false;
         bit_zero();
     }
-
-    hwlib::wait_us(800);
 
     if(signal.get() == 0 && in_progress == true) {
         bit_one();
@@ -47,7 +47,8 @@ void idle(hwlib::pin_in & signal) {
 
     while(starting) {
         if(signal.get() == 0) {
-            hwlib::wait_us(800);
+
+            hwlib::wait_us(700);
 
             if(signal.get() == 0) {
                 starting = false;
@@ -79,7 +80,6 @@ int main( void ){
     //auto const active = 100'000;
     //auto last_signal = hwlib::now_us() - active;
 
-    hwlib::cout << "hello there \n";
     int amount_bits_found = 0;
     for(;;){
 
@@ -94,9 +94,12 @@ int main( void ){
                 amount_bits_found++;
             } else{
 
-                for(int i = 0; i < 15; i++) {
-                    hwlib::cout << bits[i] << "\n";
+                for(int i = 0; i < 16; i++) {
+                    hwlib::cout << bits[i];
                 }
+
+                hwlib::cout << "\n-";
+                amount_bits_found = 0;
             }
 
             bit_found = false;
