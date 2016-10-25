@@ -1,0 +1,8 @@
+//
+// Created by endargon on 10/25/16.
+//
+
+#ifndef B1_BAZEN_THEMA_DEVICES_RECEIVE_H
+#define B1_BAZEN_THEMA_DEVICES_RECEIVE_H
+
+#endif //B1_BAZEN_THEMA_DEVICES_RECEIVE_H

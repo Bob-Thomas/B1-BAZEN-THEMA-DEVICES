@@ -523,13 +523,9 @@ endif
 
 define Cortex
    $(eval $(Embedded))
-   ifeq ($(OS),Windows_NT)
-    PREFIX          := $(GCC-ARM)/bin/arm-none-eabi-
-    ifeq ($(wildcard $(PREFIX)* ),)
-        PREFIX          := $(GCC-ARM)/bin/arm-eabi-
-    endif
-    else
-        PREFIX       := $(GCC-ARM)/usr/bin/arm-none-eabi-
+   PREFIX          := $(GCC-ARM)/usr/local/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-
+   ifeq ($(wildcard $(PREFIX)* ),)
+      PREFIX          := $(GCC-ARM)/bin/arm-eabi-
    endif
    SEARCH          += $(BMPTK)/targets/cortex $(BMPTK)/targets/cortex/cmsis
    SOURCES         += bmptk_cortex.c
