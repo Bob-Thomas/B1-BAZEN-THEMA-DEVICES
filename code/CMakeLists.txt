@@ -287,8 +287,8 @@ set(SOURCE_FILES
     libs/rtos/rtos.cpp
     libs/rtos/rtos.hpp
     libs/rtos/switch_to.hpp
-    "proof of concept/src/tasks/receive.cpp"
-    "proof of concept/src/tasks/receive.h"
+        "proof of concept/src/tasks/receiver.cpp"
+        "proof of concept/src/tasks/receiver.h"
     "proof of concept/src/main.bin"
     "proof of concept/src/main.cpp"
     "proof of concept/src/main.elf"

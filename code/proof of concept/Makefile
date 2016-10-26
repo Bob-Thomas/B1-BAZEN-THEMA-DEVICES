@@ -10,15 +10,15 @@
 
 # settings for Arduino Due projects
 TARGET            ?= arduino_due
-SERIAL_PORT       ?= COM4
+SERIAL_PORT       ?= COM3
 CONSOLE_BAUDRATE  ?= 38400
 STACK_SIZE        ?= 81920
 HEAP              ?= BMPTK
 
 PROJECT 	  	  ?= src/main
 
-SOURCES 		  += ./src/tasks/transmitter.cpp ./src/tasks/gameManager.cpp ./src/tasks/gameClock.cpp
-HEADERS			  += ./src/tasks/transmitter.h ./src/tasks/gameManager.h ./src/tasks/gameClock.h
+SOURCES 		  += ./src/tasks/comStation.cpp ./src/tasks/receiver.cpp ./src/tasks/transmitter.cpp ./src/tasks/gameManager.cpp ./src/tasks/gameClock.cpp
+HEADERS			  += ./src/tasks/comStation.h ./src/tasks/transmitter.h ./src/tasks/gameManager.h ./src/tasks/gameClock.h
 
 # use hwlib
 SEARCH            += ../libs/hwlib
