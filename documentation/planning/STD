@@ -31,7 +31,7 @@
     <entity-ids>
       <counter>
         <item-type type-id="" type="AbstractElementGroup" />
-        <value>253</value>
+        <value>263</value>
       </counter>
       <counter>
         <item-type type-id="initial-state" type="UmlInitialState" />
@@ -168,7 +168,7 @@
           </item>
           <item id="di664447256559856861" cid="ELEM005" type="general-transition" name="" style-class="" visibility="package" change-tracking-state="added" creator="P9a4549ae8bac454b9a96d70ca594eaab" creation-date="10/25/2016 15:48:22" from="di318537323931408621" to="di868543232405544972">
             <style class="default" />
-            <transition guard="" behaviourExpression="">
+            <transition guard="true" behaviourExpression="">
               <trigger>Init received</trigger>
             </transition>
           </item>
@@ -215,7 +215,7 @@
           </item>
           <item id="di819892463499547374" cid="ELEM028" type="general-transition" name="" style-class="" visibility="package" change-tracking-state="added" creator="P9a4549ae8bac454b9a96d70ca594eaab" creation-date="10/26/2016 11:42:31" from="di948405179328194852" to="di852768986765045369">
             <style class="default" />
-            <transition guard="" behaviourExpression="">
+            <transition guard="true" behaviourExpression="">
               <trigger>Hit received</trigger>
             </transition>
           </item>
@@ -239,7 +239,7 @@
           </item>
           <item id="di774044958450772150" cid="ELEM025" type="general-transition" name="" style-class="" visibility="package" change-tracking-state="added" creator="P9a4549ae8bac454b9a96d70ca594eaab" creation-date="10/26/2016 11:36:29" from="di790510837335369224" to="di948405179328194852">
             <style class="default" />
-            <transition guard="" behaviourExpression="">
+            <transition guard="true" behaviourExpression="">
               <trigger>Shot Send</trigger>
             </transition>
           </item>
@@ -264,7 +264,7 @@
           </item>
           <item id="di334995477308480306" cid="ELEM016" type="general-transition" name="" style-class="" visibility="package" change-tracking-state="added" creator="P9a4549ae8bac454b9a96d70ca594eaab" creation-date="10/25/2016 16:18:01" from="di868543232405544972" to="di962964192692978721">
             <style class="default" />
-            <transition guard="" behaviourExpression="">
+            <transition guard="true" behaviourExpression="">
               <trigger>Start game</trigger>
             </transition>
           </item>
@@ -287,7 +287,7 @@
           </item>
           <item id="di716526302125995803" cid="ELEM019" type="general-transition" name="" style-class="" visibility="package" change-tracking-state="added" creator="P9a4549ae8bac454b9a96d70ca594eaab" creation-date="10/25/2016 16:18:57" from="di467873646595771327" to="di185478122201825687">
             <style class="default" />
-            <transition guard="" behaviourExpression="">
+            <transition guard="true" behaviourExpression="">
               <trigger>Signal transfer</trigger>
             </transition>
           </item>
