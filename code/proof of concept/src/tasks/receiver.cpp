@@ -6,7 +6,7 @@
 
 void Receiver::main() {
     rtos::timer receive_timer(this, "receive-timer");
-    for (; ;) {
+    for (;;) {
         wait(enabled);
         while (true) {
             if (signal.get() == 0) {
@@ -23,7 +23,6 @@ void Receiver::main() {
             wait(receive_timer);
         }
         wait(signal_found);
-        hwlib::cout << "KANKER" << "\n";
         bool in_progress = true;
         receive_timer.set(500*rtos::us);
         wait(receive_timer);
@@ -47,6 +46,7 @@ void Receiver::main() {
                 (bit_value) ? bits[amount_bits_found] = '1' : bits[amount_bits_found] = '0';
                 amount_bits_found++;
             } else {
+                hwlib::cout << bits << "\n";
                 controller->receive(bits);
                 amount_bits_found = 0;
             }

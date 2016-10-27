@@ -33,10 +33,17 @@ SOURCES           += rtos.cpp
 DEFINES           += -DPlAYER=2
 DEFINES           += -DLEADER=1
 
-DEFINES           += -DGAMEMODE=PLAYER
 
+player:
+	export DEFINES=DEFINES-DGAMEMODE=PLAYER
+
+leader:
+	export DEFINES=DEFINES-DGAMEMODE=LEADER
 runAvr:
 	sudo stty -F /dev/ttyACM0 speed 1200 cs8 -cstopb -parenb && make build && sudo bossac --info --port "ttyACM0" --erase --write --verify --reset --debug --boot -U false ./src/main.bin && sudo platformio serialports monitor -b 38400
+
+playerRun: player runAvr
+leaderRun: leader runAvr
 
 # set BMPTK to the bmptk subdirectory
 BMPTK := $(BMPTK)../libs/bmptk/

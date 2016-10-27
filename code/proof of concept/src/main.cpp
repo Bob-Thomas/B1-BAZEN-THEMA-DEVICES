@@ -3,7 +3,6 @@
 //
 
 #include "../../libs/hwlib/hwlib.hpp"
-#include "tasks/gameClock.h"
 #include "tasks/transmitter.h"
 #include "tasks/receiver.h"
 #include "tasks/initGameController.h"
@@ -33,14 +32,12 @@ class Main : public rtos::task<> {
                         receiver.set_controller(&init_controller);
                     }
                     init_controller.enable();
-                    current_state = REGISTER;
                     break;
                 case REGISTER:
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
                         receiver.set_controller(&register_controller);
                     }
                     register_controller.enable();
-                    current_state = INIT;
                     break;
                 case RUNNING:
                     break;
