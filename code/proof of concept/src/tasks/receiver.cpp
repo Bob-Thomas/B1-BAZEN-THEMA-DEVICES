@@ -7,15 +7,15 @@
 void Receiver::main() {
     rtos::timer receive_timer(this, "receive-timer");
     for (; ;) {
-        bool starting = true;
-        while (starting) {
+        wait(enabled);
+        while (true) {
             if (signal.get() == 0) {
                 receive_timer.set(700*rtos::us);
                 wait(receive_timer);
 
                 if (signal.get() == 0) {
-                    starting = false;
                     signal_found.set();
+                    break;
                 }
 
             }
@@ -23,6 +23,7 @@ void Receiver::main() {
             wait(receive_timer);
         }
         wait(signal_found);
+        hwlib::cout << "KANKER" << "\n";
         bool in_progress = true;
         receive_timer.set(500*rtos::us);
         wait(receive_timer);
@@ -46,12 +47,13 @@ void Receiver::main() {
                 (bit_value) ? bits[amount_bits_found] = '1' : bits[amount_bits_found] = '0';
                 amount_bits_found++;
             } else {
-                com_station.add_command(bits);
+                controller->receive(bits);
                 amount_bits_found = 0;
             }
 
             bit_found = false;
         }
-        sleep(1);
+        receive_timer.set(1*rtos::s);
+        wait(receive_timer);
     }
 }

@@ -8,7 +8,6 @@ void Transmitter::main() {
     rtos::timer ir_timer(this, "ir_timer");
     for (; ;) {
         wait(command_received);
-        hwlib::cout << "SENDING " << command << "\n";
         command_mutex.wait();
         for (int j = 0; j < 2; j++) {
             //start bit
@@ -55,6 +54,7 @@ void Transmitter::send(char bits[16]) {
     for(int i = 0; i < 15; i++) {
         command[i] = bits[i];
     }
+    hwlib::cout << "SENDING " << command << "\n";
     command_mutex.signal();
     command_received.set();
 }

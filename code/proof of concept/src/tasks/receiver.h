@@ -7,22 +7,35 @@
 
 #include "../../../libs/rtos/rtos.hpp"
 #include "../../../libs/hwlib/hwlib.hpp"
-#include "comStation.h"
+#include "controller.h"
 
 class Receiver : public rtos::task<> {
-        hwlib::pin_in & signal;
-        rtos::flag signal_found;
-        char bits[16];
-        int amount_bits_found = 0;
-        bool bit_found = true;
-        bool bit_value = false;
-        ComStation &com_station;
+    hwlib::pin_in &signal;
+    Controller* controller;
+    rtos::flag enabled;
+    rtos::flag signal_found;
+    char bits[16];
+    int amount_bits_found = 0;
+    bool bit_found = true;
+    bool bit_value = false;
 
-        void main();
+    void main();
 
-    public:
-        Receiver(const char* name, hwlib::pin_in& signal, ComStation &com_station)
-                : task(name), signal(signal), signal_found(this, "signal-found"), com_station(com_station){}
+public:
+    Receiver(const char *name, hwlib::pin_in &signal, Controller *controller)
+            : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"), signal_found(this, "signal-found") { }
+
+    void enable() {
+        enabled.set();
+    }
+
+    void set_controller(Controller* c) {
+        this->controller = c;
+    }
+
+    Controller* get_controller() {
+        return controller;
+    }
 
 };
 

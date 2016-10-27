@@ -17,8 +17,8 @@ HEAP              ?= BMPTK
 
 PROJECT 	  	  ?= src/main
 
-SOURCES 		  += ./src/tasks/comStation.cpp ./src/tasks/receiver.cpp ./src/tasks/transmitter.cpp ./src/tasks/gameManager.cpp ./src/tasks/gameClock.cpp
-HEADERS			  += ./src/tasks/comStation.h ./src/tasks/transmitter.h ./src/tasks/gameManager.h ./src/tasks/gameClock.h
+SOURCES 		  += ./src/tasks/command.cpp ./src/tasks/registerController.cpp ./src/tasks/initGameController.cpp ./src/tasks/receiver.cpp ./src/tasks/transmitter.cpp
+HEADERS			  += ./src/tasks/command.h ./src/tasks/registerController.h ./src/tasks/controller.h  ./src/tasks/initGameController.h ./src/tasks/transmitter.h ./src/tasks/transmitter.h
 
 # use hwlib
 SEARCH            += ../libs/hwlib

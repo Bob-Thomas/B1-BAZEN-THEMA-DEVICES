@@ -612,9 +612,24 @@ typedef struct {
 /* ANSI C namespace clean utility typedefs */
 /* This file defines various typedefs needed by the system calls that support
    the C library.  Basically, they're just the POSIX versions with an '_'
-   prepended.  This file lives in the `sys' directory so targets can provide
-   their own if desired (or they can put target dependant conditionals here).
+   prepended.  Targets shall use <machine/_types.h> to define their own
+   internal types if desired.
+
+   There are three define patterns used for type definitions.  Lets assume
+   xyz_t is a user type.
+
+   The internal type definition uses __machine_xyz_t_defined.  It is defined by
+   <machine/_types.h> to disable a default definition in <sys/_types.h>. It
+   must not be used in other files.
+
+   User type definitions are guarded by __xyz_t_defined in glibc and
+   _XYZ_T_DECLARED in BSD compatible systems.
 */
+/* newlib.h.  Generated from newlib.hin by configure.  */
+/* newlib.hin.  Manually edited from the output of autoheader to
+   remove all PACKAGE_ macros which will collide with any user
+   package using newlib header files and having its own package name,
+   version, etc...  */
 /*
  *  $Id$
  */
@@ -674,21 +689,35 @@ typedef int _LOCK_RECURSIVE_T;
    To get a strict ANSI C environment, define macro __STRICT_ANSI__.  This will
    "comment out" the non-ANSI parts of the ANSI header files (non-ANSI header
    files aren't affected).  */
+typedef long __blkcnt_t;
+typedef long __blksize_t;
+typedef __uint64_t __fsblkcnt_t;
+typedef __uint32_t __fsfilcnt_t;
 typedef long _off_t;
+typedef int __pid_t;
 typedef short __dev_t;
 typedef unsigned short __uid_t;
 typedef unsigned short __gid_t;
+typedef __uint32_t __id_t;
+typedef unsigned short __ino_t;
+typedef __uint32_t __mode_t;
 __extension__ typedef long long _off64_t;
+typedef _off_t __off_t;
+typedef _off64_t __loff_t;
+typedef long __key_t;
 /*
  * We need fpos_t for the following, but it doesn't have a leading "_",
  * so we use _fpos_t instead.
  */
 typedef long _fpos_t; /* XXX must match off_t in <sys/types.h> */
     /* (and must be `long' for now) */
+/* Defined by GCC provided <stddef.h> */
+typedef unsigned int __size_t;
 /* If __SIZE_TYPE__ is defined (gcc) we define ssize_t based on size_t.
    We simply change "unsigned" to "signed" for this single definition
    to make sure ssize_t and size_t only differ by their signedness. */
 typedef signed int _ssize_t;
+typedef _ssize_t __ssize_t;
 /* Copyright (C) 1989-2015 Free Software Foundation, Inc.
 
 This file is part of GCC.
@@ -772,8 +801,19 @@ typedef struct
 typedef _LOCK_RECURSIVE_T _flock_t;
 /* Iconv descriptor type */
 typedef void *_iconv_t;
+typedef unsigned long __clock_t;
+typedef long __time_t;
+typedef unsigned long __clockid_t;
+typedef unsigned long __timer_t;
+typedef __uint8_t __sa_family_t;
+typedef __uint32_t __socklen_t;
+typedef unsigned short __nlink_t;
+typedef long __suseconds_t; /* microseconds (signed) */
+typedef unsigned long __useconds_t; /* microseconds (unsigned) */
+typedef char * __va_list;
 typedef unsigned long __ULong;
 struct _reent;
+struct __locale_t;
 /*
  * If _REENT_SMALL is defined, we make struct _reent as small as possible,
  * by having nearly everything possible allocated at first use.
@@ -924,8 +964,9 @@ struct _reent
   __FILE *_stdin, *_stdout, *_stderr;
   int _inc; /* used by tmpnam */
   char _emergency[25];
-  int _current_category; /* used by setlocale */
-  const char *_current_locale;
+  /* TODO */
+  int _unspecified_locale_info; /* unused, reserved for locale stuff */
+  struct __locale_t *_locale;/* per-thread locale */
   int __sdidinit; /* 1 means stdio has been init'd */
   void (* __cleanup) (struct _reent *);
   /* used by mprec routines */

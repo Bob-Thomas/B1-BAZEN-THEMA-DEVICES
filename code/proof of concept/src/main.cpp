@@ -4,10 +4,57 @@
 
 #include "../../libs/hwlib/hwlib.hpp"
 #include "tasks/gameClock.h"
-#include "tasks/gameManager.h"
 #include "tasks/transmitter.h"
 #include "tasks/receiver.h"
-#include "tasks/comStation.h"
+#include "tasks/initGameController.h"
+#include "tasks/registerController.h"
+
+enum States {
+    INIT, REGISTER, RUNNING, GAME_END
+};
+
+#if GAMEMODE == PLAYER
+States current_state = REGISTER;
+#else
+States current_state = INIT;
+#endif
+
+class Main : public rtos::task<> {
+    Receiver &receiver;
+    InitGameController &init_controller;
+    RegisterController &register_controller;
+
+    void main() {
+        for (; ;) {
+            receiver.enable();
+            switch (current_state) {
+                case INIT:
+                    if (receiver.get_controller()->get_name() != init_controller.get_name()) {
+                        receiver.set_controller(&init_controller);
+                    }
+                    init_controller.enable();
+                    current_state = REGISTER;
+                    break;
+                case REGISTER:
+                    if (receiver.get_controller()->get_name() != register_controller.get_name()) {
+                        receiver.set_controller(&register_controller);
+                    }
+                    register_controller.enable();
+                    current_state = INIT;
+                    break;
+                case RUNNING:
+                    break;
+                case GAME_END:
+                    break;
+            }
+            sleep(1);
+        }
+    }
+
+public:
+    Main(Receiver &r, InitGameController &i, RegisterController &reg) : task("Main"), receiver(r), init_controller(i),
+                                                                        register_controller(reg) { }
+};
 
 int main() {
 #if GAMEMODE == PLAYER
@@ -26,19 +73,17 @@ int main() {
 
     namespace target = hwlib::target;
     auto ir = target::d2_36kHz();
-//    auto tsop_signal = target::pin_in( target::pins::d8 );
-//    auto tsop_gnd    = target::pin_out( target::pins::d9 );
-//    auto tsop_vdd    = target::pin_out( target::pins::d10 );
-//    tsop_gnd.set( 0 );
-//    tsop_vdd.set( 1 );
+//    auto shoot_button = target::pin_in( target::pins::d3 );
+    auto tsop_signal = target::pin_in(target::pins::d8);
+    auto tsop_gnd = target::pin_out(target::pins::d9);
+    auto tsop_vdd = target::pin_out(target::pins::d10);
+    tsop_gnd.set(0);
+    tsop_vdd.set(1);
 
     auto transmitter = Transmitter("transmitter", ir);
-    auto com_station = ComStation("com_station", transmitter);
-//
-    auto game_clock = GameClock("game_clock", 5, 5);
-    auto game_manager = GameManager("game_manager", game_clock, com_station);
-//
-//    auto receiver = Receiver("receiver", tsop_signal, com_station);
-
+    auto init_game_controller = InitGameController();
+    auto register_controller = RegisterController();
+    auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
+    auto main = Main(receiver, init_game_controller, register_controller);
     rtos::run();
 }
