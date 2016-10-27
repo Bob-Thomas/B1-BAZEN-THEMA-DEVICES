@@ -14,8 +14,10 @@ class Receiver : public rtos::task<> {
     Controller* controller;
     rtos::flag enabled;
     rtos::flag signal_found;
-    char bits[16];
+    Command last_command;
+    unsigned short bits;
     int amount_bits_found = 0;
+    int max_bits = 16;
     bool bit_found = true;
     bool bit_value = false;
 

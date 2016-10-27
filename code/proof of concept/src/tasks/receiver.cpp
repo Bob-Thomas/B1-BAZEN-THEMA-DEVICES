@@ -6,6 +6,7 @@
 
 void Receiver::main() {
     rtos::timer receive_timer(this, "receive-timer");
+    long long int message_received = 0;
     for (;;) {
         wait(enabled);
         while (true) {
@@ -43,11 +44,19 @@ void Receiver::main() {
         if (bit_found == true) {
 
             if (amount_bits_found < 16) {
-                (bit_value) ? bits[amount_bits_found] = '1' : bits[amount_bits_found] = '0';
                 amount_bits_found++;
+                if(bit_value) {
+                    bits |= (1 << (max_bits - amount_bits_found));
+                }
             } else {
-                hwlib::cout << bits << "\n";
-                controller->receive(bits);
+                if(message_received != 0 && message_received - hwlib::now_us() / 1000 < 4 && last_command.encode() == bits) {
+                    last_command = Command(bits);
+                } else {
+                    if(!last_command.get_error()) {
+                        controller->receive(last_command);
+                    }
+                }
+                message_received = hwlib::now_us()/10000;
                 amount_bits_found = 0;
             }
 

@@ -4,13 +4,87 @@
 
 #include "command.h"
 
-char * Command::encode(int sender, int data) {
-    return (char *) "1001010100";
+Command::Command(int sender, int data) : sender(sender), data(data) {
+    if(sender >= 31) {
+        hwlib::cout << "Player range exceeded\n";
+    } else if (sender < 0) {
+        hwlib::cout << "Player not in range\n";
+    }
+    if(data >= 31) {
+        hwlib::cout << "Data range exceeded\n";
+    } else if (data < 0) {
+        hwlib::cout << "Data not in range\n";
+    }
 }
 
-void Command::decode(char bits[16]) {
-    this->sender = 6;
-    this->data = 7;
+Command::Command() : sender(-1), data(-1) { }
+
+
+short Command::generate_checksum(short bits) {
+    short checksum_part = 0;
+    return checksum_part;
+}
+bool Command::valid_checksum(short bits) {
+    for(int i = 1; i<=5;i++){
+        bool current_bit = ((bits >> (15-i))&1);
+        bool check_bit = ((bits >> (15-(i+5)))&1);
+        short control_bit = ((bits >> (15-(i+10)))&1);
+        bool xor_bit = current_bit ^ check_bit;
+        if(control_bit != xor_bit) {
+            hwlib::cout << "checksum failed\n";
+            return true;
+        }
+    }
+    return false;
+}
+
+short Command::encode() {
+    short bits = 0;
+    bits =  bits | (1<<15);//add startbit
+
+    //Convert id to short and place it on position 1-5
+    short id_bits = sender << 10;
+    bits = bits | id_bits;
+
+    //Convert data to short and place it on position 5-10
+    short data_bits = data << 5;
+    bits = bits | data_bits;
+    for(int i = 1; i<=5;i++){
+        short checksum = ((bits >> (15-i))&1) ^ ((bits >> (15-(i+5)))&1);
+        checksum = checksum << (5 - i);
+        bits = bits | checksum;
+    }
+    //add new bits
+    hwlib::cout << "checksumed data " << bits << "\n";
+    return bits;
+}
+
+void Command::decode(short bits) {
+    if(!((bits >> (15-1))&1)) {
+        hwlib::cout << "Starbit not correct";
+        error = true;
+    }
+    if(!valid_checksum(bits)) {
+        error = true;
+        hwlib::cout << "Checksum not correct";
+    }
+    if(!error){
+        //retrieve id
+        int i = 0;
+        for(i = 1; i<=5; i++){
+            sender = sender | ((bits >> (15-i))&1);
+            if(i<5){
+                sender = sender << 1;
+            }
+        }
+        for(i = 6 ;i<=10; i++){
+            data = data | ((bits >> (15-i))&1);
+            if(i<10){
+                data = data << 1;
+            }
+        }
+
+    }
 }
 
 
@@ -28,4 +102,8 @@ int Command::get_data() {
 
 void Command::set_data(int data) {
     this->data = data;
+}
+
+bool Command::get_error() {
+    return error;
 }
