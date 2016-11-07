@@ -12,7 +12,7 @@ class Transmitter : public rtos::task<> {
     hwlib::target::d2_36kHz &ir;
     rtos::flag command_received;
     rtos::mutex command_mutex;
-    char command[16] = {0};
+    short command_bits;
     void main();
 public:
     Transmitter(
@@ -21,7 +21,7 @@ public:
 
     }
 
-    void send(char bits[16]);
+    void send(short bits);
 };
 
 #endif //CODE_TRANSMITTER_H

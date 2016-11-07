@@ -3,6 +3,7 @@
 //
 
 #include "transmitter.h"
+#include "command.h"
 
 void Transmitter::main() {
     rtos::timer ir_timer(this, "ir_timer");
@@ -21,7 +22,8 @@ void Transmitter::main() {
 
             //command
             for (int i = 0; i < 16; i++) {
-                if (command[i] == '0') {
+                bool bit = ((command_bits >> (15-i))&1);
+                if (!bit) {
 
                     ir.set(1);
                     ir_timer.set(800 * rtos::us);
@@ -32,7 +34,7 @@ void Transmitter::main() {
                     wait(ir_timer);
 
                 }
-                if (command[i] == '1') {
+                if (bit) {
                     ir.set(1);
                     ir_timer.set(1600 * rtos::us);
                     wait(ir_timer);
@@ -49,12 +51,9 @@ void Transmitter::main() {
     }
 }
 
-void Transmitter::send(char bits[16]) {
+void Transmitter::send(short bits) {
     command_mutex.wait();
-    for(int i = 0; i < 15; i++) {
-        command[i] = bits[i];
-    }
-    hwlib::cout << "SENDING " << command << "\n";
+    command_bits = bits;
     command_mutex.signal();
     command_received.set();
 }

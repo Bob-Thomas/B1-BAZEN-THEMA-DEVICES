@@ -8,8 +8,10 @@
 #include "../../../libs/rtos/rtos.hpp"
 #include "../../../libs/hwlib/hwlib.hpp"
 #include "controller.h"
+#include "transmitter.h"
 
 class InitGameController :  public Controller, public rtos::task<> {
+    Transmitter &transmitter;
     rtos::flag enabled;
     rtos::flag command_available;
     Command command;
@@ -21,6 +23,6 @@ public:
     const char * get_name() {
         return this->name();
     }
-    InitGameController();
+    InitGameController(Transmitter &transmitter);
 };
 #endif //CODE_INITGAMECONTROLLER_H

@@ -4,12 +4,19 @@
 
 #include "initGameController.h"
 
-InitGameController::InitGameController()
-        : task("Init_Controller"), enabled(this, "init-enabled"), command_available(this, "command-available") { }
+InitGameController::InitGameController(Transmitter &transmitter)
+        : task("Init_Controller"), transmitter(transmitter), enabled(this, "init-enabled"), command_available(this, "command-available") { }
 
 void InitGameController::main() {
+    rtos::timer timer(this);
+    Command test(2, 6);
+    test.print_command();
+    timer.set(1000);
     for (; ;) {
         wait(enabled);
+        wait(timer);
+        transmitter.send(test.encode());
+        timer.set(1000);
     }
 }
 

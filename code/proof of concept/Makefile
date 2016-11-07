@@ -32,6 +32,7 @@ SOURCES           += rtos.cpp
 
 DEFINES           += -DPlAYER=2
 DEFINES           += -DLEADER=1
+DEFINES           += -DGAMEMODE=LEADER
 
 
 player:

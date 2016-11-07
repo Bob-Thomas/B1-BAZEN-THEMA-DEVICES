@@ -78,7 +78,7 @@ int main() {
     tsop_vdd.set(1);
 
     auto transmitter = Transmitter("transmitter", ir);
-    auto init_game_controller = InitGameController();
+    auto init_game_controller = InitGameController(transmitter);
     auto register_controller = RegisterController();
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
     auto main = Main(receiver, init_game_controller, register_controller);
