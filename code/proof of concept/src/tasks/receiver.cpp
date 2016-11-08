@@ -5,64 +5,54 @@
 #include "receiver.h"
 
 void Receiver::main() {
-    rtos::timer receive_timer(this, "receive-timer");
-    long long int message_received = 0;
-    for (;;) {
+    long long int received = 0;
+    for (; ;) {
         wait(enabled);
-        while (true) {
+        if (received + (4 * rtos::ms) < hwlib::now_us()) {
+            amount_bits_found = 0;
+        }
+        short bits;
+        bool starting = true;
+        while (starting) {
             if (signal.get() == 0) {
-                receive_timer.set(700*rtos::us);
-                wait(receive_timer);
-
+                sleep(1600 * rtos::us);
                 if (signal.get() == 0) {
-                    signal_found.set();
-                    break;
-                }
-
-            }
-            receive_timer.set(1*rtos::ms);
-            wait(receive_timer);
-        }
-        wait(signal_found);
-        bool in_progress = true;
-        receive_timer.set(500*rtos::us);
-        wait(receive_timer);
-        if (signal.get() == 1) {
-            in_progress = false;
-            bit_found = true;
-            bit_value = false;
-            receive_timer.set(400*rtos::us);
-            wait(receive_timer);
-        }
-        if (signal.get() == 0 && in_progress) {
-            bit_found = true;
-            bit_value = true;
-            receive_timer.set(400*rtos::us);
-            wait(receive_timer);
-        }
-
-        if (bit_found == true) {
-
-            if (amount_bits_found < 16) {
-                amount_bits_found++;
-                if(bit_value) {
-                    bits |= (1 << (max_bits - amount_bits_found));
-                }
-            } else {
-                if(message_received != 0 && message_received - hwlib::now_us() / 1000 < 4 && last_command.encode() == bits) {
-                    last_command = Command(bits);
-                } else {
-                    if(!last_command.get_error()) {
-                        controller->receive(last_command);
+                    bits |= (1 << 0);
+                    amount_bits_found++;
+                    while (amount_bits_found < max_bits) {
+                        if (signal.get() == 0) {
+                            sleep(800 * rtos::us);
+                            if (signal.get() == 1) {
+                                amount_bits_found++;
+                                sleep(1600 * rtos::us);
+                            }
+                            else if (signal.get() == 0) {
+                                bits |= (1 << (max_bits - amount_bits_found));
+                                amount_bits_found++;
+                                sleep(1600 * rtos::us);
+                            }
+                        }
                     }
+                    Command c(bits);
+                    c.print_command();
+                    if(c.encode() == last_command.encode() && received+(2*rtos::ms) < hwlib::now_us()) {
+                        if(!c.get_error()) {
+                            controller->receive(c);
+                            received = hwlib::now_us();
+                        }
+                    }
+                    if (!c.get_error()) {
+                        received = hwlib::now_us();
+                        last_command = c;
+                    }
+                    amount_bits_found = 0;
+                    bits = 0;
+                    bit_found = false;
                 }
-                message_received = hwlib::now_us()/10000;
-                amount_bits_found = 0;
             }
-
-            bit_found = false;
+            starting = false;
+            sleep(2 * rtos::ms);
         }
-        receive_timer.set(1*rtos::s);
-        wait(receive_timer);
     }
+
 }

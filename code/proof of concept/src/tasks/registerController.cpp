@@ -17,5 +17,9 @@ void RegisterController::enable() {
 }
 
 void RegisterController::receive(Command c) {
-    hwlib::cout << HERE << " RECEIVED << " << c.get_sender() << "\n";
+    if(c.get_sender() == 0) {
+        //admin command
+        hwlib::cout << HERE << "Set gametime " << c.get_data() << " minutes";
+    }
+    c.print_command();
 }

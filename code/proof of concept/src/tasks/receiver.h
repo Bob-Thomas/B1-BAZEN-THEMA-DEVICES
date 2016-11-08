@@ -11,34 +11,44 @@
 
 class Receiver : public rtos::task<> {
     hwlib::pin_in &signal;
-    Controller* controller;
+    Controller *controller;
     rtos::flag enabled;
-    rtos::flag signal_found;
+    rtos::timer timer;
     Command last_command;
-    unsigned short bits;
     int amount_bits_found = 0;
     int max_bits = 16;
-    bool bit_found = true;
     bool bit_value = false;
 
     void main();
 
 public:
     Receiver(const char *name, hwlib::pin_in &signal, Controller *controller)
-            : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"), signal_found(this, "signal-found") { }
+            : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"),
+              timer(this) { }
 
     void enable() {
         enabled.set();
     }
 
-    void set_controller(Controller* c) {
+    void set_controller(Controller *c) {
         this->controller = c;
     }
 
-    Controller* get_controller() {
+    Controller *get_controller() {
         return controller;
     }
 
+    void bit_one();
+
+    void bit_zero();
+
+    void idle();
+
+    void signal_found();
+
+    bool bit_found;
 };
 
 #endif //B1_BAZEN_THEMA_DEVICES_RECEIVER_H
+//1 10000 00100 10100
+//1 00010 00110
