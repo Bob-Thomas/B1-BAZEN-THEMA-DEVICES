@@ -7,6 +7,7 @@
 #include "tasks/receiver.h"
 #include "tasks/initGameController.h"
 #include "tasks/registerController.h"
+#include "tasks/displayController.h"
 
 enum States {
     INIT, REGISTER, RUNNING, GAME_END
@@ -77,10 +78,37 @@ int main() {
     tsop_gnd.set(0);
     tsop_vdd.set(1);
 
+    // keypad
+    auto out0 = target::pin_oc( target::pins::a0 );
+    auto out1 = target::pin_oc( target::pins::a1 );
+    auto out2 = target::pin_oc( target::pins::a2 );
+    auto out3 = target::pin_oc( target::pins::a3 );
+    auto out_port = hwlib::port_oc_from_pins( out0, out1, out2, out3 );
+    auto in0 = target::pin_in( target::pins::a4 );
+    auto in1 = target::pin_in( target::pins::a5 );
+    auto in2 = target::pin_in( target::pins::a6 );
+    auto in3 = target::pin_in( target::pins::a7 );
+    auto in_port = hwlib::port_in_from_pins( in0, in1, in2, in3 );
+    auto matrix = hwlib::matrix_of_switches( out_port, in_port );
+    auto keypad = hwlib::keypad< 16 >( matrix, "123A456B789C*0#D" );
+
+    // oled
+    namespace target = hwlib::target;
+    auto scl = target::pin_oc( target::pins::scl );
+    auto sda = target::pin_oc( target::pins::sda );
+    auto i2c_bus = hwlib::i2c_bus_bit_banged_scl_sda( sda, scl );
+    auto pin_gnd = target::pin_out( target::pins::d19 );
+    pin_gnd.set( 0 );
+    auto pin_vcc = target::pin_out( target::pins::d18 );
+    pin_vcc.set( 1 );
+    auto oled = hwlib::glcd_oled_buffered( i2c_bus, 0x3c );
+
     auto transmitter = Transmitter("transmitter", ir);
-    auto init_game_controller = InitGameController();
+    auto display_controller = DisplayController(oled);
+    auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
     auto register_controller = RegisterController();
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
+
     auto main = Main(receiver, init_game_controller, register_controller);
     rtos::run();
 }

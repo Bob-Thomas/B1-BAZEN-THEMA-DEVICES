@@ -8,11 +8,20 @@
 #include "../../../libs/rtos/rtos.hpp"
 #include "../../../libs/hwlib/hwlib.hpp"
 #include "controller.h"
+#include "transmitter.h"
+#include "displayController.h"
 
 class InitGameController :  public Controller, public rtos::task<> {
+    Transmitter &transmitter;
+    hwlib::keypad<16> &keypad;
+    DisplayController &displayCtrl;
     rtos::flag enabled;
     rtos::flag command_available;
     Command command;
+
+    int player_id;
+    int weapon_id;
+    int valid_id(char first, char second);
     void main();
 
 public:
@@ -21,6 +30,6 @@ public:
     const char * get_name() {
         return this->name();
     }
-    InitGameController();
+    InitGameController(Transmitter &transmitter, hwlib::keypad<16> &keypad, DisplayController &displayCtrl);
 };
 #endif //CODE_INITGAMECONTROLLER_H

@@ -12,23 +12,23 @@ class Command {
     int data;
     bool error = false;
 
-    void decode(short bits);
+    void decode( short bits);
 
-    short generate_checksum(short bits);
+     short generate_checksum( short bits);
 
-    bool valid_checksum(short bits);;
+    bool valid_checksum( short bits);;
 
 public:
     void print_command() {
         char bits[16];
-        short encoded = encode();
+         short encoded = encode();
         for(int i = 0; i < 16; i++) {
             bool bit = ((encoded >> (15-i))&1);
             (bit) ? bits[i] = '1' : bits[i] = '0';
         }
-        hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: " << bits;
+        hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: " << bits << "\n";
     }
-    short encode();
+     short encode();
 
     bool get_error();
 
@@ -42,7 +42,7 @@ public:
 
     Command();
 
-    Command(unsigned int bits) {
+    Command( short bits) {
         decode(bits);
     }
 

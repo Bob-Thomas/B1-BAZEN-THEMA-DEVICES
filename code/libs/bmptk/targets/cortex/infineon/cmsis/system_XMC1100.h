@@ -11,7 +11,7 @@
  *
  * @par
  * Infineon Technologies AG (Infineon) is supplying this software for use with 
- * Infineonï¿½s microcontrollers.
+ * Infineon’s microcontrollers.
  *   
  * This file can be freely distributed within development tools that are 
  * supporting such microcontrollers.
@@ -39,7 +39,7 @@ extern "C" {
 #endif
  
 #include <stdint.h>
-#include "XMC1000_RomFunctionTable.h"
+#include <XMC1000_RomFunctionTable.h>
 
 /*----------------------------------------------------------------------------
   Clock Variable definitions
