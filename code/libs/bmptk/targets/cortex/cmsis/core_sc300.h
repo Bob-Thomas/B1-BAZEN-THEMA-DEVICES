@@ -124,8 +124,8 @@
 #endif
 
 #include <stdint.h>                      /* standard types definitions                      */
-#include "core_cmInstr.h"
-#include "core_cmFunc.h"
+#include <core_cmInstr.h>                /* Core Instruction Access                         */
+#include <core_cmFunc.h>                 /* Core Function Access                            */
 
 #endif /* __CORE_SC300_H_GENERIC */
 

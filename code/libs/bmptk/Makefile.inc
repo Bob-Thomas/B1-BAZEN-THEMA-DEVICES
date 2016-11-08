@@ -7,11 +7,11 @@
 # This file is meant to be included by a project-specific Makefile.
 #
 # Copyright (c) 2012 .. 2016 Wouter van Ooijen (wouter@voti.nl)
-#
+# 
 # Distributed under the Boost Software License, Version 1.0.
-# (See accompanying file LICENSE_1_0.txt or copy at
+# (See accompanying file LICENSE_1_0.txt or copy at 
 # http://www.boost.org/LICENSE_1_0.txt)
-#
+# 
 #############################################################################
 
 
@@ -24,7 +24,7 @@ VERSION := V03_00_work_in_progress_2016_07_04
 #
 # Invoke the Makefile.custom (if it exists) or else the Makefile.local,
 # to get the locations of the external toolsets
-#
+# 
 #============================================================================
 
 ifeq ($(OS),Windows_NT)
@@ -40,7 +40,7 @@ endif
 
 ifneq ($(wildcard $(BMPTK)/Makefile.custom),)
    include $(BMPTK)/Makefile.custom
-else
+else   
    include $(BMPTK)/Makefile.local
 endif
 
@@ -50,9 +50,9 @@ endif
 # For windows these executables are distributed with bmptk,
 # or must be installed separately.
 #
-# For another platform you will have to compile and/or install them
+# For another platform you will have to compile and/or install them 
 # or find a suitable replacement.
-#
+# 
 #============================================================================
 
 ifeq ($(OS),Windows_NT)
@@ -60,7 +60,7 @@ ifeq ($(OS),Windows_NT)
    # seems to be required in some circustances
    SHELL=C:/Windows/System32/cmd.exe
 
-   # distributed with bmptk
+   # distributed with bmptk 
    MAKE          ?= "bmptk-make.exe"
    REMOVE        ?= "bmptk-rm.exe" -f
    COPY          ?= "bmptk-cp.exe" -f
@@ -68,38 +68,38 @@ ifeq ($(OS),Windows_NT)
    CHECK_PORT    ?= "$(BMPTK)/tools/check_serial_port/check_serial_port.exe"
    CHECK_DRIVE   ?= "$(BMPTK)/tools/check_drive_name/check_drive_name.exe"
    COPY_TO_DRIVE ?= "$(BMPTK)/tools/copy_to_drive/copy_to_drive.exe"
-   LPC21ISP      ?= "$(BMPTK)/tools/lpc21isp_197/lpc21isp_hr.exe"
+   LPC21ISP      ?= "$(BMPTK)/tools/lpc21isp_197/lpc21isp_hr.exe" 
    BMPTK-SSC     ?= $(PYTHON) "$(BMPTK)/tools/bmptk-ssc.py"
    AVRDUDE       ?= "$(BMPTK)/tools/avrdude/avrdude.exe"
    AVRDUDEC      ?= "$(BMPTK)/tools/avrdude/avrdude.conf"
    TERMINAL      ?= "$(BMPTK)/tools/Terminal.exe"
    BOSSAC        ?= "$(BMPTK)/tools/bmptk-bossac.exe"
    DUE_BOOTMODE  ?= cmd "/C due_bootmode.bat $(SERIAL_PORT) "
-
+   
    # installed separately
    ATPROGRAM     ?= "$(AtmelToolchain)/../Atmel Studio 6.2/atbackend/atprogram.exe"
-   STM32_CLI     ?= "$(STM32LU)/ST-LINK Utility/ST-LINK_CLI.exe"
-
+   STM32_CLI     ?= "$(STM32LU)/ST-LINK Utility/ST-LINK_CLI.exe"     
+   
    # windows
-   PAUSE         ?= cmd /c pause
-
+   PAUSE         ?= cmd /c pause     
+   
 else
 
    # linux
    MAKE          ?= make
    REMOVE        ?= rm -f
    COPY          ?= cp
-
+   
    # distributed with bmptk
    IMAGE_SIZES   ?= $(BMPTK)/tools/image_sizes/image_sizes
    CHECK_PORT    ?= $(BMPTK)/tools/check_serial_port/check_serial_port
    CHECK_DRIVE   ?= $(BMPTK)/tools/check_drive_name/check_drive_name
    # COPY_TO_DRIVE ?= $(BMPTK)/tools/copy_to_drive/copy_to_drive
    LPC21ISP      ?= $(BMPTK)/tools/lpc21isp_197/lpc21isp_hr_linux.exe
-
+   
    # installed separately
    AVRDUDE       ?= avrdude
-
+   
 endif
 
 
@@ -108,7 +108,7 @@ endif
 # The main project source file is sure part of the project.
 # By default it is the name of the project, but we must find out what
 # the extension is: .asm, .c or .cpp
-#
+# 
 #============================================================================
 
 # some targets can be build are not C/C++/asm projects
@@ -130,22 +130,22 @@ ifeq ($(wildcard $(PROJECT).cpp),)
       ifeq ($(wildcard $(PROJECT).asm),)
          ifneq ($(NOPROJECT),1)
             $(error PROJECT ($(PROJECT)) is not a .cpp, .c or .asm file)
-         endif
-      else
+         endif   
+      else	  
          SOURCES += $(PROJECT).asm
-      endif
-   else
+      endif	  
+   else	  
       SOURCES += $(PROJECT).c
-   endif
-else
+   endif	  
+else	     
    SOURCES += $(PROJECT).cpp
 endif
 
 
 #============================================================================
 #
-# some (possible) result files
-#
+# some (possible) result files 
+# 
 #============================================================================
 
 
@@ -159,9 +159,9 @@ DMP           := $(PROJECT).dmp
 LSSX          := $(PROJECT).lssx
 LSS           := $(PROJECT).lss
 EXE           := $(PROJECT).exe
-NMDUMP        := $(PROJECT).nmdump
+NMDUMP        := $(PROJECT).nmdump   
 ANNOTATED     := $(PROJECT).annotated
-
+   
 # and remember to delete these result files
 CLEAN         += $(LINKERSCRIPT)
 CLEAN         += $(BIN)
@@ -183,7 +183,7 @@ CLEAN         += $(ANNOTATED)
 #
 # When a project uses at least one C++ file it is a C++ project, and
 # the C++ tools are used for ALL files. If not, the C tools are used.
-#
+# 
 #============================================================================
 
 SOURCES := $(strip $(SOURCES))
@@ -193,63 +193,63 @@ else
    LANGUAGE ?= C++
 endif
 
-
+   
 #============================================================================
 #
 # boards
-#
+# 
 #============================================================================
 
 ifeq ($(TARGET),esp-01)
    CHIP        ?= esp8266
    # by default the chip runs at 80 MHz
-   XTAL        ?= 80000
+   XTAL        ?= 80000   
 endif
 
 ifeq ($(TARGET),lpc800_mini_kit)
    CHIP        ?= lpc810m021fn8
-   XTAL        ?= 12000
+   XTAL        ?= 12000   
 endif
 
 ifeq ($(TARGET),lpc800_max)
    CHIP        ?= lpc812m101jdh16
-   XTAL        ?= 12000
-
-# does this work?
+   XTAL        ?= 12000  
+   
+# does this work?   
 #   PORT_CHECK  ?=
 #   DOWNLOAD_DRIVE ?= MBED
-#   RUN         ?= $(COPY_TO_DRIVE) $(BIN) $(DOWNLOAD_DRIVE) application.bin
+#   RUN         ?= $(COPY_TO_DRIVE) $(BIN) $(DOWNLOAD_DRIVE) application.bin   
 
 endif
 
 ifeq ($(TARGET),tiny_11c14)
    CHIP        ?= lpc11c14fbd48
-   XTAL        ?= 12000
+   XTAL        ?= 12000   
 endif
 
 ifeq ($(TARGET),arduino_uno)
    CHIP        ?= atmega328p
-   XTAL        ?= 12000
+   XTAL        ?= 12000   
 endif
 
 ifeq ($(TARGET),arduino_nano)
    CHIP        ?= atmega328p
-   XTAL        ?= 12000
+   XTAL        ?= 12000   
 endif
 
 ifeq ($(TARGET),arduino_due)
    CHIP        ?= atsam3x8e
-   XTAL        ?= 12000
+   XTAL        ?= 12000   
 endif
 
 ifeq ($(TARGET),msp_exp430g2)
    CHIP        ?= msp430g2553
-   XTAL        ?= 16000
+   XTAL        ?= 16000   
 endif
 
 ifeq ($(TARGET),msp_exp430fr4133)
    CHIP        ?= msp430fr4133
-   XTAL        ?= 16000
+   XTAL        ?= 16000   
 endif
 
 ifeq ($(TARGET),db103)
@@ -294,31 +294,31 @@ endif
 #============================================================================
 #
 # target-specific parts
-#
+# 
 #============================================================================
 
 define All_Targets
    # make sure the bmptk and hwcpp files are found
    SEARCH            += $(BMPTK)
-   SEARCH            += $(BMPTK)/targets
-
+   SEARCH            += $(BMPTK)/targets 
+   
    # the language dialects to use
    CPP_LANGUAGE      ?= -std=c++14
    C_LANGUAGE        ?= -std=c11
-   AS_LANGUAGE       ?= -x assembler-with-cpp
-
+   AS_LANGUAGE       ?= -x assembler-with-cpp   
+   
    # common settings for all languages
    ALL_ERRORS        ?= -Wall -Werror
-   ALL_IGNORE        += -Wno-maybe-uninitialized
+   ALL_IGNORE        += -Wno-maybe-uninitialized 
    ALL_IGNORE        += -Wno-unused-local-typedefs
    ALL_OPTIMIZATION  ?= -Os
-
+   
    # cpp: don't use features that are useless and/or too expensive
-   CPP_RTTI          ?= -fno-rtti
-   CPP_EXCEPTIONS    ?= -fno-exceptions
-   CPP_THREADSAFE    ?= -fno-threadsafe-statics
-   CPP_CXA           ?= -fno-use-cxa-get-exception-ptr
-
+   CPP_RTTI          ?= -fno-rtti 
+   CPP_EXCEPTIONS    ?= -fno-exceptions 
+   CPP_THREADSAFE    ?= -fno-threadsafe-statics 
+   CPP_CXA           ?= -fno-use-cxa-get-exception-ptr   
+   
 endef
 
 define Hosted
@@ -329,74 +329,74 @@ define Hosted
    HEAP              ?= NATIVE
 endef
 
-define Embedded
+define Embedded 
    $(eval $(All_Targets))
    EMBEDDED          ?= 1
    HOSTED            ?= 0
    HAS_FILESYSTEM    ?= 0
    HEAP              ?= NONE
-
+   
    ALL_SECTIONS      ?= -fdata-sections -ffunction-sections
    #CORE_FLAGS        += -fno-asynchronous-unwind-tables
-
-   LN_MAP            ?= -Wl,-Map,$(MAP)
+   
+   LN_MAP            ?= -Wl,-Map,$(MAP)      
    LN_SECTIONS       ?= -Wl,--gc-sections
-   LN_ERRORS         ?= -Wl,-fatal-warnings
-
-   # RESULTS += $(DMP) $(LSS) $(NMDUMP)
+   LN_ERRORS         ?= -Wl,-fatal-warnings 
+   
+   # RESULTS += $(DMP) $(LSS) $(NMDUMP) 
    # RESULTS += $(MAP)
    # RESULTS += $(LST)
-
+   
    # create a 'fake' iostream in hwcpp
-   DEFINES         += -DHWCPP_FAKE_OSTREAM
+   DEFINES         += -DHWCPP_FAKE_OSTREAM 
 endef
 
    #=========================================================================
    #
    # running native
-   #
+   # 
    #=========================================================================
 
 ifeq ($(TARGET),native)
    $(eval $(Hosted))
-
-   ifeq ($(OS),Windows_NT)
-
-      # running native on Windows
+   
+   ifeq ($(OS),Windows_NT)   
+   
+      # running native on Windows  
       CHIP              := Windows_Native
       PREFIX            := $(GCC-WIN)/bin/
-      TARGET_CPP_FLAGS  += -mno-ms-bitfields
-      TARGET_C_FLAGS    += -mno-ms-bitfields
+      TARGET_CPP_FLAGS  += -mno-ms-bitfields   
+      TARGET_C_FLAGS    += -mno-ms-bitfields   
       TARGET_LN_FLAGS   += -lgdi32
       RESULTS           += $(EXE)
       export PATH       := $PREFIX:$(PATH)
       RUN               ?= ./$(EXE)
       RUN_PAUSE         ?= $(PAUSE)
-
+      
    else
-
+   
       # assume running native on some Linux
       CHIP              := Linux_Native
-      PREFIX            :=
+      PREFIX            := 
       RESULTS           += $(EXE)
       RUN               ?= sudo ./$(EXE)
       RUN_PAUSE         ?= $(PAUSE)
-
-   endif
+      
+   endif   
 endif
 
    #=========================================================================
    #
    # 8-bit AVR chips
-   #
+   # 
    #=========================================================================
-
+   
 define Atmega
    $(eval $(Embedded))
    PREFIX          := $(GCC-AVR)/bin/avr-
    SEARCH          += $(BMPTK)/targets/avr $(BMPTK)/targets/avr/include
-   DEFINES         += -DBMPTK_INCLUDE_CHIP=io.h
-   RESULTS         += $(ELF) $(BIN) $(HEX)
+   DEFINES         += -DBMPTK_INCLUDE_CHIP=io.h   
+   RESULTS         += $(ELF) $(BIN) $(HEX) 
    CPU             ?= avr
    ROOT            ?= __vectors
    #LN_TEMPLATE     ?= bmptk_linkerscript_avr5_xn.c
@@ -414,68 +414,68 @@ ifeq ($(CHIP),atmega328p)
    ROM_SIZE       ?= 32k
    RAM_SIZE       ?= 2k
    STACK_SIZE     ?= 1536
-   XTAL           ?= 20000
-   DEFINES        += -D__AVR_ATmega328P__
+   XTAL           ?= 20000   
+   DEFINES        += -D__AVR_ATmega328P__ 
    ARCH_FLAGS     += -mmcu=atmega328p
-   # PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)
+   # PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)  
    RUN            ?= $(AVRDUDE) -C$(AVRDUDEC) -carduino -patmega328p  -P$(SERIAL_PORT) -b115200 -Uflash:w:$(HEX)
    RUN              ?= $(AVRDUDE) -C$(AVRDUDEC) -c usbasp -p atmega328p  -P$(SERIAL_PORT) -b115200 -Uflash:w:$(HEX)
    # RUN            ?= $(ATPROGRAM) -t avrispmk2 -d atmega328p erase program -f $(HEX)
-   LINKERSCRIPT :=
-   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000
+   LINKERSCRIPT := 
+   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000 
 endif
 
    #=========================================================================
    #
    # 16-bit MSP430 chips
-   #
+   # 
    #=========================================================================
-
+   
 define MSP430
    $(eval $(Embedded))
    CPU             ?= msp430
    ROOT            ?= __start
-   ROM_START      ?= 0x00000000
+   ROM_START      ?= 0x00000000   
    ifeq ($(OS),Windows_NT)
       PREFIX         := $(GCC-MSP430)/bin/msp430-elf-
    else
       PREFIX         := $(GCC-MSP430)/bin/msp430-
-   endif
+   endif   
    # SEARCH         += c:/ti/ccsv6/tools/compiler/gcc_msp430_4.9.14r1_98/msp430-elf/include
    # SEARCH         += c:/ti/ccsv6/ccs_base/msp430/include_gcc
    SEARCH         += $(BMPTK)/targets/msp430/include
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=msp430.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=msp430.h 
    #RUN_PAUSE       ?= $(PAUSE)
-   RESULTS         += $(ELF) $(BIN) $(HEX)
+   RESULTS         += $(ELF) $(BIN) $(HEX) 
    # linkerscript.ld
 endef
 
 ifeq ($(CHIP),msp430g2553)
-   $(eval $(MSP430))
+   $(eval $(MSP430))   
    ROM_SIZE       ?= 16k
    RAM_SIZE       ?= 512
    STACK_SIZE     ?= 384
-   DEFINES        += -mmcu=msp430g2553
+   DEFINES        += -mmcu=msp430g2553 
    LDFLAGS	      += -T$(BMPTK)/targets/msp430/linkerscripts/$(CHIP).ld
    RUN            ?= $(MSP430FLASHER) -n MSP430G2553 -w $(HEX) -v -z [VCC] -m SBW2 -g
    RUN_PAUSE      := $(PAUSE)
 endif
 
 ifeq ($(CHIP),msp430fr4133)
-   $(eval $(MSP430))
+   $(eval $(MSP430))   
    ROM_SIZE       ?= 15k
    RAM_SIZE       ?= 2k
-   STACK_SIZE     ?= 1536
-   DEFINES        += -mmcu=msp430fr4133
+   STACK_SIZE     ?= 1536  
+   DEFINES        += -mmcu=msp430fr4133 
    LDFLAGS	      += -T$(BMPTK)/targets/msp430/linkerscripts/$(CHIP).ld
    RUN            ?= $(MSP430FLASHER) -n MSP430FR4133 -w $(HEX) -v -z [VCC] -m SBW2 -g
    RUN_PAUSE      := $(PAUSE)
-endif
-
+endif   
+   
    #=========================================================================
    #
    # ARM v7 chips
-   #
+   # 
    #=========================================================================
 
 define ARM_V7
@@ -485,24 +485,24 @@ define ARM_V7
    SEARCH          += $(BMPTK)/targets/armv7 $(BMPTK)/targets/armv7/include
    SOURCES         += bmptk_arm_startup.asm
    COREFLAGS    += -nostdlib
-   COREFLAGS    += -nodefaultlibs
+   COREFLAGS    += -nodefaultlibs  
    LDFLAGS    += -nostdlib
-   LDFLAGS    += -nodefaultlibs
-   CORE_FLAGS      += -nostartfiles
-   LDFLAGS         += -nostartfiles
-   RESULTS         += $(HEX)
+   LDFLAGS    += -nodefaultlibs  
+   CORE_FLAGS      += -nostartfiles 
+   LDFLAGS         += -nostartfiles   
+   RESULTS         += $(HEX) 
 endef
 
 define LPC_ARM_V7
    $(eval $(ARM_V7))
    $(eval $(LPC))
-   LDFLAGS        += -T linkerscript.ld
+   LDFLAGS        += -T linkerscript.ld 
    LN_TEMPLATE    ?= linkerscript.ld
    ROM_START      ?= 0x00000000
    RAM_START      ?= 0x40000000
    INCLUDES       += -I$(BMPTK)/targets/armv7/include
-   XTAL           ?= 12000
-   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)
+   XTAL           ?= 12000   
+   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)  
    RUN            ?= $(LPC21ISP) -control -verify -term $(HEX) $(SERIAL_PORT) $(SERIAL_BAUDRATE) 12000
 endef
 
@@ -511,14 +511,14 @@ ifeq ($(CHIP),lpc2148fbd64)
    ROM_SIZE       ?= 512k
    RAM_SIZE       ?= 32k
    STACK_SIZE     ?= 24576
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=lpc2148.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=lpc2148.h 
 endif
-
-
+  
+   
    #=========================================================================
    #
    # Cortex chips common
-   #
+   # 
    #=========================================================================
 
 define Cortex
@@ -530,21 +530,21 @@ define Cortex
    SEARCH          += $(BMPTK)/targets/cortex $(BMPTK)/targets/cortex/cmsis
    SOURCES         += bmptk_cortex.c
    #COREFLAGS    += -nostdlib
-   #COREFLAGS    += -nodefaultlibs
+   #COREFLAGS    += -nodefaultlibs  
    #LDFLAGS    += -nostdlib
-   #LDFLAGS    += -nodefaultlibs
-   CORE_FLAGS      += -nostartfiles
-   LDFLAGS         += -nostartfiles
+   #LDFLAGS    += -nodefaultlibs  
+   CORE_FLAGS      += -nostartfiles 
+   LDFLAGS         += -nostartfiles   
    LN_TEMPLATE    ?= bmptk_linkerscript_cortex.c
    # should be $(LINKERSCRIPT)
    LDFLAGS	       += -T $(LINKERSCRIPT)
-   OBJ         += bmptk_startup_cortex.o
+   OBJ         += bmptk_startup_cortex.o   
    CPU         ?= cortex
    ROOT        ?= __startup
-endef
-
+endef   
+   
 define Cortex-M0
-   $(eval $(Cortex))
+   $(eval $(Cortex)) 
    ARCH_FLAGS      := -mcpu=cortex-m0 -mthumb -fomit-frame-pointer -march=armv6-m
 endef
 
@@ -560,39 +560,39 @@ endef
 
 define Cortex-M4F
    $(eval $(Cortex))
-   ARCH_FLAGS     := -mcpu=cortex-m4 -mthumb -fomit-frame-pointer
+   ARCH_FLAGS     := -mcpu=cortex-m4 -mthumb -fomit-frame-pointer 
    # -march=armv7-m
 endef
-
+   
       #======================================================================
       #
       # NXP : LPC Cortex chips
-      #
+      # 
       #======================================================================
 
 define LPC_Cortex
    $(eval $(LPC))
    ROM_START       ?= 0x00000000
    RAM_START       ?= 0x10000000
-   INCLUDES        += -I$(BMPTK)/targets/cortex/lpc/cmsis
-   XTAL            ?= 12000
+   INCLUDES        += -I$(BMPTK)/targets/cortex/lpc/cmsis   
+   XTAL            ?= 12000   
    RESULTS         += $(HEX)
    PORT_CHECK      ?= $(CHECK_PORT) $(SERIAL_PORT)
    LPCISP_PARAMS   := $(HEX) $(SERIAL_PORT) $(SERIAL_BAUDRATE) 12000
    # RUN             ?= $(LPC21ISP) -control -verify -term $(HEX) $(SERIAL_PORT) $(SERIAL_BAUDRATE) 12000
    RUN             ?= $(LPC21ISP) -control -verify $(HEX) $(SERIAL_PORT) $(SERIAL_BAUDRATE) 12000
-   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000
+   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000      
 endef
 
 define LPC81X
    $(eval $(Cortex-M0+))
    $(eval $(LPC_Cortex))
    INCLUDES       += -I$(BMPTK)/targets/cortex/lpc/cmsis/lpc800/inc
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=LPC8xx.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=LPC8xx.h 
 endef
 
 ifeq ($(CHIP),lpc810m021fn8)
-   $(eval $(LPC81X))
+   $(eval $(LPC81X))   
    ROM_SIZE       ?= 8k
    RAM_SIZE       ?= 1k
    STACK_SIZE     ?= 768
@@ -608,8 +608,8 @@ endif
 define LPC1114
    $(eval $(Cortex-M0))
    $(eval $(LPC_Cortex))
-   INCLUDES       += -I$(BMPTK)/targets/cortex/lpc/cmsis/11xx/inc
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=LPC11xx.h
+   INCLUDES       += -I$(BMPTK)/targets/cortex/lpc/cmsis/11xx/inc 
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=LPC11xx.h 
 endef
 
 ifeq ($(CHIP),lpc1114fn28)
@@ -624,20 +624,20 @@ ifeq ($(CHIP),lpc11c14fbd48)
    $(eval $(LPC1114))
    ROM_SIZE       ?= 32k
    RAM_SIZE       ?= 8k
-   STACK_SIZE     ?= 6144
+   STACK_SIZE     ?= 6144  
    HWCPP_CHIP     ?= lpc11c14fbd48.hpp
 endif
 
       #======================================================================
       #
       # STM Cortex chips
-      #
+      # 
       #======================================================================
 
 define STM32
    ROM_START      ?= 0x08000000
-   RAM_START      ?= 0x20000000
-   INCLUDES       += -I$(BMPTK)/targets/cortex/stm32/cmsis
+   RAM_START      ?= 0x20000000     
+   INCLUDES       += -I$(BMPTK)/targets/cortex/stm32/cmsis  
    RUN            ?= $(STM32_CLI) -P $(HEX) -Rst
    RUN_PAUSE      ?= $(PAUSE)
 endef
@@ -647,17 +647,17 @@ ifeq ($(CHIP),stm32f051r8)
    $(eval $(STM32))
    ROM_SIZE       ?= 64k
    RAM_SIZE       ?= 8k
-   STACK_SIZE     ?= 6144
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32f051x8.h
+   STACK_SIZE     ?= 6144  
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32f051x8.h 
 endif
 
 ifeq ($(CHIP),stm32l152rc)
    $(eval $(Cortex-M3))
    $(eval $(STM32))
    ROM_SIZE       ?= 256k
-   RAM_SIZE       ?= 32k
+   RAM_SIZE       ?= 32k  
    STACK_SIZE     ?= 24576
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32l1xx.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32l1xx.h 
 endif
 
 ifeq ($(CHIP),stm32f411re)
@@ -666,56 +666,56 @@ ifeq ($(CHIP),stm32f411re)
    ROM_SIZE       ?= 512k
    RAM_SIZE       ?= 128k
    STACK_SIZE     ?= 98304
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32f411xe.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=stm32f411xe.h 
 endif
 
       #======================================================================
       #
       # Freescale Cortex chips
-      #
+      # 
       #======================================================================
 
 define Freescale
-   ROM_START      ?= 0x00000000
-   INCLUDES       += -I$(BMPTK)/targets/cortex/freescale/cmsis
+   ROM_START      ?= 0x00000000   
+   INCLUDES       += -I$(BMPTK)/targets/cortex/freescale/cmsis 
    RUN            ?= $(STM32_CLI) -P $(HEX) -Rst
    RUN_PAUSE      ?= $(PAUSE)
 endef
 
 ifeq ($(CHIP),kl25z128vlk4)
    $(eval $(Cortex-M0))
-   $(eval $(Freescale))
+   $(eval $(Freescale))   
    ROM_SIZE       ?= 128k
    RAM_START      ?= 0x20000000
    RAM_SIZE       ?= 8k
-   STACK_SIZE     ?= 6144
+   STACK_SIZE     ?= 6144  
    DOWNLOAD_DRIVE ?= FRDM-KL25Z
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=MKL25Z4.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=MKL25Z4.h 
    RUN            = $(COPY_TO_DRIVE) $(BIN) $(DOWNLOAD_DRIVE) application.bin
 endif
 
       #======================================================================
       #
       # Infineon Cortex chips
-      #
+      # 
       #======================================================================
 
 define Infineon
-   ROM_START      ?= 0x00000000
-   INCLUDES       += -I$(BMPTK)/targets/cortex/infineon/cmsis
+   ROM_START      ?= 0x00000000   
+   INCLUDES       += -I$(BMPTK)/targets/cortex/infineon/cmsis 
    RUN            ?= $(STM32_CLI) -P $(HEX) -Rst
    RUN_PAUSE      ?= $(PAUSE)
 endef
 
 ifeq ($(CHIP),xmc1100)
    $(eval $(Cortex-M0))
-   $(eval $(Infineon))
+   $(eval $(Infineon))   
    ROM_SIZE       ?= 64k
    RAM_START      ?= 0x20000000
    RAM_SIZE       ?= 16k
    STACK_SIZE     ?= 12288
    DOWNLOAD_DRIVE ?= FRDM-KL25Z
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=XMC1100.h
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=XMC1100.h 
    RUN            = $(COPY_TO_DRIVE) $(BIN) $(DOWNLOAD_DRIVE) application.bin
 endif
 
@@ -723,40 +723,40 @@ endif
       #======================================================================
       #
       # Atmel Cortex chips
-      #
+      # 
       #======================================================================
-
+      
 define Atmel_SAM3
    $(eval $(Cortex-M3))
-   ROM_START      ?= 0x00000000
-   RAM_START      ?= 0x20000000
+   ROM_START      ?= 0x00000000   
+   RAM_START      ?= 0x20000000     
    INCLUDES       += -I$(BMPTK)/targets/cortex/atmel
-   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)
+   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)  
    RUN_PRE        := $(DUE_BOOTMODE)
    # was al gezet?
    RESULTS        += $(BIN)
    RUN            := $(BOSSAC) -p $(SERIAL_PORT) -U false -e -w -v -b $(BIN) -R
-   # RUN            := $(BOSSAC) -e -w -v -b $(BIN)
-   DEFINES        += -DDONT_USE_CMSIS_INIT
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=sam.h
+   # RUN            := $(BOSSAC) -e -w -v -b $(BIN)   
+   DEFINES        += -DDONT_USE_CMSIS_INIT 
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=sam.h 
    LDFLAGS        += -I$(BMPTK)/targets/cortex/atmel/sam3xa/source/as_gcc
-   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000
-
-endef
+   RUN_TERMINAL   ?= $(LPC21ISP) -termonly -term $(HEX) $(SERIAL_PORT) $(CONSOLE_BAUDRATE) 12000   
+   
+endef     
 
 #   ifeq($(SERIAL_BAUDRATE),1200)
-#      $(error do not use 1200 baud: it will reset the Due)
+#      $(error do not use 1200 baud: it will reset the Due) 
 #   endif
 #   ifeq($(CONSOLE_BAUDRATE),1200)
-#      $(error do not use 1200 baud: it will reset the Due)
-#   endif
+#      $(error do not use 1200 baud: it will reset the Due) 
+#   endif 
 
 ifeq ($(CHIP),atsam3x8e)
    $(eval $(Atmel_SAM3))
    ROM_SIZE       ?= 512k
    RAM_SIZE       ?= 96k
-   STACK_SIZE     ?= 92160
-   DEFINES        += -D__SAM3X8E__
+   STACK_SIZE     ?= 92160     
+   DEFINES        += -D__SAM3X8E__ 
 endif
 
       #======================================================================
@@ -764,82 +764,82 @@ endif
       # Tensilica xtensa chips:
       #
       # Tensilica Xtensa LX3
-      #
+      # 
       #======================================================================
 
 define Xtensa-106
-   $(eval $(Embedded))
+   $(eval $(Embedded)) 
    PREFIX         := $(GCC-XTENSA)/bin/xtensa-lx106-elf-
 endef
 
 ifeq ($(CHIP),esp8266)
    HEAP           ?= NATIVE
-   $(eval $(Xtensa-106))
-   ROM_START      ?= 0x00000000
+   $(eval $(Xtensa-106))   
+   ROM_START      ?= 0x00000000   
    ROM_SIZE       ?= 64k
    RAM_START      ?= 0x20000000
    RAM_SIZE       ?= 16k
    INCLUDES       += -I$(ESP-SDK)/include -I$(ESP-SDK)/include/json
    INCLUDES       += -I$(BMPTK)
-   INCLUDES       += -I$(BMPTK)/targets/esp8266
-   DEFINES        += -DBMPTK_INCLUDE_CHIP=esp8266.h
-
-   CORE_FLAGS     += -Os -g -O2 -Wl,-EL
-   CORE_FLAGS     += -fno-inline-functions -nostdlib -mlongcalls
-   CORE_FLAGS     += -mtext-section-literals -D__ets__ -DICACHE_FLASH
-   CORE_FLAGS     +=
-
-   LD_FLAGS       += -T$(ESP-SDK)\ld\eagle.app.v6.ld
+   INCLUDES       += -I$(BMPTK)/targets/esp8266 
+   DEFINES        += -DBMPTK_INCLUDE_CHIP=esp8266.h 
+   
+   CORE_FLAGS     += -Os -g -O2 -Wl,-EL 
+   CORE_FLAGS     += -fno-inline-functions -nostdlib -mlongcalls 
+   CORE_FLAGS     += -mtext-section-literals -D__ets__ -DICACHE_FLASH 
+   CORE_FLAGS     += 
+   
+   LD_FLAGS       += -T$(ESP-SDK)\ld\eagle.app.v6.ld 
    LD_FLAGS       += -L$(ESP-SDK)\lib
    LD_FLAGS       += -nostdlib -Wl,--no-check-sections -u call_user_start -Wl,-static
    ESP_LIBS       := -lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lmain
    LD_FLAGS       += -Wl,--start-group $(ESP_LIBS) -Wl,--end-group -o $@
-
+   
    OUT_1_ARGS	= -bo $@ -bs .text -bs .data -bs .rodata -bc -ec
    OUT_2_ARGS	= -es .irom0.text $@ -ec
-
+   
    RESULTS        += $(ELF) $(BIN1) $(BIN2)
-
-   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)
+   
+   PORT_CHECK     ?= $(CHECK_PORT) $(SERIAL_PORT)    
    RUN            = $(ESP-LOADER) -p $(SERIAL_PORT) -b $(SERIAL_BAUDRATE) write_flash 0x00000 $(BIN1) 0x40000 $(BIN2)
    RUN_PAUSE      ?= $(PAUSE)
-
+      
    $(BIN1): $(ELF)
 		$(ESP-TOOL) -eo $(ELF) $(OUT_1_ARGS)
 
    $(BIN2): $(ELF)
-		$(ESP-TOOL) -eo $(ELF) $(OUT_2_ARGS)
-
+		$(ESP-TOOL) -eo $(ELF) $(OUT_2_ARGS)        
+   
 endif
 
-
+   
 #============================================================================
 #
-# If a valid target was recognised, hosted will be either 1 or 0,
+# If a valid target was recognised, hosted will be either 1 or 0, 
 # so if not, raise an error.
-#
-#============================================================================
+# 
+#============================================================================   
 
 ifneq ($(NOPROJECT),1)
    ifeq ($(HOSTED),)
       $(error invalid or no target specifie$d: "$(TARGET)")
    endif
-endif
+endif   
 
 
 #============================================================================
 #
 # where to find the files
-#
+# 
 #============================================================================
 
 INCLUDES  += $(foreach x, $(SEARCH), -I$(x))
 
-
+   
 #============================================================================
 #
 # hwcpp
-#
+# 
 #============================================================================
 
 #ifeq ($(LANGUAGE),C++)
@@ -852,7 +852,7 @@ INCLUDES  += $(foreach x, $(SEARCH), -I$(x))
 #============================================================================
 #
 # GCC (and other) executables
-#
+# 
 #============================================================================
 
 CC          := "$(PREFIX)gcc"
@@ -874,7 +874,7 @@ endif
 #============================================================================
 #
 # Add the .o version of all source files to the objects list
-#
+# 
 #============================================================================
 
 SOURCES_X    := $(patsubst %.asm,%.o,$(patsubst %.S,%.o,$(SOURCES)))
@@ -885,44 +885,44 @@ CLEAN        += $(OBJECTS)
 
 #============================================================================
 #
-# Pass information to the code
-#
+# Pass information to the code 
+# 
 #============================================================================
 
-DEFINES   += -DBMPTK_TARGET=$(TARGET)
-DEFINES   += -DBMPTK_TARGET_$(TARGET)
-DEFINES   += -DBMPTK_CHIP=$(CHIP)
-DEFINES   += -DBMPTK_CHIP_$(CHIP)
-DEFINES   += -DBMPTK_XTAL=$(XTAL)
-DEFINES   += -DBMPTK_BAUDRATE=$(CONSOLE_BAUDRATE)
-DEFINES   += -DBMPTK_VERSION=$(VERSION)
+DEFINES   += -DBMPTK_TARGET=$(TARGET) 
+DEFINES   += -DBMPTK_TARGET_$(TARGET) 
+DEFINES   += -DBMPTK_CHIP=$(CHIP) 
+DEFINES   += -DBMPTK_CHIP_$(CHIP) 
+DEFINES   += -DBMPTK_XTAL=$(XTAL) 
+DEFINES   += -DBMPTK_BAUDRATE=$(CONSOLE_BAUDRATE) 
+DEFINES   += -DBMPTK_VERSION=$(VERSION) 
 
 ifeq ($(HOSTED),1)
-   DEFINES   += -DBMPTK_HOSTED
-endif
+   DEFINES   += -DBMPTK_HOSTED 
+endif   
 ifeq ($(EMBEDDED),1)
-   DEFINES   += -DBMPTK_EMBEDDED
-endif
+   DEFINES   += -DBMPTK_EMBEDDED 
+endif   
 ifeq ($(HAS_FILESYSTEM),1)
-   DEFINES   += -DBMPTK_HAS_FILESYSTEM
-endif
+   DEFINES   += -DBMPTK_HAS_FILESYSTEM 
+endif   
 
 HEAP ?= NONE
 ifeq ($(HEAP),NONE)
    OBJECTS         += bmptk_heap_none.o
-endif
+endif   
 ifeq ($(HEAP),BMPTK)
    OBJECTS         += bmptk_heap_bmptk.o
-endif
+endif   
 
 
 #============================================================================
 #
 # Dependencies
-#
+# 
 #============================================================================
 
-# Assume compilation depends on
+# Assume compilation depends on 
 # all headers, the LN_SOURCE, and the Makefile
 DEPENDENCIES    += $(HEADERS) $(LN_SOURCE) Makefile
 $(OBJECTS): $(DEPENDENCIES)
@@ -931,7 +931,7 @@ $(OBJECTS): $(DEPENDENCIES)
 #============================================================================
 #
 # where to find non-local files
-#
+# 
 # VPATH is not used, beacause it would also 'find' .ld and .o files,
 # which should be created locally
 #
@@ -949,16 +949,16 @@ vpath %.inc  $(SEARCH)
 #============================================================================
 #
 # combine the tool options
-#
+# 
 #============================================================================
-
-COMMON        :=
+ 
+COMMON        := 
 COMMON        += $(ARCH_FLAGS)
 COMMON        += $(ALL_ERRORS)
 COMMON        += $(ALL_IGNORE)
 COMMON        += $(ALL_OPTIMIZATION)
 COMMON        += $(ALL_SECTIONS)
-COMMON        += $(INCLUDES)
+COMMON        += $(INCLUDES) 
 COMMON        += $(DEFINES)
 
 AS_FLAGS      := $(COMMON) $(AS_LANGUAGE)
@@ -967,7 +967,7 @@ CPP_FLAGS     := $(COMMON) $(CPP_LANGUAGE)
 LN_FLAGS      := $(COMMON) -lgcc
 
 # add C++-specific flags
-CPP_FLAGS     += $(CPP_RTTI)
+CPP_FLAGS     += $(CPP_RTTI) 
 CPP_FLAGS     += $(CPP_EXCEPTIONS)
 CPP_FLAGS     += $(CPP_THREADSAFE)
 CPP_FLAGS     += $(CPP_CXA)
@@ -977,7 +977,7 @@ LN_FLAGS      += $(LN_MAP)
 LN_FLAGS      += $(LN_SECTIONS)
 LN_FLAGS      += $(LN_ERRORS)
 
-# target-specific and project-specific flags are last
+# target-specific and project-specific flags are last 
 # so they can override all previous flags
 AS_FLAGS      += $(TARGET_AS_FLAGS)  $(PROJECT_AS_FLAGS)
 C_FLAGS       += $(TARGET_C_FLAGS)   $(PROJECT_C_FLAGS)
@@ -988,26 +988,26 @@ LN_FLAGS      += $(TARGET_LN_FLAGS)  $(PROJECT_LN_FLAGS)
 #============================================================================
 #
 # choose which compiler and linker to use
-#
+# 
 #============================================================================
 
 ifeq ($(LANGUAGE),C)
    LINKER  := $(CC)   $(LN_FLAGS)
    AS      := $(AS)   $(AS_CFLAGS)
    CC      := $(CC)   $(C_FLAGS)
-   CPP     :=
+   CPP     := 
 else
    LINKER  := $(CPP)  $(LN_FLAGS)
    AS      := $(AS)   $(AS_CFLAGS)
    CC      := $(CC)   $(C_FLAGS)
    CPP     := $(CPP)  $(CPP_FLAGS)
-endif
+endif   
 
 
 #============================================================================
 #
 # the file(s) that hold the stack allocated by/within bmptk
-#
+# 
 #============================================================================
 
 CALCULATED_SIZE_STACK_FILE  := bmptk_calculated_size_stack
@@ -1016,12 +1016,12 @@ FIXED_SIZE_STACK_FILE       := bmptk_fixed_size_stack
 CLEAN         += $(CALCULATED_SIZE_STACK_FILE).c
 CLEAN         += $(CALCULATED_SIZE_STACK_FILE).o
 CLEAN         += $(FIXED_SIZE_STACK_FILE).c
-CLEAN         += $(FIXED_SIZE_STACK_FILE).o
+CLEAN         += $(FIXED_SIZE_STACK_FILE).o 
 
 # choose between a calculated size stack and a fixed size stack
 ifeq ($(STACK_SIZE),AUTOMATIC)
    BMPTK_STACK_FILE  := $(CALCULATED_SIZE_STACK_FILE)
-else
+else 
    BMPTK_STACK_FILE  := $(FIXED_SIZE_STACK_FILE)
 endif
 
@@ -1029,7 +1029,7 @@ endif
 #============================================================================
 #
 # how to make things
-#
+# 
 #============================================================================
 
 # use only the explcit rules below
@@ -1041,33 +1041,33 @@ endif
 build: version
 version:
 	@echo 'Show toolchain version'
-	@$(CC) --version
-
+	@$(CC) --version   
+   
    #=========================================================================
    #
    # Compile
-   #
+   # 
    #=========================================================================
 
 # How to make assembler listing from asm
 %.lst: %.asm
 	@echo 'Compiling C file to asm listing: $<'
 	$(AS) $(AS_FLAGS) -c -S > $(patsubst %.o,%.lst,$@) $<
-	@echo ' '
-
+	@echo ' '   
+   
 # How to make assembler listing from C
 %.lst: %.c
 	@echo 'Compiling C file (.c) to asm listing: $<'
 	$(CC) -c -S -o $(patsubst %.o,%.lst,$@) $<
-	@echo ' '
-
-# How to make assembler listing from C++ (.cpp)
+	@echo ' '   
+   
+# How to make assembler listing from C++ (.cpp) 
 %.lst: %.cpp
 	@echo 'Compiling C++ file (.cpp) to asm listing: $<'
 	$(CPP) -c -S -o $(patsubst %.o,%.lst,$@) $<
 	@echo '  '
 
-# How to make assembler listing from C++ (.cc)
+# How to make assembler listing from C++ (.cc)  
 %.lst: %.cc
 	@echo 'Compiling C++ file (.cc) to asm listing: $<'
 	$(CPP) -c -S -o $(patsubst %.o,%.lst,$@) $<
@@ -1080,68 +1080,68 @@ version:
 	@echo ' '
 
 # How to make an object file from a C file
-%.o: %.c
+%.o: %.c 
 	@echo 'Compiling C (.c) file: $<'
-	$(CC) -c -o $@ $<
+	$(CC) -c -o $@ $< 
 	@echo ' '
 
 # How to make an object file from a C++ file (.cpp)
-%.o: %.cpp
+%.o: %.cpp 
 	@echo 'Compiling C++ (.cpp) file: $<'
-	$(CPP) -c -o $@ $<
+	$(CPP) -c -o $@ $< 
 	@echo ' '
-
+    
 # How to make an object file from a C++ file (.cc)
 %.o: %.cc
 	@echo 'Compiling C++ (.cc) file: $<'
-	$(CPP) -c -o $@ $<
+	$(CPP) -c -o $@ $< 
 	@echo ' '
-
+    
    #=========================================================================
    #
-   # create the linkerscript from the template
-   #
+   # create the linkerscript from the template 
+   # 
    #=========================================================================
 
-LD_CONFIG    += -DROM_START=$(ROM_START)
-LD_CONFIG    += -DROM_SIZE=$(ROM_SIZE)
-LD_CONFIG    += -DRAM_START=$(RAM_START)
+LD_CONFIG    += -DROM_START=$(ROM_START) 
+LD_CONFIG    += -DROM_SIZE=$(ROM_SIZE) 
+LD_CONFIG    += -DRAM_START=$(RAM_START) 
 LD_CONFIG    += -DRAM_SIZE=$(RAM_SIZE)
 
 # How to make a linkerscipt by preprocessing a .c linkerfile template
 $(LINKERSCRIPT): $(LN_TEMPLATE)
 	@echo 'Creating the linkerscript'
-	$(CC) $(LD_CONFIG) -E -P -C $< -o $@
+	$(CC) $(LD_CONFIG) -E -P -C $< -o $@ 
 	@echo ' '
-
+   
    #=========================================================================
    #
    # fixed size stack, link
-   #
+   # 
    #=========================================================================
 
-# How to create a fixed size stack
+# How to create a fixed size stack 
 $(FIXED_SIZE_STACK_FILE).c: Makefile
 	@echo 'create the (fixed size) stack file $(FIXED_SIZE_STACK_FILE).o'
 	$(CC) -E -P -C -DSTACK_SIZE=$(STACK_SIZE) $(BMPTK)/targets/bmptk_stack.c -o $@
 	@echo ' '
-
+   
 # make .elf by linking all objects
 $(ELF): $(addprefix ./,$(OBJECTS)) $(BMPTK_STACK_FILE).o $(LIBA) $(LINKERSCRIPT)
 	@echo 'Linking ELF target: $(ELF)'
 	$(LINKER) -o $@ $(OBJECTS) $(BMPTK_STACK_FILE).o $(LDFLAGS) $(LIBS)
-	@echo ' '
-
+	@echo ' '   
+    
 # How to make an .exe executable by linking all objects
-$(EXE): $(OBJECTS)
+$(EXE): $(OBJECTS) 
 	@echo 'Linking EXE target: $(EXE)'
-	$(LINKER) -o $@ $(OBJECTS) $(LDFLAGS) $(LIBS)
-	@echo ' '
-
+	$(LINKER) -o $@ $(OBJECTS) $(LDFLAGS) $(LIBS) 
+	@echo ' '  
+      
    #=========================================================================
    #
    # calculated size stack
-   #
+   # 
    #=========================================================================
 
 # How to make an .elfx file by linking all objects with a fixed (dummy) stack
@@ -1153,13 +1153,13 @@ $(ELFX): $(addprefix ./,$(OBJECTS)) $(LIBA) $(FIXED_SIZE_STACK_FILE).o $(LINKERS
 # How to make a .lssx (listing) file from an .elfx file
 $(LSSX): $(ELFX)
 	$(OBJDUMP) -S $< > $@
-
+   
 # uncomment to generate an annotated listing
 # (off by default because it slows things down)
 #ifeq ($(ANNOTATE),YES)
-   ANNOTATE := -annotate $(ANNOTATED) -filt $(FILT)
-#endif
-
+   ANNOTATE := -annotate $(ANNOTATED) -filt $(FILT)  
+#endif   
+   
 # How to create a calculated size stack file
 $(CALCULATED_SIZE_STACK_FILE).c: bmptk_stack.c $(LSSX)
 	@echo 'analysing the required stack size'
@@ -1170,9 +1170,9 @@ $(CALCULATED_SIZE_STACK_FILE).c: bmptk_stack.c $(LSSX)
    #=========================================================================
    #
    # .elf postprocessing
-   #
+   # 
    #=========================================================================
-
+   
 # How to make a .lss (listing) file from an .elf file
 $(LSS): $(ELF)
 	$(OBJDUMP) -S $< > $@
@@ -1194,16 +1194,16 @@ $(BIN): $(ELF)
 # How to make a .hex file from an .elf file
 $(HEX): $(ELF)
 	$(OBJCOPY) --output-target ihex -R .bss $< $@
-
+	
 # How to make an .src file from an .elf file
 $(SREC): $(ELF)
 	$(OBJCOPY) --output-target srec -R .bss $< $@
-
+	
 
 #============================================================================
 #
 # targets
-#
+# 
 #============================================================================
 
 .PHONY: $(PROJECT) all build new fresh run clean doxygen mef
@@ -1224,17 +1224,17 @@ $(PROJECT): $(RESULTS)
 # Run (= download and start) the project
 run: $(PROJECT)
 	$(PORT_CHECK)
-	$(RUN_PRE)
+	$(RUN_PRE)   
 	$(RUN)
 	$(RUN_TERMINAL)
 	$(RUN_PAUSE)
-
+    
 doxygen: doxyfile
 	Doxygen
-
-mef:
-	python $(BMPTK)/tools/bmptk_mef.py -bmptk
-
+   
+mef: 
+	python $(BMPTK)/tools/bmptk_mef.py -bmptk   
+   
 # Cleanup
 CLEAN += -rf doxygen_docs
 CLEAN += -rf .settings temp .cproject .project
