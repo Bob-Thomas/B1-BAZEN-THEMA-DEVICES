@@ -9,14 +9,15 @@ InitGameController::InitGameController(Transmitter &transmitter)
 
 void InitGameController::main() {
     rtos::timer timer(this);
-    Command test(2, 6);
-    test.print_command();
-    timer.set(1000);
+    Command test(0, 10);
+    timer.set(2*rtos::s);
     for (; ;) {
         wait(enabled);
         wait(timer);
+        hwlib::cout << "sending signal\n";
+        test.print_command();
         transmitter.send(test.encode());
-        timer.set(1000);
+        timer.set(5*rtos::s);
     }
 }
 

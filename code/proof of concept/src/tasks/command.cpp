@@ -32,7 +32,6 @@ bool Command::valid_checksum(short bits) {
         short control_bit = ((bits >> (15 - (i + 10))) & 1);
         bool xor_bit = current_bit ^check_bit;
         if (control_bit != xor_bit) {
-            hwlib::cout << "checksum failed\n";
             return false;
         }
     }
@@ -56,19 +55,29 @@ short Command::encode() {
         bits = bits | checksum;
     }
     //add new bits
+#if RTOS_STATISTICS_ENABLED
+
     hwlib::cout << "checksumed data " << bits << "\n";
+#endif
+
     return bits;
 }
 
 void Command::decode(short bits) {
     bool start_bit = ((bits >> (15)) & 1);
     if (!start_bit) {
+#if RTOS_STATISTICS_ENABLED
+
         hwlib::cout << HERE << " Starbit not correct\n";
+#endif
+
         error = true;
     }
     if (!valid_checksum(bits)) {
         error = true;
+#if RTOS_STATISTICS_ENABLED
         hwlib::cout << HERE << " Checksum not correct\n";
+#endif
     }
     if (!error) {
         //retrieve id
