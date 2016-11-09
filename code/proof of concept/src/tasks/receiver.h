@@ -10,43 +10,42 @@
 #include "controller.h"
 
 class Receiver : public rtos::task<> {
-    hwlib::pin_in &signal;
-    Controller *controller;
-    rtos::flag enabled;
-    rtos::timer timer;
-    Command last_command;
-    int amount_bits_found = 0;
-    int max_bits = 16;
-    bool bit_value = false;
+        hwlib::pin_in &signal;
+        Controller *controller;
+        rtos::flag enabled;
+        rtos::timer timer;
+        Command last_command;
+        int amount_bits_found = 0;
+        int max_bits = 16;
+        bool bit_value = false;
 
-    void main();
+        void main();
 
-public:
-    Receiver(const char *name, hwlib::pin_in &signal, Controller *controller)
-            : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"),
-              timer(this) { }
+    public:
+        Receiver(const char *name, hwlib::pin_in &signal, Controller *controller)
+                : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"),
+                  timer(this) { }
 
-    void enable() {
-        enabled.set();
-    }
+        void enable() {
+            enabled.set();
+        }
 
-    void set_controller(Controller *c) {
-        this->controller = c;
-    }
+        void set_controller(Controller *c) {
+            this->controller = c;
+        }
 
-    Controller *get_controller() {
-        return controller;
-    }
+        Controller *get_controller() {
+            return controller;
+        }
 
-    void bit_one();
+        void bit_one();
 
-    void bit_zero();
+        void bit_zero();
 
-    void idle();
+        void idle();
 
-    void signal_found();
-
-    bool bit_found;
+        void signal_found();
+        short bits;
 };
 
 #endif //B1_BAZEN_THEMA_DEVICES_RECEIVER_H
