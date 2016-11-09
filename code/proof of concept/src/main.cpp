@@ -9,6 +9,7 @@
 #include "tasks/registerController.h"
 #include "tasks/displayController.h"
 #include "entities/gameParameters.h"
+#include "tasks/runGameController.h"
 
 enum States {
     INIT, REGISTER, RUNNING, GAME_END
@@ -24,6 +25,7 @@ class Main : public rtos::task<> {
     Receiver &receiver;
     InitGameController &init_controller;
     RegisterController &register_controller;
+    RunGameController &run_game_controller;
 
     void main() {
         for (; ;) {
@@ -35,16 +37,31 @@ class Main : public rtos::task<> {
                     }
                     init_controller.enable();
                     register_controller.suspend();
+                    run_game_controller.suspend();
                     break;
                 case REGISTER:
 
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
                         receiver.set_controller(&register_controller);
                     }
+
+                    if(register_controller.state() == '1') {
+                        current_state = RUNNING;
+                    }
+
                     init_controller.suspend();
                     register_controller.enable();
+                    run_game_controller.suspend();
                     break;
                 case RUNNING:
+
+                    if (receiver.get_controller()->get_name() != run_game_controller.get_name()) {
+                        receiver.set_controller(&run_game_controller);
+                    }
+
+                    init_controller.suspend();
+                    register_controller.suspend();
+                    run_game_controller.enable();
                     break;
                 case GAME_END:
                     break;
@@ -54,8 +71,8 @@ class Main : public rtos::task<> {
     }
 
 public:
-    Main(Receiver &r, InitGameController &i, RegisterController &reg) : task("Main"), receiver(r), init_controller(i),
-                                                                        register_controller(reg) { }
+    Main(Receiver &r, InitGameController &i, RegisterController &reg, RunGameController &run) : task("Main"), receiver(r), init_controller(i),
+                                                                        register_controller(reg), run_game_controller(run) { }
 };
 
 int main() {
@@ -108,13 +125,14 @@ int main() {
     auto oled = hwlib::glcd_oled_buffered( i2c_bus, 0x3c );
 
     // entities
-    //auto game_parameter = GameParameters();
+    auto game_parameter = GameParameters();
     auto transmitter = Transmitter("transmitter", ir);
     auto display_controller = DisplayController(oled);
     auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
     auto register_controller = RegisterController(display_controller);
+    auto run_game_controller = RunGameController(game_parameter, display_controller);
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
 
-    auto main = Main(receiver, init_game_controller, register_controller);
+    auto main = Main(receiver, init_game_controller, register_controller, run_game_controller);
     rtos::run();
 }

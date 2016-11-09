@@ -17,8 +17,8 @@ HEAP              ?= BMPTK
 
 PROJECT 	  	  ?= src/main
 
-SOURCES 		  += ./src/entities/gameParameters.cpp ./src/tasks/displayController.cpp ./src/tasks/command.cpp ./src/tasks/registerController.cpp ./src/tasks/initGameController.cpp ./src/tasks/receiver.cpp ./src/tasks/transmitter.cpp
-HEADERS			  += ./src/entities/gameParameters.h ./src/tasks/displayController.h ./src/tasks/command.h ./src/tasks/registerController.h ./src/tasks/controller.h  ./src/tasks/initGameController.h ./src/tasks/transmitter.h ./src/tasks/transmitter.h
+SOURCES 		  += ./src/tasks/runGameController.cpp ./src/entities/gameParameters.cpp ./src/tasks/displayController.cpp ./src/tasks/command.cpp ./src/tasks/registerController.cpp ./src/tasks/initGameController.cpp ./src/tasks/receiver.cpp ./src/tasks/transmitter.cpp
+HEADERS			  += ./src/tasks/runGameController.h ./src/entities/gameParameters.h ./src/tasks/displayController.h ./src/tasks/command.h ./src/tasks/registerController.h ./src/tasks/controller.h  ./src/tasks/initGameController.h ./src/tasks/transmitter.h ./src/tasks/transmitter.h
 
 # use hwlib
 SEARCH            += ../libs/hwlib
@@ -32,7 +32,7 @@ SOURCES           += rtos.cpp
 
 DEFINES           += -DPlAYER=2
 DEFINES           += -DLEADER=1
-DEFINES           += -DGAMEMODE=PLAYER
+DEFINES           += -DGAMEMODE=LEADER
 
 player:
 	export DEFINES=DEFINES-DGAMEMODE=PLAYER

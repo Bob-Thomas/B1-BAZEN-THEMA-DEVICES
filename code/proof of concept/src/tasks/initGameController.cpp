@@ -74,7 +74,7 @@ void InitGameController::main() {
                         if(c =='*') {
                             displayCtrl.displayText("Sending data..");
 
-                            // todo... send data
+                            // todo... send data transmitter int weapon_id, player_id
                             keypad.getc();
                         }
                     }
@@ -123,6 +123,7 @@ void InitGameController::main() {
 
             if(command_full == '1') {
                 displayCtrl.displayText("send last \ninserted command");
+                // todo... transmitter.send char custom command
             } else {
                 displayCtrl.displayText("Incorrect  \nCommand");
             }

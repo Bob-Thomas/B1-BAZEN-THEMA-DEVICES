@@ -14,7 +14,7 @@ class RegisterController : public Controller, public rtos::task<> {
     rtos::flag enabled;
     DisplayController &displayCtrl;
     void main();
-
+    char next_state = '0';
 public:
     void enable();
 
@@ -22,6 +22,10 @@ public:
 
     const char *get_name() {
         return this->name();
+    }
+
+    char state() {
+        return next_state;
     }
 
     RegisterController(DisplayController &dCtrl);

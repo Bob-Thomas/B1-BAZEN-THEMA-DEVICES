@@ -14,6 +14,7 @@ void RegisterController::main() {
 
         wait(enabled);
         displayCtrl.displayText("waiting signal..");
+        next_state = '1';
 
         // wait for signal
 
@@ -27,9 +28,5 @@ void RegisterController::enable() {
 }
 
 void RegisterController::receive(Command c) {
-    if(c.get_sender() == 0) {
-        //admin command
-        hwlib::cout << HERE << "Set gametime " << c.get_data() << " minutes";
-    }
-    c.print_command();
+    hwlib::cout << HERE << " RECEIVED << " << c.get_sender() << "\n";
 }
