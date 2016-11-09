@@ -5,46 +5,35 @@
 #include "transmitter.h"
 
 void Transmitter::main() {
-    rtos::timer ir_timer(this, "ir_timer");
     for (; ;) {
         wait(command_received);
         command_mutex.wait();
         for (int j = 0; j < 2; j++) {
-            //start bit
-            ir.set(1);
-            ir_timer.set(1600 * rtos::us);
-            wait(ir_timer);
-
-            ir.set(0);
-            ir_timer.set(800 * rtos::us);
-            wait(ir_timer);
-
             //command
-            for (int i = 0; i < 16; i++) {
-                bool bit = ((command_bits >> (15-i))&1);
+            for (int i = 1; i < 16; i++) {
+                bool bit = ((command_bits >> (16-i))&1);
                 if (!bit) {
 
                     ir.set(1);
-                    ir_timer.set(800 * rtos::us);
-                    wait(ir_timer);
+                    hwlib::wait_us(800);
+
 
                     ir.set(0);
-                    ir_timer.set(1600 * rtos::us);
-                    wait(ir_timer);
+                    hwlib::wait_us(1600);
+
 
                 }
                 if (bit) {
                     ir.set(1);
-                    ir_timer.set(1600 * rtos::us);
-                    wait(ir_timer);
+                    hwlib::wait_us(1600);
+
 
                     ir.set(0);
-                    ir_timer.set(800 * rtos::us);
-                    wait(ir_timer);
+                    hwlib::wait_us(800);
+
                 }
             }
-            ir_timer.set(2 * rtos::ms);
-            wait(ir_timer);
+            hwlib::wait_ms(3);
         }
         command_mutex.signal();
     }
