@@ -4,6 +4,7 @@
 
 #ifndef CODE_COMMAND_H
 #define CODE_COMMAND_H
+
 #include "../../../libs/hwlib/hwlib.hpp"
 #include "../../../libs/rtos/rtos.hpp"
 
@@ -12,28 +13,24 @@ class Command {
     int data;
     bool error = false;
 
-    void decode( short bits);
+    void decode(short bits);
 
-     short generate_checksum( short bits);
+    short generate_checksum(short bits);
 
-    bool valid_checksum( short bits);;
+    bool valid_checksum(short bits);;
 
 public:
     void print_command() {
         short encoded = encode();
         hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: ";
-        for(int i = 0; i < 16; i++) {
-            bool bit = ((encoded >> (15-i))&1);
-            if(bit) {
-                hwlib::cout << "0";
-            } else {
-                hwlib::cout << "1";
-            }
+        for (int i = 0; i < 16; i++) {
+            hwlib::cout << ((encoded >> (15 - i)) & 1);
 
         }
         hwlib::cout << "\n";
     }
-     short encode();
+
+    short encode();
 
     bool get_error();
 
@@ -47,7 +44,7 @@ public:
 
     Command();
 
-    Command( short bits) {
+    Command(short bits) {
         decode(bits);
     }
 

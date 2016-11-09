@@ -41,7 +41,7 @@ bool Command::valid_checksum(short bits) {
 
 short Command::encode() {
     short bits = 0;
-    bits = bits | (1 << 16);//add startbit
+    bits |= 1 << 15;//add startbit
 
     //Convert id to  short and place it on position 1-5
     short id_bits = sender << 10;
@@ -51,7 +51,7 @@ short Command::encode() {
     short data_bits = data << 5;
     bits = bits | data_bits;
     for (int i = 1; i <= 5; i++) {
-        short checksum = ((bits >> (16 - i)) & 1) ^((bits >> (16 - (i + 5))) & 1);
+        short checksum = ((bits >> (15 - i)) & 1) ^((bits >> (15 - (i + 5))) & 1);
         checksum = checksum << (5 - i);
         bits = bits | checksum;
     }
