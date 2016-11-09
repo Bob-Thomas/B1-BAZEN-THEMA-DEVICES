@@ -10,6 +10,7 @@ InitGameController::InitGameController(Transmitter &transmitter, hwlib::keypad<1
 
 void InitGameController::main() {
 
+
     char txt[] = "Press A to \n insert player";
 
     for(;;) {
@@ -65,10 +66,11 @@ void InitGameController::main() {
                     if(c != 'A') {
 
                         weapon_id = atoi(&c);
-
-                        hwlib::cout << "TEST CASE PLAYER ID:" << player_id << "\n TEST CASE WEAPON ID " << weapon_id << "\n";
                         displayCtrl.displayText("sending data..");
-                        keypad.getc();
+
+                        // todo... send the private vars (int player_id, int weapon_id) from this fields with transmitter
+
+                        //transmitter.send(player_id, weapon_id);
                     }
 
 

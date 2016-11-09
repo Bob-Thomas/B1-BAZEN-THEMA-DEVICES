@@ -2,12 +2,20 @@
 // Created by endargon on 10/25/16.
 //
 
+// libaries
 #include "../../libs/hwlib/hwlib.hpp"
 #include "tasks/transmitter.h"
+
+// special task or something
 #include "tasks/receiver.h"
+
+// controllers
 #include "tasks/initGameController.h"
 #include "tasks/registerController.h"
 #include "tasks/displayController.h"
+#include "entities/gameParameters.h"
+#include "boundaries/oled.h"
+#include "boundaries/keypad.h"
 
 enum States {
     INIT, REGISTER, RUNNING, GAME_END
@@ -25,20 +33,32 @@ class Main : public rtos::task<> {
     RegisterController &register_controller;
 
     void main() {
+
+        init_controller.suspend();
+        register_controller.suspend();
+
         for (; ;) {
+
             receiver.enable();
             switch (current_state) {
                 case INIT:
+
                     if (receiver.get_controller()->get_name() != init_controller.get_name()) {
                         receiver.set_controller(&init_controller);
                     }
+
                     init_controller.enable();
+                    register_controller.suspend();
                     break;
                 case REGISTER:
+
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
                         receiver.set_controller(&register_controller);
                     }
+
+                    init_controller.suspend();
                     register_controller.enable();
+
                     break;
                 case RUNNING:
                     break;
@@ -93,7 +113,6 @@ int main() {
     auto keypad = hwlib::keypad< 16 >( matrix, "123A456B789C*0#D" );
 
     // oled
-    namespace target = hwlib::target;
     auto scl = target::pin_oc( target::pins::scl );
     auto sda = target::pin_oc( target::pins::sda );
     auto i2c_bus = hwlib::i2c_bus_bit_banged_scl_sda( sda, scl );
@@ -104,9 +123,14 @@ int main() {
     auto oled = hwlib::glcd_oled_buffered( i2c_bus, 0x3c );
 
     auto transmitter = Transmitter("transmitter", ir);
+
+    // define entities
+    auto game_parameters = GameParameters();
+
+    // define controllers
     auto display_controller = DisplayController(oled);
     auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
-    auto register_controller = RegisterController();
+    auto register_controller = RegisterController(display_controller, game_parameters);
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
 
     auto main = Main(receiver, init_game_controller, register_controller);

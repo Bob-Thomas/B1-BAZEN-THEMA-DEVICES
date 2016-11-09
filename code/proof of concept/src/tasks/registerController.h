@@ -8,9 +8,13 @@
 #include "../../../libs/rtos/rtos.hpp"
 #include "controller.h"
 #include "../../../libs/hwlib/hwlib-ostream.hpp"
+#include "displayController.h"
+#include "../entities/gameParameters.h"
 
 class RegisterController : public Controller, public rtos::task<> {
     rtos::flag enabled;
+    DisplayController &displayCtrl;
+    GameParameters &gameParameters;
 
     void main();
 
@@ -23,7 +27,7 @@ public:
         return this->name();
     }
 
-    RegisterController();
+    RegisterController(DisplayController &d, GameParameters &gameParameters);
 
 };
 
