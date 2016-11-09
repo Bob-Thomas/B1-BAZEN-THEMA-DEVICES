@@ -3,31 +3,23 @@
 //
 
 #include "registerController.h"
+#include "../entities/gameParameters.h"
 
-RegisterController::RegisterController(DisplayController &d, GameParameters &gp) : task("Register_Controller"), enabled(this, "register-enabled"), displayCtrl(d), gameParameters(gp) { }
+RegisterController::RegisterController( DisplayController &dCtrl) : task("Register_Controller"), enabled(this, "register-enabled"),displayCtrl(dCtrl) { }
 
 void RegisterController::main() {
+
+
     for (; ;) {
 
-        displayCtrl.displayText("waiting data.. \n");
-
-        // when register received...
-            // todo..
-
-        // decode signal and assign to variables below
-            // todo...
-
-        gameParameters.id = 1;
-        gameParameters.weapon = 1;
-        gameParameters.health = 100;
-
-        // activate game time or something
-            // todo...
-
-        // this task is done, suspend task after init
         wait(enabled);
+        displayCtrl.displayText("waiting signal..");
+
+        // wait for signal
+
 
     }
+
 }
 
 void RegisterController::enable() {
