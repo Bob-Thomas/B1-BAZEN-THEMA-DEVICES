@@ -27,10 +27,11 @@ short Command::generate_checksum(short bits) {
 
 bool Command::valid_checksum(short bits) {
     for (int i = 1; i <= 5; i++) {
-        bool current_bit = ((bits >> (15 - i)) & 1);
-        bool check_bit = ((bits >> (15 - (i + 5))) & 1);
-        short control_bit = ((bits >> (15 - (i + 10))) & 1);
-        bool xor_bit = current_bit ^check_bit;
+        bool current_bit = bits & (1 << i);
+        bool check_bit = bits & (1 << (i+5));
+        bool control_bit = bits & (1 << (i+10));
+        bool xor_bit = current_bit ^ check_bit;
+        hwlib::cout << "\n" << ((current_bit) ? "1" : "0") << ((check_bit) ? "1" : "0") << " ^ " << ((xor_bit) ? "1" : "0") << " = " << ((control_bit) ? "1" : "0") << "\n";
         if (control_bit != xor_bit) {
             return false;
         }
@@ -40,7 +41,7 @@ bool Command::valid_checksum(short bits) {
 
 short Command::encode() {
     short bits = 0;
-    bits = bits | (1 << 15);//add startbit
+    bits = bits | (1 << 16);//add startbit
 
     //Convert id to  short and place it on position 1-5
     short id_bits = sender << 10;
@@ -50,7 +51,7 @@ short Command::encode() {
     short data_bits = data << 5;
     bits = bits | data_bits;
     for (int i = 1; i <= 5; i++) {
-        short checksum = ((bits >> (15 - i)) & 1) ^((bits >> (15 - (i + 5))) & 1);
+        short checksum = ((bits >> (16 - i)) & 1) ^((bits >> (16 - (i + 5))) & 1);
         checksum = checksum << (5 - i);
         bits = bits | checksum;
     }
@@ -64,7 +65,7 @@ short Command::encode() {
 }
 
 void Command::decode(short bits) {
-    bool start_bit = ((bits >> (15)) & 1);
+    bool start_bit = bits & (1 << 0);
     if (!start_bit) {
 #if RTOS_STATISTICS_ENABLED
 
@@ -85,13 +86,13 @@ void Command::decode(short bits) {
         sender = 0;
         data = 0;
         for (i = 1; i <= 5; i++) {
-            sender = sender | ((bits >> (15 - i)) & 1);
+            sender = sender | ((bits >> (16 - i)) & 1);
             if (i < 5) {
                 sender = sender << 1;
             }
         }
         for (i = 6; i <= 10; i++) {
-            data = data | ((bits >> (15 - i)) & 1);
+            data = data | ((bits >> (16 - i)) & 1);
             if (i < 10) {
                 data = data << 1;
             }

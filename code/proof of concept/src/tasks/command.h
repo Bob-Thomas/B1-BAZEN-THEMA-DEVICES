@@ -20,13 +20,18 @@ class Command {
 
 public:
     void print_command() {
-        char bits[16];
-         short encoded = encode();
+        short encoded = encode();
+        hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: ";
         for(int i = 0; i < 16; i++) {
             bool bit = ((encoded >> (15-i))&1);
-            (bit) ? bits[i] = '1' : bits[i] = '0';
+            if(bit) {
+                hwlib::cout << "0";
+            } else {
+                hwlib::cout << "1";
+            }
+
         }
-        hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: " << bits << "\n";
+        hwlib::cout << "\n";
     }
      short encode();
 
