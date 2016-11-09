@@ -6,14 +6,14 @@
 #include "stdlib.h"
 
 InitGameController::InitGameController(Transmitter &transmitter, hwlib::keypad<16> &keypad, DisplayController &displayCtrl)
-        : task("Init_Controller"), transmitter(transmitter), keypad(keypad), displayCtrl(displayCtrl), enabled(this, "init-enabled"), command_available(this, "command-available") { }
+        : task("Init_Controller"), transmitter(transmitter), keypad(keypad), displayCtrl(displayCtrl), enabled(this, "init-enabled"), command_available(this, "command-available"), command_full(0) { }
 
 void InitGameController::main() {
 
-
-    char txt[] = "Press A to \n insert player";
-
     for(;;) {
+
+        wait(enabled);
+        char txt[] = "Press A to \n insert player. \n \n \n \nPress C to \n insert command. \n";
 
         // default screen
         displayCtrl.displayText(txt);
@@ -66,11 +66,17 @@ void InitGameController::main() {
                     if(c != 'A') {
 
                         weapon_id = atoi(&c);
-                        displayCtrl.displayText("sending data..");
 
-                        // todo... send the private vars (int player_id, int weapon_id) from this fields with transmitter
+                        hwlib::cout << "TEST CASE PLAYER ID:" << player_id << "\n TEST CASE WEAPON ID " << weapon_id << "\n";
+                        displayCtrl.displayText("Press * to \n send data.");
+                        c = keypad.getc();
 
-                        //transmitter.send(player_id, weapon_id);
+                        if(c =='*') {
+                            displayCtrl.displayText("Sending data..");
+
+                            // todo... send data
+                            keypad.getc();
+                        }
                     }
 
 
@@ -84,8 +90,46 @@ void InitGameController::main() {
 
         }
 
+        if(c == 'C') {
+            hwlib::cout << "im here";
+            int counter = 0;
+            char first_screen_command[] = "..........xxxxx";
+            displayCtrl.displayText(first_screen_command);
+
+            while(counter < 15){
+
+                char c = keypad.getc();
+                if(c == '1' || c == '0' ) {
+                    first_screen_command[counter] = c;
+                    custom_command[counter] = c;
+                    displayCtrl.displayText(first_screen_command);
+                    counter++;
+                } else{
+                    command_full = 0;
+                    break;
+                }
+
+            }
+
+            if(counter == 15) {
+                displayCtrl.displayText("Press # \nany time \nto send  \ncommand. \nPress any \nkey to \ncontinue.");
+                command_full = '1';
+                keypad.getc();
+            }
+
+        }
+
+        if(c == '#') {
+
+            if(command_full == '1') {
+                displayCtrl.displayText("send last \ninserted command");
+            } else {
+                displayCtrl.displayText("Incorrect  \nCommand");
+            }
+        }
+
+
         hwlib::cout << c;
-        wait();
     }
 
     /*
