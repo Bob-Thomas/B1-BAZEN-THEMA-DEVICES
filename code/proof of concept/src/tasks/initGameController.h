@@ -10,6 +10,7 @@
 #include "controller.h"
 #include "transmitter.h"
 #include "displayController.h"
+#include "stdlib.h"
 
 class InitGameController :  public Controller, public rtos::task<> {
     Transmitter &transmitter;
@@ -22,7 +23,7 @@ class InitGameController :  public Controller, public rtos::task<> {
     int player_id;
     int weapon_id;
     int valid_id(char first, char second);
-    char custom_command[16];
+    short custom_command = 0;
     char command_full;
     void main();
 

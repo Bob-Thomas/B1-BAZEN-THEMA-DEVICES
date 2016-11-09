@@ -26,41 +26,46 @@ class Main : public rtos::task<> {
     InitGameController &init_controller;
     RegisterController &register_controller;
     RunGameController &run_game_controller;
-
     void main() {
         for (; ;) {
             receiver.enable();
             switch (current_state) {
                 case INIT:
+
                     if (receiver.get_controller()->get_name() != init_controller.get_name()) {
+                        receiver.suspend();
                         receiver.set_controller(&init_controller);
+                        receiver.resume();
+                        init_controller.resume();
+                        register_controller.suspend();
+                        run_game_controller.suspend();
                     }
                     init_controller.enable();
-                    register_controller.suspend();
-                    run_game_controller.suspend();
                     break;
                 case REGISTER:
 
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
+                        receiver.suspend();
                         receiver.set_controller(&register_controller);
+                        receiver.resume();
+                        init_controller.suspend();
+                        register_controller.resume();
+                        run_game_controller.suspend();
                     }
-
-                    if(register_controller.state() == '1') {
-                        current_state = RUNNING;
-                    }
-
-                    init_controller.suspend();
                     register_controller.enable();
-                    run_game_controller.suspend();
+
                     break;
                 case RUNNING:
 
                     if (receiver.get_controller()->get_name() != run_game_controller.get_name()) {
+                        receiver.suspend();
                         receiver.set_controller(&run_game_controller);
+                        receiver.resume();
+                        init_controller.suspend();
+                        register_controller.suspend();
+                        run_game_controller.resume();
                     }
 
-                    init_controller.suspend();
-                    register_controller.suspend();
                     run_game_controller.enable();
                     break;
                 case GAME_END:
@@ -76,18 +81,18 @@ public:
 };
 
 int main() {
-#if GAMEMODE == PLAYER
-    hwlib::cout << "Player";
-#else
-    hwlib::cout << "Leader";
-#endif
+
 
     // kill the watchdog
     WDT->WDT_MR = WDT_MR_WDDIS;
 
     // wait for the PC console to start
     hwlib::wait_ms(1000);
-
+#if GAMEMODE == PLAYER
+    hwlib::cout << "Player";
+#else
+    hwlib::cout << "Leader";
+#endif
     hwlib::cout << "timer demo\n";
 
     namespace target = hwlib::target;

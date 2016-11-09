@@ -5,13 +5,13 @@
 #include "receiver.h"
 
 void Receiver::main() {
-//    long long int received = 0;
+    long long int received = 0;
     for (; ;) {
         wait(enabled);
-//        if(received+(4*rtos::ms) < hwlib::now_us())  {
-//            bits = 0;
-//            amount_bits_found = 0;
-//        }
+        if(received+(4*rtos::ms) < hwlib::now_us())  {
+            bits = 0;
+            amount_bits_found = 0;
+        }
         idle();
         Command c(bits);
         c.print_command();
@@ -31,8 +31,7 @@ void Receiver::idle() {
                 if (signal.get() == 0) {
                     hwlib::wait_us(800);
                     //start bit found
-                    bits &= ~(1 << (max_bits));
-                    hwlib::cout << "1";
+                    bits |= (1 << (max_bits-1));
                     amount_bits_found++;
                     starting = false;
                     while (amount_bits_found < 16) {
@@ -49,12 +48,11 @@ void Receiver::signal_found() {
     if(signal.get() == 0) {
         hwlib::wait_us(1200);
         if (signal.get() == 1) {
-            bits |= (1 << (max_bits - amount_bits_found));
             amount_bits_found++;
             hwlib::cout << "0";
 
         } else if (signal.get() == 0) {
-            bits &= ~(1 << (max_bits - amount_bits_found));
+            bits |= (1 << (max_bits - amount_bits_found));
             amount_bits_found++;
             hwlib::cout << "1";
 
@@ -62,10 +60,3 @@ void Receiver::signal_found() {
         hwlib::wait_us(600);
     }
 }
-//1 10000 00101 00101
-//1 00000 01010 01010
-
-//0 11000 00010 10010
-//1 00000 01010 01010
-
-//0100000101001011

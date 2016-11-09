@@ -23,7 +23,7 @@ class Receiver : public rtos::task<> {
 
     public:
         Receiver(const char *name, hwlib::pin_in &signal, Controller *controller)
-                : task(name), signal(signal), controller(controller), enabled(this, "receiver-enabled"),
+                : task( (unsigned int) 0, name), signal(signal), controller(controller), enabled(this, "receiver-enabled"),
                   timer(this) { }
 
         void enable() {

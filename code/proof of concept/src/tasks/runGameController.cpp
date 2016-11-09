@@ -8,7 +8,6 @@ RunGameController::RunGameController(GameParameters &gameParam, DisplayControlle
 
 void RunGameController::main() {
     for(;;) {
-        hwlib::cout << "derup";
         wait(enabled);
         char txt[] = "hp: 100\ntime left: 00:00";
         displayCtrl.displayText(txt);

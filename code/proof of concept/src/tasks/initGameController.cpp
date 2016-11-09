@@ -3,7 +3,6 @@
 //
 
 #include "initGameController.h"
-#include "stdlib.h"
 
 InitGameController::InitGameController(Transmitter &transmitter, hwlib::keypad<16> &keypad, DisplayController &displayCtrl)
         : task("Init_Controller"), transmitter(transmitter), keypad(keypad), displayCtrl(displayCtrl), enabled(this, "init-enabled"), command_available(this, "command-available"), command_full(0) { }
@@ -73,8 +72,9 @@ void InitGameController::main() {
 
                         if(c =='*') {
                             displayCtrl.displayText("Sending data..");
-
-                            // todo... send data transmitter int weapon_id, player_id
+                            Command c(player_id, weapon_id);
+                            c.print_command();
+                            transmitter.send(c.encode());
                             keypad.getc();
                         }
                     }
@@ -92,16 +92,20 @@ void InitGameController::main() {
 
         if(c == 'C') {
             hwlib::cout << "im here";
-            int counter = 0;
-            char first_screen_command[] = "..........xxxxx";
+            int counter = 1;
+            custom_command = 0;
+            custom_command |= 1 << 15;
+            char first_screen_command[] = "1.........xxxxx";
             displayCtrl.displayText(first_screen_command);
 
-            while(counter < 15){
+            while(counter < 16){
 
                 char c = keypad.getc();
                 if(c == '1' || c == '0' ) {
                     first_screen_command[counter] = c;
-                    custom_command[counter] = c;
+                    if(c == '1') {
+                        custom_command |= (1 << (15-counter));
+                    }
                     displayCtrl.displayText(first_screen_command);
                     counter++;
                 } else{
@@ -111,19 +115,17 @@ void InitGameController::main() {
 
             }
 
-            if(counter == 15) {
+            if(counter == 16) {
                 displayCtrl.displayText("Press # \nany time \nto send  \ncommand. \nPress any \nkey to \ncontinue.");
                 command_full = '1';
-                keypad.getc();
             }
 
         }
-
         if(c == '#') {
 
             if(command_full == '1') {
                 displayCtrl.displayText("send last \ninserted command");
-                // todo... transmitter.send char custom command
+                transmitter.send(custom_command);
             } else {
                 displayCtrl.displayText("Incorrect  \nCommand");
             }
