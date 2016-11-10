@@ -7,7 +7,6 @@
 void Transmitter::main() {
     for (; ;) {
         wait(command_received);
-        command_mutex.wait();
         for (int j = 0; j < 2; j++) {
             //command
             for (int i = 1; i < 16; i++) {
@@ -35,13 +34,10 @@ void Transmitter::main() {
             }
             hwlib::wait_ms(3);
         }
-        command_mutex.signal();
     }
 }
 //1 100000 01001 0100
 void Transmitter::send(short bits) {
-    command_mutex.wait();
     command_bits = bits;
-    command_mutex.signal();
     command_received.set();
 }

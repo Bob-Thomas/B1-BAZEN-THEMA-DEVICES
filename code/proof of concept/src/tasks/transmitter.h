@@ -18,6 +18,8 @@ class Transmitter : public rtos::task<> {
     hwlib::target::d2_36kHz &ir;
     /** An RTOS flag used to check if a command is received **/
     rtos::flag command_received;
+    /** short to save the command in **/
+    short command_bits;
     /** Rtos main loop that sends a short in binary form over IR using the d2_36khz pin **/
     void main();
 public:
@@ -47,6 +49,7 @@ public:
      * \param bits The short that will be send by binary MSB over ir
      */
     void send(short bits);
+
 };
 
 #endif //CODE_TRANSMITTER_H

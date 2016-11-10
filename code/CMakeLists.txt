@@ -304,6 +304,6 @@ set(SOURCE_FILES
     "proof of concept/hwlib.o"
     "proof of concept/Makefile"
     "proof of concept/rtos.o"
-    "proof of concept/switch_to.o" "proof of concept/src/tasks/transmitter.cpp" "proof of concept/src/tasks/transmitter.h" "proof of concept/src/tasks/controller.h" "proof of concept/src/tasks/initGameController.cpp" "proof of concept/src/tasks/initGameController.cpp" "proof of concept/src/tasks/initGameController.h" "proof of concept/src/tasks/command.cpp" "proof of concept/src/tasks/command.h" "proof of concept/src/tasks/registerController.cpp" "proof of concept/src/tasks/registerController.h" "proof of concept/src/tasks/soundController.cpp" "proof of concept/src/tasks/soundController.h")
+    "proof of concept/switch_to.o" "proof of concept/src/tasks/transmitter.cpp" "proof of concept/src/tasks/transmitter.h" "proof of concept/src/tasks/controller.h" "proof of concept/src/tasks/initGameController.cpp" "proof of concept/src/tasks/initGameController.cpp" "proof of concept/src/tasks/initGameController.h" "proof of concept/src/tasks/command.cpp" "proof of concept/src/tasks/command.h" "proof of concept/src/tasks/registerController.cpp" "proof of concept/src/tasks/registerController.h" "proof of concept/src/tasks/soundController.cpp" "proof of concept/src/tasks/soundController.h" "proof of concept/src/tasks/buttoController.h" "proof of concept/src/tasks/buttoController.cpp")
 
 add_executable(code ${SOURCE_FILES})

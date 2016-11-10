@@ -4,19 +4,17 @@
 
 #include "soundController.h"
 
-SoundController::SoundController(hwlib::pin_out &lsp, rtos::mutex & mutex)
-        : task("sound controller"), lsp(lsp), play_sound(this, "play-sound"), sounds(this), sound_mutex(mutex) {}
+SoundController::SoundController(hwlib::pin_out &lsp)
+        : task("sound controller"), lsp(lsp), play_sound(this, "play-sound"), sounds(this) {}
 
 void SoundController::main() {
     for(;;) {
         wait(play_sound);
-        sound_mutex.wait();
         for(int i = 0; i < 20; i++) {
             play(sounds.read());
         }
         sounds.clear();
-        sound_mutex.signal();
-        ;        }
+    }
 }
 
 void SoundController::play(Sound s ) {
@@ -35,10 +33,8 @@ void SoundController::play(Sound s ) {
 }
 
 void SoundController::play_shoot() {
-    sound_mutex.wait();
     for(int i = 0; i < 20; i++) {
         sounds.write({2000-(100*i), 10000});
     }
-    sound_mutex.signal();
     play_sound.set();
 }
