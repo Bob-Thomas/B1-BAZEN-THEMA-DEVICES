@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>can be interpretted as playing state and will handle each event during his state.  
+ <a href="../../d9/dc3/classInitGameController.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../da/d71/initGameController_8h_source.html">initGameController.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for InitGameController:</div>
@@ -76,7 +79,7 @@ Inheritance diagram for InitGameController:</div>
  <div class="center">
   <img src="../../d9/dc3/classInitGameController.png" usemap="#InitGameController_map" alt=""/>
   <map id="InitGameController_map" name="InitGameController_map">
-<area href="../../d9/d85/classController.html" alt="Controller" shape="rect" coords="0,0,116,24"/>
+<area href="../../d9/d85/classController.html" title="will be implented by each state " alt="Controller" shape="rect" coords="0,0,116,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -124,7 +127,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a8e74bd72ed5a44d5d165081df44057c8"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc3/classInitGameController.html#a8e74bd72ed5a44d5d165081df44057c8">command_full</a></td></tr>
 <tr class="separator:a8e74bd72ed5a44d5d165081df44057c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>can be interpretted as playing state and will handle each event during his state. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a313ac576256249024ccb9d6811a53f4b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -154,6 +159,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p><a class="el" href="../../d9/dc3/classInitGameController.html" title="can be interpretted as playing state and will handle each event during his state. ...">InitGameController</a> constructor /param <a class="el" href="../../de/d11/classTransmitter.html" title="Tranmitter class used to send information over IR A rtos task that gives the user the ability of send...">Transmitter</a> &amp;transmitter is a boundary object to send data /param hwlib::keypad&lt;16&gt; &amp;keypad is HWLIB boundary for keypad input /param <a class="el" href="../../dc/dae/classDisplayController.html" title="will be used as communcation controller between oled boundary and other game state controllers ...">DisplayController</a> &amp;displayCtrl reference to display controller for handling text </p>
 
 </div>
 </div>
@@ -178,7 +184,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>virtual function to enable the class function task </p>
+<p>interface function to set flag that will activate task </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#abd695b1eb4c8363c11eb3e94108662e2">Controller</a>.</p>
 
@@ -204,7 +210,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>virtual function for getting class name </p>
+<p>interface function for getting controller name </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#acf91db33d51e796cffad3e7528af58bd">Controller</a>.</p>
 
@@ -230,6 +236,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>RTOS main task function </p>
 
 </div>
 </div>
@@ -254,7 +261,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>virtual function for received data from the receiver </p>
+<p>interface function for receiving command /param <a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> c </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#ac2f31f35f2128feed3026ff9627be111">Controller</a>.</p>
 
@@ -291,6 +298,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>function valid_id will combine 2 input chars from keypad to 1 integer value. integer value will be validated. Must be between 1 and 31. When true, return the valid id. On failure, return 0. </p>
 
 </div>
 </div>
@@ -312,6 +320,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>COMMAND class for encoding and decoding bits </p>
 
 </div>
 </div>
@@ -332,6 +341,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>RTOS flag foor command available </p>
 
 </div>
 </div>
@@ -352,6 +362,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>command_full present a boolean value. Used to check if player </p>
 
 </div>
 </div>
@@ -372,6 +383,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>short custom_command will be the inputted command by leader with keypad. </p>
 
 </div>
 </div>
@@ -392,6 +404,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>displayController to display text on oled </p>
 
 </div>
 </div>
@@ -412,6 +425,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>RTOS enable flag to atctivate task </p>
 
 </div>
 </div>
@@ -432,6 +446,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>keypad boundary for getting input </p>
 
 </div>
 </div>
@@ -452,6 +467,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>int player_id is NOT admin id! it will be the player id to give </p>
 
 </div>
 </div>
@@ -472,6 +488,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>transmitter boundary for sending data </p>
 
 </div>
 </div>
@@ -492,6 +509,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>int weapon_id is weapon id to give </p>
 
 </div>
 </div>
