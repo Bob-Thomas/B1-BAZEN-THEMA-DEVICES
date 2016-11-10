@@ -7,11 +7,27 @@
 
 #include "command.h"
 
+/**
+ * Controller class will be implented by each state
+ */
 class Controller {
 public:
+
+    /**
+     * Controller Constructor
+     */
     Controller(){};
+    /**
+     * virtual function for received data from the receiver
+     */
     virtual void receive(Command c) = 0;
+    /**
+     * virtual function to enable the class function task
+     */
     virtual void enable() = 0;
+    /**
+     * virtual function for getting class name
+     */
     virtual const char * get_name() = 0;
 };
 

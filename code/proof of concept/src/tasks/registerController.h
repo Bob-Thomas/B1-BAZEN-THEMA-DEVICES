@@ -9,26 +9,67 @@
 #include "controller.h"
 #include "../../../libs/hwlib/hwlib-ostream.hpp"
 #include "displayController.h"
+#include "../entities/gameParameters.h"
 
+/**
+ * RegisterGameController can be interpret as register state and will handle each event during his state.
+ */
 class RegisterController : public Controller, public rtos::task<> {
+    /**
+     * enable flag to continue task
+     */
     rtos::flag enabled;
+    /**
+     * gameParameters reference for get and set player data
+     */
+    GameParameters &gameParameters;
+
+    /**
+     * displayCtrl for writing text oled
+     */
     DisplayController &displayCtrl;
+
+    /**
+     * RTOS main tas
+     */
     void main();
+
+    /**
+     * char for changing state
+     */
     char next_state = '0';
 public:
+    /**
+     * interface function to activate task function
+     */
     void enable();
 
+    /**
+     * interface function for receiving data
+     * /param Command c to encode and decode data
+     */
     void receive(Command c);
 
+    /**
+     * interface function to get name of the controller
+     */
     const char *get_name() {
         return this->name();
     }
 
+    /**
+     * function for change stat
+     */
     char state() {
         return next_state;
     }
 
-    RegisterController(DisplayController &dCtrl);
+    /**
+     * RegisterController Constructor
+     * /param GameParameters  &gp for get and set player data
+     * /param Display Controller &dCtrl for get and set player data
+     */
+    RegisterController(GameParameters &gp, DisplayController &dCtrl);
 
 };
 

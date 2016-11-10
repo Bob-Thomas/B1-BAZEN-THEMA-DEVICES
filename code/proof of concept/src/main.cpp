@@ -18,6 +18,7 @@
 #include "tasks/displayController.h"
 #include "entities/gameParameters.h"
 #include "tasks/runGameController.h"
+#include "tasks/buttonController.h"
 
 enum States {
     INIT, REGISTER, RUNNING, GAME_END
@@ -57,11 +58,11 @@ class Main : public rtos::task<> {
      * It will also swap the listeners for the receiver based on the current state.
      */
     void main() {
+
         for (; ;) {
-            receiver.enable();
+           // receiver.enable();
             switch (current_state) {
                 case INIT:
-
                     if (receiver.get_controller()->get_name() != init_controller.get_name()) {
                         receiver.suspend();
                         receiver.set_controller(&init_controller);
@@ -82,6 +83,8 @@ class Main : public rtos::task<> {
                         register_controller.resume();
                         run_game_controller.suspend();
                     }
+
+
                     register_controller.enable();
 
                     break;
@@ -118,18 +121,18 @@ public:
 };
 
 int main() {
-
+#if GAMEMODE == PLAYER
+    hwlib::cout << "Player";
+#else
+    hwlib::cout << "Leader";
+#endif
 
     // kill the watchdog
     WDT->WDT_MR = WDT_MR_WDDIS;
 
     // wait for the PC console to start
     hwlib::wait_ms(1000);
-#if GAMEMODE == PLAYER
-    hwlib::cout << "Player";
-#else
-    hwlib::cout << "Leader";
-#endif
+
     hwlib::cout << "timer demo\n";
 
     namespace target = hwlib::target;
@@ -171,10 +174,13 @@ int main() {
     auto transmitter = Transmitter("transmitter", ir);
     auto display_controller = DisplayController(oled);
     auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
-    auto register_controller = RegisterController(display_controller);
+    auto register_controller = RegisterController(game_parameter, display_controller);
     auto run_game_controller = RunGameController(game_parameter, display_controller);
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
-
+    auto gnd = target::pin_out( target::pins::d49);
+    auto vlt = target::pin_out( target::pins::d51);
+    auto but = target::pin_in( target::pins::d53);
+    auto button_controller = ButtonController(run_game_controller, gnd, vlt, but);
     auto main = Main(receiver, init_game_controller, register_controller, run_game_controller);
     rtos::run();
 }

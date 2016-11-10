@@ -3,9 +3,8 @@
 //
 
 #include "registerController.h"
-#include "../entities/gameParameters.h"
 
-RegisterController::RegisterController( DisplayController &dCtrl) : task("Register_Controller"), enabled(this, "register-enabled"),displayCtrl(dCtrl) { }
+RegisterController::RegisterController( GameParameters &gp, DisplayController &dCtrl) : task("Register_Controller"), enabled(this, "register-enabled"), gameParameters(gp), displayCtrl(dCtrl) { }
 
 void RegisterController::main() {
 

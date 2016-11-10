@@ -12,6 +12,9 @@
 #include "displayController.h"
 #include "stdlib.h"
 
+/**
+ *
+ */
 class InitGameController :  public Controller, public rtos::task<> {
     Transmitter &transmitter;
     hwlib::keypad<16> &keypad;

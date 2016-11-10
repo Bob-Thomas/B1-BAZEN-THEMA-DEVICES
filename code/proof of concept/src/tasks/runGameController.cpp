@@ -4,18 +4,34 @@
 
 #include "runGameController.h"
 
-RunGameController::RunGameController(GameParameters &gameParam, DisplayController &disCtrl): task("RunGame_Controller"), enabled(this, "runGame-enabled"), gameParameters(gameParam), displayCtrl(disCtrl) { }
+RunGameController::RunGameController(GameParameters &gameParam, DisplayController &disCtrl): task("RunGame_Controller"), enabled(this, "runGame-enabled"), pressed(this, "button-pressed"), gameParameters(gameParam), displayCtrl(disCtrl) { }
 
 void RunGameController::main() {
+
+    wait(enabled);
+    // display on screen
+    char txt[] = "hp: 100\nminutes left: 10";
+    displayCtrl.displayText(txt);
+
     for(;;) {
+
         wait(enabled);
-        char txt[] = "hp: 100\ntime left: 00:00";
-        displayCtrl.displayText(txt);
+
+        // check if button pressed or hit received or game over
+        wait(pressed);
+
+        hwlib::cout << "I was pressed";
+
     }
+
 }
 
 void RunGameController::enable() {
     enabled.set();
+}
+
+void RunGameController::button_pressed() {
+    pressed.set();
 }
 
 void RunGameController::receive(Command c) {

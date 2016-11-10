@@ -30,6 +30,7 @@ void DisplayController::main() {
 void DisplayController::displayText(const char * txt) {
     buffer.clear();
     flushFlag.set();
+
     for(int i = 0; i < 2048; i++) {
         buffer.write(txt[i]);
     }
