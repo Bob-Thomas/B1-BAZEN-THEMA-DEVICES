@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main',['Main',['../db/d4a/classMain.html',1,'']]]
+  ['initgamecontroller',['InitGameController',['../d9/dc3/classInitGameController.html',1,'']]]
 ];

@@ -88,6 +88,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ce30791b191b91093d95e28701c51a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5de530e7e4438aaab5b3fc76a8562e15"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#a5de530e7e4438aaab5b3fc76a8562e15">get_name</a> ()</td></tr>
 <tr class="separator:a5de530e7e4438aaab5b3fc76a8562e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf40ea236b2192aa3d299fb0205cdfed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#abf40ea236b2192aa3d299fb0205cdfed">button_pressed</a> ()</td></tr>
+<tr class="separator:abf40ea236b2192aa3d299fb0205cdfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9993ef04e8adb6db64fd16e337da0c8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#a9993ef04e8adb6db64fd16e337da0c8a">RunGameController</a> (<a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;gameParam, <a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;disCtrl)</td></tr>
 <tr class="separator:a9993ef04e8adb6db64fd16e337da0c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classController"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classController')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d9/d85/classController.html">Controller</a></td></tr>
@@ -103,12 +105,16 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aa42d61dda2c87352934e97927aeeef8e"><td class="memItemLeft" align="right" valign="top">rtos::flag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#aa42d61dda2c87352934e97927aeeef8e">enabled</a></td></tr>
 <tr class="separator:aa42d61dda2c87352934e97927aeeef8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ba9b930def06701eea9059ad6f52c65"><td class="memItemLeft" align="right" valign="top">rtos::flag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#a6ba9b930def06701eea9059ad6f52c65">pressed</a></td></tr>
+<tr class="separator:a6ba9b930def06701eea9059ad6f52c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6794cfa89a07182304614fd4ec0b8dbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#a6794cfa89a07182304614fd4ec0b8dbf">gameParameters</a></td></tr>
 <tr class="separator:a6794cfa89a07182304614fd4ec0b8dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ffb58440b96d5577c942179b5b398d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d75/classRunGameController.html#a5ffb58440b96d5577c942179b5b398d8">displayCtrl</a></td></tr>
 <tr class="separator:a5ffb58440b96d5577c942179b5b398d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="../../d6/d75/classRunGameController.html">RunGameController</a> can be interpret as playing state and will handle each event during his state. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9993ef04e8adb6db64fd16e337da0c8a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -132,10 +138,27 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p><a class="el" href="../../d6/d75/classRunGameController.html">RunGameController</a> constructor. /param &amp;gameParam to set or get player game settings. /param &amp;disCtrl to write text on screen. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="abf40ea236b2192aa3d299fb0205cdfed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RunGameController::button_pressed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>button_pressed interface function. </p>
+
+</div>
+</div>
 <a id="afe90788158d503e73e63dae9456bf34c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -156,6 +179,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function for activating task. </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#abd695b1eb4c8363c11eb3e94108662e2">Controller</a>.</p>
 
@@ -181,6 +205,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function for getting controller name. </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#acf91db33d51e796cffad3e7528af58bd">Controller</a>.</p>
 
@@ -206,6 +231,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>RTOS task function. </p>
 
 </div>
 </div>
@@ -230,6 +256,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function for receiving a command /param <a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> c for encode en decode data. </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#ac2f31f35f2128feed3026ff9627be111">Controller</a>.</p>
 
@@ -253,6 +280,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> reference handles text display on oled screen. </p>
 
 </div>
 </div>
@@ -273,6 +301,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>flag to enable the task </p>
 
 </div>
 </div>
@@ -293,6 +322,28 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>gameParameters will be an entity object for storring the personal player data. </p>
+
+</div>
+</div>
+<a id="a6ba9b930def06701eea9059ad6f52c65"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rtos::flag RunGameController::pressed</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>rtos flag will be used for detecting button press </p>
 
 </div>
 </div>

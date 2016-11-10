@@ -19,12 +19,6 @@ Command::Command(int sender, int data) : sender(sender), data(data) {
 
 Command::Command() : sender(-1), data(-1) { }
 
-
-short Command::generate_checksum(short bits) {
-    short checksum_part = 0;
-    return checksum_part;
-}
-
 bool Command::valid_checksum(short bits) {
     for (int i = 1; i <= 5; i++) {
         bool current_bit = bits & (1 << i);
@@ -120,4 +114,14 @@ void Command::set_data(int data) {
 
 bool Command::get_error() {
     return error;
+}
+
+void Command::print_command() {
+    short encoded = encode();
+    hwlib::cout << HERE << "\n \t--" << "decoded " << sender << " | " << data << " Encoded: ";
+    for (int i = 0; i < 16; i++) {
+        hwlib::cout << ((encoded >> (15 - i)) & 1);
+
+    }
+    hwlib::cout << "\n";
 }

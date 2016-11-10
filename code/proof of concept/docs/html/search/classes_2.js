@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gameparameters',['GameParameters',['../db/ddd/classGameParameters.html',1,'']]]
+  ['displaycontroller',['DisplayController',['../dc/dae/classDisplayController.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fbits',['max_bits',['../dc/db8/classReceiver.html#a44689683bdb10e7c9d37145770e651d4',1,'Receiver']]]
+  ['max_5fbits',['max_bits',['../dc/db8/classReceiver.html#a6d8b8cab0d0cde1792498c73e9f715c1',1,'Receiver']]]
 ];

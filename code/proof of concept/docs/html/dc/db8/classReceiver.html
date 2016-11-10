@@ -61,7 +61,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d5/d16/classReceiver-members.html">List of all members</a>  </div>
@@ -69,6 +68,9 @@ $(function() {
 <div class="title">Receiver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that handles receiving IR handling.  
+ <a href="../../dc/db8/classReceiver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d7/d54/receiver_8h_source.html">receiver.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -83,52 +85,55 @@ Inheritance diagram for Receiver:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a802c30d812f25cc937187fca72770909"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a802c30d812f25cc937187fca72770909">Receiver</a> (const char *name, hwlib::pin_in &amp;<a class="el" href="../../dc/db8/classReceiver.html#adb2105987ae4ef94202b575aca8c5dd4">signal</a>, <a class="el" href="../../d9/d85/classController.html">Controller</a> *<a class="el" href="../../dc/db8/classReceiver.html#a55f41243176521a211c02e05f271cd2e">controller</a>)</td></tr>
+<tr class="memdesc:a802c30d812f25cc937187fca72770909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="../../dc/db8/classReceiver.html" title="Class that handles receiving IR handling. ">Receiver</a> class.  <a href="#a802c30d812f25cc937187fca72770909">More...</a><br /></td></tr>
 <tr class="separator:a802c30d812f25cc937187fca72770909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd">enable</a> ()</td></tr>
+<tr class="memdesc:ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the enable flag  <a href="#ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd">More...</a><br /></td></tr>
 <tr class="separator:ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8a1cb51d083ce85a987105d4849237b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#ab8a1cb51d083ce85a987105d4849237b">set_controller</a> (<a class="el" href="../../d9/d85/classController.html">Controller</a> *c)</td></tr>
+<tr class="memdesc:ab8a1cb51d083ce85a987105d4849237b"><td class="mdescLeft">&#160;</td><td class="mdescRight">swaps out the controller that the receiver talks to  <a href="#ab8a1cb51d083ce85a987105d4849237b">More...</a><br /></td></tr>
 <tr class="separator:ab8a1cb51d083ce85a987105d4849237b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7821c8ee1eba31c280ca428f3a328e84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d85/classController.html">Controller</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a7821c8ee1eba31c280ca428f3a328e84">get_controller</a> ()</td></tr>
+<tr class="memdesc:a7821c8ee1eba31c280ca428f3a328e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the controller that the receiver is talking to  <a href="#a7821c8ee1eba31c280ca428f3a328e84">More...</a><br /></td></tr>
 <tr class="separator:a7821c8ee1eba31c280ca428f3a328e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4e33cf6ba25d205286c3767f6839e33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#ae4e33cf6ba25d205286c3767f6839e33">bit_one</a> ()</td></tr>
-<tr class="separator:ae4e33cf6ba25d205286c3767f6839e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab80911a27e1b7fc9b83ad4b6d9f8cfef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#ab80911a27e1b7fc9b83ad4b6d9f8cfef">bit_zero</a> ()</td></tr>
-<tr class="separator:ab80911a27e1b7fc9b83ad4b6d9f8cfef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a481c3859f007aecdcf8a155ccf0170cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a481c3859f007aecdcf8a155ccf0170cc">idle</a> ()</td></tr>
 <tr class="separator:a481c3859f007aecdcf8a155ccf0170cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae93c044c1786d8ed265f1f1bc0cd94e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#ae93c044c1786d8ed265f1f1bc0cd94e3">signal_found</a> ()</td></tr>
 <tr class="separator:ae93c044c1786d8ed265f1f1bc0cd94e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:afe868f24407cab2b5cf347204361f442"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#afe868f24407cab2b5cf347204361f442">bits</a></td></tr>
-<tr class="separator:afe868f24407cab2b5cf347204361f442"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a75dba83bf5ac20f68b354b0d586ed6a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a75dba83bf5ac20f68b354b0d586ed6a9">main</a> ()</td></tr>
+<tr class="memdesc:a75dba83bf5ac20f68b354b0d586ed6a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTOS main loop that if enabled will listen for signals If a command is received twice successfully it will call the current controller it's Received method with as parameter the received command.  <a href="#a75dba83bf5ac20f68b354b0d586ed6a9">More...</a><br /></td></tr>
 <tr class="separator:a75dba83bf5ac20f68b354b0d586ed6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:adb2105987ae4ef94202b575aca8c5dd4"><td class="memItemLeft" align="right" valign="top">hwlib::pin_in &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#adb2105987ae4ef94202b575aca8c5dd4">signal</a></td></tr>
+<tr class="memdesc:adb2105987ae4ef94202b575aca8c5dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin that receives the ir pulses.  <a href="#adb2105987ae4ef94202b575aca8c5dd4">More...</a><br /></td></tr>
 <tr class="separator:adb2105987ae4ef94202b575aca8c5dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55f41243176521a211c02e05f271cd2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d85/classController.html">Controller</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a55f41243176521a211c02e05f271cd2e">controller</a></td></tr>
+<tr class="memdesc:a55f41243176521a211c02e05f271cd2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to a abstract controller class.  <a href="#a55f41243176521a211c02e05f271cd2e">More...</a><br /></td></tr>
 <tr class="separator:a55f41243176521a211c02e05f271cd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23c37e177e32554a4cc404810cc4b654"><td class="memItemLeft" align="right" valign="top">rtos::flag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a23c37e177e32554a4cc404810cc4b654">enabled</a></td></tr>
+<tr class="memdesc:a23c37e177e32554a4cc404810cc4b654"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTOS flag to check if the receiver is enabled.  <a href="#a23c37e177e32554a4cc404810cc4b654">More...</a><br /></td></tr>
 <tr class="separator:a23c37e177e32554a4cc404810cc4b654"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4afe070845c5088048162ad64135ea59"><td class="memItemLeft" align="right" valign="top">rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a4afe070845c5088048162ad64135ea59">timer</a></td></tr>
-<tr class="separator:a4afe070845c5088048162ad64135ea59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa548fbcea05ffb6cbe86bc7b2ea50752"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d71/classCommand.html">Command</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#aa548fbcea05ffb6cbe86bc7b2ea50752">last_command</a></td></tr>
+<tr class="memdesc:aa548fbcea05ffb6cbe86bc7b2ea50752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer for the last received command.  <a href="#aa548fbcea05ffb6cbe86bc7b2ea50752">More...</a><br /></td></tr>
 <tr class="separator:aa548fbcea05ffb6cbe86bc7b2ea50752"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfa43d423053ab0005af3e8f181b8d6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#abfa43d423053ab0005af3e8f181b8d6e">amount_bits_found</a> = 0</td></tr>
+<tr class="memdesc:abfa43d423053ab0005af3e8f181b8d6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to keep track on how many bits we've counted for command.  <a href="#abfa43d423053ab0005af3e8f181b8d6e">More...</a><br /></td></tr>
 <tr class="separator:abfa43d423053ab0005af3e8f181b8d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44689683bdb10e7c9d37145770e651d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a44689683bdb10e7c9d37145770e651d4">max_bits</a> = 16</td></tr>
-<tr class="separator:a44689683bdb10e7c9d37145770e651d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61ada5dcc4896c3ea8537f301c935138"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a61ada5dcc4896c3ea8537f301c935138">bit_value</a> = false</td></tr>
-<tr class="separator:a61ada5dcc4896c3ea8537f301c935138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d8b8cab0d0cde1792498c73e9f715c1"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#a6d8b8cab0d0cde1792498c73e9f715c1">max_bits</a> = 16</td></tr>
+<tr class="memdesc:a6d8b8cab0d0cde1792498c73e9f715c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size of the command bits.  <a href="#a6d8b8cab0d0cde1792498c73e9f715c1">More...</a><br /></td></tr>
+<tr class="separator:a6d8b8cab0d0cde1792498c73e9f715c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe868f24407cab2b5cf347204361f442"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db8/classReceiver.html#afe868f24407cab2b5cf347204361f442">bits</a></td></tr>
+<tr class="memdesc:afe868f24407cab2b5cf347204361f442"><td class="mdescLeft">&#160;</td><td class="mdescRight">a short in which the received bits will be shifted into  <a href="#afe868f24407cab2b5cf347204361f442">More...</a><br /></td></tr>
+<tr class="separator:afe868f24407cab2b5cf347204361f442"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that handles receiving IR handling. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a802c30d812f25cc937187fca72770909"></a>
 <div class="memitem">
 <div class="memproto">
@@ -167,39 +172,19 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Constructor for the <a class="el" href="../../dc/db8/classReceiver.html" title="Class that handles receiving IR handling. ">Receiver</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Task name </td></tr>
+    <tr><td class="paramname">signal</td><td>Pin that's used to received to signals </td></tr>
+    <tr><td class="paramname">controler</td><td>Reference to a abstract class controller </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae4e33cf6ba25d205286c3767f6839e33"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Receiver::bit_one </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab80911a27e1b7fc9b83ad4b6d9f8cfef"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Receiver::bit_zero </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ae87c87c5ffdc9b50eeb9e9a8f9b1f8cd"></a>
 <div class="memitem">
 <div class="memproto">
@@ -220,6 +205,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>sets the enable flag </p>
 
 </div>
 </div>
@@ -243,6 +230,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>returns the controller that the receiver is talking to </p>
 
 </div>
 </div>
@@ -282,6 +271,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>RTOS main loop that if enabled will listen for signals If a command is received twice successfully it will call the current controller it's Received method with as parameter the received command. </p>
+
 </div>
 </div>
 <a id="ab8a1cb51d083ce85a987105d4849237b"></a>
@@ -305,6 +296,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>swaps out the controller that the receiver talks to </p>
 
 </div>
 </div>
@@ -342,9 +335,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Buffer to keep track on how many bits we've counted for command. </p>
+
 </div>
 </div>
-<a id="a61ada5dcc4896c3ea8537f301c935138"></a>
+<a id="afe868f24407cab2b5cf347204361f442"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -352,7 +347,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Receiver::bit_value = false</td>
+          <td class="memname">short Receiver::bits</td>
         </tr>
       </table>
   </td>
@@ -362,17 +357,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="afe868f24407cab2b5cf347204361f442"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">short Receiver::bits</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>a short in which the received bits will be shifted into </p>
 
 </div>
 </div>
@@ -394,6 +379,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Reference to a abstract controller class. </p>
+
 </div>
 </div>
 <a id="a23c37e177e32554a4cc404810cc4b654"></a>
@@ -413,6 +400,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>RTOS flag to check if the receiver is enabled. </p>
 
 </div>
 </div>
@@ -434,9 +423,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Buffer for the last received command. </p>
+
 </div>
 </div>
-<a id="a44689683bdb10e7c9d37145770e651d4"></a>
+<a id="a6d8b8cab0d0cde1792498c73e9f715c1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -444,7 +435,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Receiver::max_bits = 16</td>
+          <td class="memname">const int Receiver::max_bits = 16</td>
         </tr>
       </table>
   </td>
@@ -453,6 +444,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Maximum size of the command bits. </p>
 
 </div>
 </div>
@@ -474,25 +467,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a4afe070845c5088048162ad64135ea59"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">rtos::timer Receiver::timer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Pin that receives the ir pulses. </p>
 
 </div>
 </div>

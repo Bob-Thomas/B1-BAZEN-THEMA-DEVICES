@@ -8,6 +8,10 @@
 #include "../../../libs/rtos/rtos.hpp"
 #include "../../../libs/hwlib/hwlib-pin.hpp"
 
+/**
+ * \struct Sound
+ * \brief simple struct to maintain frequency and duration data
+ */
 struct Sound {
     int frequency;
     int duration;

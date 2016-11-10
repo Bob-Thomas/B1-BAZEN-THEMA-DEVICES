@@ -90,8 +90,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2743bf0be368e5bf6fdcc89bd524d434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ed583dc1830bed16d27c3ba7ca64ed1"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a7ed583dc1830bed16d27c3ba7ca64ed1">state</a> ()</td></tr>
 <tr class="separator:a7ed583dc1830bed16d27c3ba7ca64ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b0ae7773771a740c54dfd92a060f530"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a3b0ae7773771a740c54dfd92a060f530">RegisterController</a> (<a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;dCtrl)</td></tr>
-<tr class="separator:a3b0ae7773771a740c54dfd92a060f530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70d8081f918cbff2b8115c730ca8b5b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a70d8081f918cbff2b8115c730ca8b5b6">RegisterController</a> (<a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;gp, <a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;dCtrl)</td></tr>
+<tr class="separator:a70d8081f918cbff2b8115c730ca8b5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classController"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classController')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d9/d85/classController.html">Controller</a></td></tr>
 <tr class="memitem:a95c56822d667e94b031451729ce069a9 inherit pub_methods_classController"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d85/classController.html#a95c56822d667e94b031451729ce069a9">Controller</a> ()</td></tr>
 <tr class="separator:a95c56822d667e94b031451729ce069a9 inherit pub_methods_classController"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,25 +105,40 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:abb2076fb1f3c8964d7e38eebd3fde71f"><td class="memItemLeft" align="right" valign="top">rtos::flag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#abb2076fb1f3c8964d7e38eebd3fde71f">enabled</a></td></tr>
 <tr class="separator:abb2076fb1f3c8964d7e38eebd3fde71f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d498c67a513bd3f0ae8738d9992ae54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a8d498c67a513bd3f0ae8738d9992ae54">gameParameters</a></td></tr>
+<tr class="separator:a8d498c67a513bd3f0ae8738d9992ae54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a870ca7f1dd3d7d0b59982fae03926061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a870ca7f1dd3d7d0b59982fae03926061">displayCtrl</a></td></tr>
 <tr class="separator:a870ca7f1dd3d7d0b59982fae03926061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a9119d579d43f652f107950da611199"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dc6/classRegisterController.html#a4a9119d579d43f652f107950da611199">next_state</a> = '0'</td></tr>
 <tr class="separator:a4a9119d579d43f652f107950da611199"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3b0ae7773771a740c54dfd92a060f530"></a>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>RegisterGameController can be interpret as register state and will handle each event during his state. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a70d8081f918cbff2b8115c730ca8b5b6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">RegisterController::RegisterController </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;&#160;</td>
-          <td class="paramname"><em>dCtrl</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>gp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="../../dc/dae/classDisplayController.html">DisplayController</a> &amp;&#160;</td>
+          <td class="paramname"><em>dCtrl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p><a class="el" href="../../db/dc6/classRegisterController.html">RegisterController</a> Constructor /param <a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a> &amp;gp for get and set player data /param Display <a class="el" href="../../d9/d85/classController.html">Controller</a> &amp;dCtrl for get and set player data </p>
 
 </div>
 </div>
@@ -148,6 +163,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function to activate task function </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#abd695b1eb4c8363c11eb3e94108662e2">Controller</a>.</p>
 
@@ -173,6 +189,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function to get name of the controller </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#acf91db33d51e796cffad3e7528af58bd">Controller</a>.</p>
 
@@ -198,6 +215,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>RTOS main tas </p>
 
 </div>
 </div>
@@ -222,6 +240,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>interface function for receiving data /param <a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> c to encode and decode data </p>
 
 <p>Implements <a class="el" href="../../d9/d85/classController.html#ac2f31f35f2128feed3026ff9627be111">Controller</a>.</p>
 
@@ -247,6 +266,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>function for change stat </p>
 
 </div>
 </div>
@@ -268,6 +288,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>displayCtrl for writing text oled </p>
 
 </div>
 </div>
@@ -288,6 +309,28 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>enable flag to continue task </p>
+
+</div>
+</div>
+<a id="a8d498c67a513bd3f0ae8738d9992ae54"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../db/ddd/classGameParameters.html">GameParameters</a>&amp; RegisterController::gameParameters</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>gameParameters reference for get and set player data </p>
 
 </div>
 </div>
@@ -308,6 +351,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>char for changing state </p>
 
 </div>
 </div>

@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> that handles decoding and encoding of the IR commands This class can be instantiated with a short If this happens it will automatically decode the short into readable data like the sender and the actual data.  
+ <a href="../../d9/d71/classCommand.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../d0/d09/command_8h_source.html">command.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -76,43 +79,58 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e3e333f6084cf07b3854dc337745763"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a3e3e333f6084cf07b3854dc337745763">print_command</a> ()</td></tr>
 <tr class="separator:a3e3e333f6084cf07b3854dc337745763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abed8487d88c8e1524f302f6bd6593ab1"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#abed8487d88c8e1524f302f6bd6593ab1">encode</a> ()</td></tr>
+<tr class="memdesc:abed8487d88c8e1524f302f6bd6593ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the sender and data and turns it into a short encoded with the data Adds a startbit to a 0 initialized short.  <a href="#abed8487d88c8e1524f302f6bd6593ab1">More...</a><br /></td></tr>
 <tr class="separator:abed8487d88c8e1524f302f6bd6593ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a153b9b6770c3a0eec4018a7cdca525e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a153b9b6770c3a0eec4018a7cdca525e1">get_error</a> ()</td></tr>
+<tr class="memdesc:a153b9b6770c3a0eec4018a7cdca525e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns error value  <a href="#a153b9b6770c3a0eec4018a7cdca525e1">More...</a><br /></td></tr>
 <tr class="separator:a153b9b6770c3a0eec4018a7cdca525e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad30d803961ff0baf99e5393093a32f0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#ad30d803961ff0baf99e5393093a32f0b">get_sender</a> ()</td></tr>
+<tr class="memdesc:ad30d803961ff0baf99e5393093a32f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the sender value  <a href="#ad30d803961ff0baf99e5393093a32f0b">More...</a><br /></td></tr>
 <tr class="separator:ad30d803961ff0baf99e5393093a32f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b924f6e7409d5b3fb8c93f2bed08373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a5b924f6e7409d5b3fb8c93f2bed08373">set_sender</a> (int <a class="el" href="../../d9/d71/classCommand.html#ab6ac0aea06e0df7b3dd32cff56f13092">sender</a>)</td></tr>
+<tr class="memdesc:a5b924f6e7409d5b3fb8c93f2bed08373"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets sender value  <a href="#a5b924f6e7409d5b3fb8c93f2bed08373">More...</a><br /></td></tr>
 <tr class="separator:a5b924f6e7409d5b3fb8c93f2bed08373"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d10fbd28e8d403ec99622b4cdbc6656"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a3d10fbd28e8d403ec99622b4cdbc6656">get_data</a> ()</td></tr>
+<tr class="memdesc:a3d10fbd28e8d403ec99622b4cdbc6656"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the data value  <a href="#a3d10fbd28e8d403ec99622b4cdbc6656">More...</a><br /></td></tr>
 <tr class="separator:a3d10fbd28e8d403ec99622b4cdbc6656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5930d98ea4cdae04c269a6301a409257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a5930d98ea4cdae04c269a6301a409257">set_data</a> (int <a class="el" href="../../d9/d71/classCommand.html#a3487a1e347610ef3266ca6aec56f5987">data</a>)</td></tr>
+<tr class="memdesc:a5930d98ea4cdae04c269a6301a409257"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the data value  <a href="#a5930d98ea4cdae04c269a6301a409257">More...</a><br /></td></tr>
 <tr class="separator:a5930d98ea4cdae04c269a6301a409257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18df2d81039392daeb0b78c346a70537"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a18df2d81039392daeb0b78c346a70537">Command</a> ()</td></tr>
+<tr class="memdesc:a18df2d81039392daeb0b78c346a70537"><td class="mdescLeft">&#160;</td><td class="mdescRight">empty constructor for <a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> Empty constructor that initializes sender and data with -1  <a href="#a18df2d81039392daeb0b78c346a70537">More...</a><br /></td></tr>
 <tr class="separator:a18df2d81039392daeb0b78c346a70537"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77b202c4eabed23cc9db2b4084925429"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a77b202c4eabed23cc9db2b4084925429">Command</a> (short bits)</td></tr>
+<tr class="memdesc:a77b202c4eabed23cc9db2b4084925429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with short decode the bits param into logical sender and data values.  <a href="#a77b202c4eabed23cc9db2b4084925429">More...</a><br /></td></tr>
 <tr class="separator:a77b202c4eabed23cc9db2b4084925429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe6f962a77a629c642ac450694faf6b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#afe6f962a77a629c642ac450694faf6b0">Command</a> (int <a class="el" href="../../d9/d71/classCommand.html#ab6ac0aea06e0df7b3dd32cff56f13092">sender</a>, int <a class="el" href="../../d9/d71/classCommand.html#a3487a1e347610ef3266ca6aec56f5987">data</a>)</td></tr>
+<tr class="memdesc:afe6f962a77a629c642ac450694faf6b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that takes a data and a sender.  <a href="#afe6f962a77a629c642ac450694faf6b0">More...</a><br /></td></tr>
 <tr class="separator:afe6f962a77a629c642ac450694faf6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:adf2d1c4fd2f38942a33a8a4b73de4a5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#adf2d1c4fd2f38942a33a8a4b73de4a5b">decode</a> (short bits)</td></tr>
+<tr class="memdesc:adf2d1c4fd2f38942a33a8a4b73de4a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">decodes short into sender and data Takes the short bits and reads them like binary in MSB The protocol is defined at <a href="https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf">https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf</a> PAGE 4  <a href="#adf2d1c4fd2f38942a33a8a4b73de4a5b">More...</a><br /></td></tr>
 <tr class="separator:adf2d1c4fd2f38942a33a8a4b73de4a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ed24a4ec6d0b4744777232349ade409"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a2ed24a4ec6d0b4744777232349ade409">generate_checksum</a> (short bits)</td></tr>
-<tr class="separator:a2ed24a4ec6d0b4744777232349ade409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30d9a30665a209559a51687e23ad62d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a30d9a30665a209559a51687e23ad62d2">valid_checksum</a> (short bits)</td></tr>
+<tr class="memdesc:a30d9a30665a209559a51687e23ad62d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the checksum of the given bits The last 5 bits become the checksum The checksum is valid when the XOR of the first till last bit from the id and the first til last bit from the data are equal to the first bit of the checksum.  <a href="#a30d9a30665a209559a51687e23ad62d2">More...</a><br /></td></tr>
 <tr class="separator:a30d9a30665a209559a51687e23ad62d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:ab6ac0aea06e0df7b3dd32cff56f13092"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#ab6ac0aea06e0df7b3dd32cff56f13092">sender</a></td></tr>
+<tr class="memdesc:ab6ac0aea06e0df7b3dd32cff56f13092"><td class="mdescLeft">&#160;</td><td class="mdescRight">the sender of the command  <a href="#ab6ac0aea06e0df7b3dd32cff56f13092">More...</a><br /></td></tr>
 <tr class="separator:ab6ac0aea06e0df7b3dd32cff56f13092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3487a1e347610ef3266ca6aec56f5987"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#a3487a1e347610ef3266ca6aec56f5987">data</a></td></tr>
+<tr class="memdesc:a3487a1e347610ef3266ca6aec56f5987"><td class="mdescLeft">&#160;</td><td class="mdescRight">the actual data part of the command  <a href="#a3487a1e347610ef3266ca6aec56f5987">More...</a><br /></td></tr>
 <tr class="separator:a3487a1e347610ef3266ca6aec56f5987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae705933fd0234deeae1c13d95ca1cf1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d71/classCommand.html#aae705933fd0234deeae1c13d95ca1cf1">error</a> = false</td></tr>
+<tr class="memdesc:aae705933fd0234deeae1c13d95ca1cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the command decoded successfully.  <a href="#aae705933fd0234deeae1c13d95ca1cf1">More...</a><br /></td></tr>
 <tr class="separator:aae705933fd0234deeae1c13d95ca1cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> that handles decoding and encoding of the IR commands This class can be instantiated with a short If this happens it will automatically decode the short into readable data like the sender and the actual data. </p>
+<p><a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> It will also generate en validate checksums for the commands </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a18df2d81039392daeb0b78c346a70537"></a>
 <div class="memitem">
 <div class="memproto">
@@ -125,6 +143,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>empty constructor for <a class="el" href="../../d9/d71/classCommand.html" title="Command that handles decoding and encoding of the IR commands This class can be instantiated with a s...">Command</a> Empty constructor that initializes sender and data with -1 </p>
 
 </div>
 </div>
@@ -149,6 +169,14 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructor with short decode the bits param into logical sender and data values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bits</td><td>The short that will be decoded into usable data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -176,6 +204,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructor that takes a data and a sender. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td>the sender part of the command </td></tr>
+    <tr><td class="paramname">data</td><td>the data part of the command </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -201,6 +238,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>decodes short into sender and data Takes the short bits and reads them like binary in MSB The protocol is defined at <a href="https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf">https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf</a> PAGE 4 </p>
+<p>from left to right the first bit is the start bit Then the next 5 bits is the actual sender ID After that the next 5 bits is the actual data part. The remaining bits become the checksum </p>
+
 </div>
 </div>
 <a id="abed8487d88c8e1524f302f6bd6593ab1"></a>
@@ -216,29 +256,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a2ed24a4ec6d0b4744777232349ade409"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">short Command::generate_checksum </td>
-          <td>(</td>
-          <td class="paramtype">short&#160;</td>
-          <td class="paramname"><em>bits</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Takes the sender and data and turns it into a short encoded with the data Adds a startbit to a 0 initialized short. </p>
+<p>Decodes the int from sender into a binary value and adds it next to the short startbit</p>
+<p>Decodes the int from the data into binary value and add it next to the short sender bits</p>
+<p>Generates a checksum based on the binary XOR of sender and data and add it nex to the short data bits</p>
+<p>Checksum generation sources <a href="https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf">https://cursussen.sharepoint.hu.nl/fnt/36/TCTI-V2THDE-16/Studiemateriaal/V2THDE%20-%20Casus%20lasertag%202016-2017.pdf</a> </p>
 
 </div>
 </div>
@@ -255,6 +277,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>returns the data value </p>
+
 </div>
 </div>
 <a id="a153b9b6770c3a0eec4018a7cdca525e1"></a>
@@ -269,6 +293,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>returns error value </p>
 
 </div>
 </div>
@@ -285,14 +311,13 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>returns the sender value </p>
+
 </div>
 </div>
 <a id="a3e3e333f6084cf07b3854dc337745763"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Command::print_command </td>
@@ -301,12 +326,8 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<p>/brief helper that prints out a decoded version and encoded version of the command </p>
 
 </div>
 </div>
@@ -324,6 +345,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>sets the data value </p>
+
 </div>
 </div>
 <a id="a5b924f6e7409d5b3fb8c93f2bed08373"></a>
@@ -339,6 +362,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>sets sender value </p>
 
 </div>
 </div>
@@ -364,6 +389,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Validates the checksum of the given bits The last 5 bits become the checksum The checksum is valid when the XOR of the first till last bit from the id and the first til last bit from the data are equal to the first bit of the checksum. </p>
+<p>Example ID DATA CHECKSUM 1 00100 10100 10000 00100 10100 XOR 10000 </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -385,6 +413,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>the actual data part of the command </p>
+
 </div>
 </div>
 <a id="aae705933fd0234deeae1c13d95ca1cf1"></a>
@@ -405,6 +435,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>If the command decoded successfully. </p>
+
 </div>
 </div>
 <a id="ab6ac0aea06e0df7b3dd32cff56f13092"></a>
@@ -424,6 +456,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>the sender of the command </p>
 
 </div>
 </div>

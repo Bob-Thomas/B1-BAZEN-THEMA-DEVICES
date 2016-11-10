@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gameparameters_2ecpp',['gameParameters.cpp',['../d8/de3/gameParameters_8cpp.html',1,'']]],
-  ['gameparameters_2eh',['gameParameters.h',['../d7/da9/gameParameters_8h.html',1,'']]]
+  ['displaycontroller_2ecpp',['displayController.cpp',['../dd/da0/displayController_8cpp.html',1,'']]],
+  ['displaycontroller_2eh',['displayController.h',['../dd/d4a/displayController_8h.html',1,'']]]
 ];
