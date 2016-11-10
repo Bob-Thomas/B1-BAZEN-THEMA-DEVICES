@@ -2,6 +2,14 @@
 // Created by endargon on 10/25/16.
 //
 
+
+/*! \mainpage Laser tag
+ * This is doxygen documentation for our school project named THEMA DEVICES.
+ *
+ * THEMA DEVICES is a group project about building a laser tag game with RTOS.
+ * This is the proof of concept documentation.
+ */
+
 #include "../../libs/hwlib/hwlib.hpp"
 #include "tasks/transmitter.h"
 #include "tasks/receiver.h"
@@ -21,11 +29,33 @@ States current_state = REGISTER;
 States current_state = INIT;
 #endif
 
+/**
+ * \class Main
+ * \brief This class will resume and suspend running tasks based on it's current state
+ */
 class Main : public rtos::task<> {
+    /**
+     * Reference to a Receiver task
+     */
     Receiver &receiver;
+    /**
+     * Reference to a InitController task
+     */
     InitGameController &init_controller;
+    /**
+     * Reference to a RegisterController task
+     */
     RegisterController &register_controller;
+    /**
+    * Reference to a RunGameController task
+    */
     RunGameController &run_game_controller;
+
+    /**
+     * Main loop that the rtos tasks runs and suspends
+     * It enables and disables running tasks based on the current state.
+     * It will also swap the listeners for the receiver based on the current state.
+     */
     void main() {
         for (; ;) {
             receiver.enable();
@@ -76,6 +106,13 @@ class Main : public rtos::task<> {
     }
 
 public:
+    /**
+     * \brief Constructor for the Main class
+     * \param r a Reference to a existing instance of a Receiver task
+     * \param i a Reference to a existing instance of a InitGameController task
+     * \param reg a Reference to a existing instance of a RegisterController task
+     * \param run a Reference to a existing instance of a RunGameFController task
+     */
     Main(Receiver &r, InitGameController &i, RegisterController &reg, RunGameController &run) : task("Main"), receiver(r), init_controller(i),
                                                                         register_controller(reg), run_game_controller(run) { }
 };
