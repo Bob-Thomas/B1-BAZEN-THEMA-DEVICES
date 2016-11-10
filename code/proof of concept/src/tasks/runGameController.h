@@ -12,7 +12,8 @@
 #include "../entities/gameParameters.h"
 #include "transmitter.h"
 /**
- * RunGameController can be interpret as playing state and will handle each event during his state.
+ * \class RunGameController
+ * \brief can be interpretted as playing state and will handle each event during his state.
  */
 class RunGameController : public Controller, public rtos::task<> {
 private:

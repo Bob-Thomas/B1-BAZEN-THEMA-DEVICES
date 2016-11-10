@@ -9,20 +9,27 @@
 // each shot can be registered in an array.
 
 /**
- *  receive_shot structure. Will be used for class GameParameters. Each structure contains the player id and weapon id from the received hit
+ * \struct receive_shot
+ * \brief receive_shot structure. Will be used for class GameParameters. Each structure contains the player id and weapon id from the received hit
  */
+
 struct receive_shot {
     /**
      * play id from the received hit
      */
     int player_id;
+    /**
+     * weapon id from the received hit
+     */
     int weapon_id;
 
 };
 
 /**
- * GameParameters entity object will contain the player data
+ * \class GameParameters
+ * \brief GameParameters entity object will contain the player data.
  */
+
 class GameParameters {
 private:
 

@@ -12,6 +12,12 @@
 /**
  * ButtonController Task. Can set flags with interfaces form referenced controllers.
  */
+
+/**
+ * \class ButtonController
+ * \brief can be interpreted as playing state and will handle each event during his state.
+ */
+
 class ButtonController : public rtos::task<> {
 private:
     /**

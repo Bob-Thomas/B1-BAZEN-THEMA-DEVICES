@@ -9,8 +9,10 @@
 #include "../../../libs/hwlib/hwlib.hpp"
 
 /**
- * DisplayController will be used as communcation controller between oled boundary and other game state controllers
+ * \classDisplayController
+ * \brief will be used as communcation controller between oled boundary and other game state controllers
  */
+
 class DisplayController : public rtos::task<> {
 private:
     /**

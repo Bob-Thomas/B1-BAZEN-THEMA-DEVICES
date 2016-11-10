@@ -8,7 +8,8 @@
 #include "command.h"
 
 /**
- * Controller class will be implented by each state
+ * \class Controller class
+ * \brief will be implented by each state
  */
 class Controller {
 public:

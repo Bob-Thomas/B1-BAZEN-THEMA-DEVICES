@@ -12,8 +12,10 @@
 #include "../entities/gameParameters.h"
 
 /**
- * RegisterGameController can be interpret as register state and will handle each event during his state.
+ * \class RegisterController
+ * \brief can be interpret as register state and will handle each event during his state.
  */
+
 class RegisterController : public Controller, public rtos::task<> {
     /**
      * enable flag to continue task

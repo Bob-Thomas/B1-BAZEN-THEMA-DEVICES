@@ -10,6 +10,7 @@ void DisplayController::main() {
 
     hwlib::font_default_8x8 font;
     oled.clear();
+
     for(;;){
         oled.clear();
         wait( flushFlag );
