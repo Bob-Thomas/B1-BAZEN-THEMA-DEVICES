@@ -721,7 +721,7 @@ public:
       /// The name is used for debugging and statistics.
       clock(
          task_base * t,
-         unsigned long int _period,
+         unsigned long long int _period,
          const char * name = ""
       );
 
@@ -731,7 +731,7 @@ public:
       void clear( void ) { waitable::clear(); }
 
       /// the interval of the clock
-      unsigned long int interval( void ) { return period; }
+      unsigned long long int interval( void ) { return period; }
 
       /// print the clock (for debugging)
       void print( hwlib::ostream & s, bool header = true ) const;

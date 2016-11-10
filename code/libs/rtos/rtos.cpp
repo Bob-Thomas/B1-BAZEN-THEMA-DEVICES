@@ -362,7 +362,7 @@ void rtos::timer::print( hwlib::ostream & stream, bool header ) const {
 
 rtos::clock::clock(
    task_base * t,
-   unsigned long int _period,
+   unsigned long long int _period,
    const char *name
 ):
    waitable( t, name ),

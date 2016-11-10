@@ -74,9 +74,7 @@ class Main : public rtos::task<> {
             switch (current_state) {
                 case INIT:
                     if (receiver.get_controller()->get_name() != init_controller.get_name()) {
-                        receiver.suspend();
                         receiver.set_controller(&init_controller);
-                        receiver.resume();
                         init_controller.resume();
                         register_controller.suspend();
                         run_game_controller.suspend();
@@ -86,14 +84,11 @@ class Main : public rtos::task<> {
                 case REGISTER:
 
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
-                        receiver.suspend();
                         receiver.set_controller(&register_controller);
                         button_controller.set_listener(&register_controller);
-
-                        receiver.resume();
                         init_controller.suspend();
-                        register_controller.resume();
                         run_game_controller.suspend();
+                        register_controller.resume();
                     }
                     register_controller.enable();
 
@@ -105,10 +100,8 @@ class Main : public rtos::task<> {
                 case RUNNING:
 
                     if (receiver.get_controller()->get_name() != run_game_controller.get_name()) {
-                        receiver.suspend();
                         receiver.set_controller(&run_game_controller);
                         button_controller.set_listener(&run_game_controller);
-                        receiver.resume();
                         init_controller.suspend();
                         register_controller.suspend();
                         run_game_controller.resume();
@@ -192,7 +185,7 @@ int main() {
     auto display_controller = DisplayController(oled);
     auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
     auto register_controller = RegisterController(game_parameter, display_controller);
-    auto run_game_controller = RunGameController(game_parameter, display_controller, sound_controller);
+    auto run_game_controller = RunGameController(game_parameter, display_controller, transmitter, sound_controller);
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
     auto gnd = target::pin_out( target::pins::d49);
     auto vlt = target::pin_out( target::pins::d51);

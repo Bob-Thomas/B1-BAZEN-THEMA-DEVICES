@@ -66,7 +66,7 @@ public:
     /**
      * int health
      */
-    int health;
+    int health = 100;
 
     /**
      * weapon id

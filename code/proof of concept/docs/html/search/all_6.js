@@ -1,6 +1,8 @@
 var searchData=
 [
   ['game_5fend',['GAME_END',['../df/d0a/main_8cpp.html#a808e5cd4979462d3bbe3070d7d147444a75001e0af1f4badfa9096e9a14265f31',1,'main.cpp']]],
+  ['game_5ftime',['game_time',['../db/ddd/classGameParameters.html#a412aad05c32877d803982649ade92ae5',1,'GameParameters']]],
+  ['game_5ftimer',['game_timer',['../d6/d75/classRunGameController.html#a746da09478d56ca75e9839d8e3954c00',1,'RunGameController']]],
   ['gameparameters',['GameParameters',['../db/ddd/classGameParameters.html',1,'GameParameters'],['../db/dc6/classRegisterController.html#a8d498c67a513bd3f0ae8738d9992ae54',1,'RegisterController::gameParameters()'],['../d6/d75/classRunGameController.html#a6794cfa89a07182304614fd4ec0b8dbf',1,'RunGameController::gameParameters()'],['../db/ddd/classGameParameters.html#ab457f550fbf4a7c05bc471f69859a174',1,'GameParameters::GameParameters()']]],
   ['gameparameters_2ecpp',['gameParameters.cpp',['../d8/de3/gameParameters_8cpp.html',1,'']]],
   ['gameparameters_2eh',['gameParameters.h',['../d7/da9/gameParameters_8h.html',1,'']]],

@@ -12,7 +12,7 @@ void RegisterController::main() {
     wait(pressed);
     displayCtrl.displayText("Waiting for \n  signal");
     hwlib::wait_ms(300);
-    receive(Command(0, 29));
+    receive(Command(0, 1));
     wait(command_processed);
     displayCtrl.displayText("Received \n gameTime");
     hwlib::wait_ms(300);
@@ -37,12 +37,12 @@ void RegisterController::receive(Command c) {
             gameParameters.game_time = c.get_data();
         }
         if(c.get_data() == 0) {
-            displayCtrl.displayText("STARTING GAME in \n      5S");
-            displayCtrl.displayText("STARTING GAME in \n      4S");
-            displayCtrl.displayText("STARTING GAME in \n      3S");
-            displayCtrl.displayText("STARTING GAME in \n      2S");
-            displayCtrl.displayText("STARTING GAME in \n      1S");
-            displayCtrl.displayText("STARTING GAME in \n      0S");
+            displayCtrl.displayText("STARTING GAME in \n\n      5S");
+            displayCtrl.displayText("STARTING GAME in \n\n      4S");
+            displayCtrl.displayText("STARTING GAME in \n\n      3S");
+            displayCtrl.displayText("STARTING GAME in \n\n      2S");
+            displayCtrl.displayText("STARTING GAME in \n\n      1S");
+            displayCtrl.displayText("STARTING GAME in \n\n      0S");
             next_state = 1;
         }
     } else {

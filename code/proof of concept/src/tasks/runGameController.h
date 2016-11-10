@@ -19,68 +19,83 @@
 class RunGameController : public Controller, public rtos::task<> {
 private:
     /**
-     * flag to enable the task
+     * \brief fflag to enable the task
      */
     rtos::flag enabled;
     /**
-     * rtos flag will be used for detecting button press
+     * \brief rtos flag will be used for detecting button press
      */
     rtos::flag pressed;
 
     /**
-    * rtos flag will be used for detecting hits
+    * \brief rtos flag will be used for detecting hits
     */
     rtos::flag hit;
+
     /**
-     * gameParameters will be an entity object for storring the personal player data.
+    * \brief rtos clock that will count down the minutes
+    */
+     rtos::clock game_timer;
+    /**
+     * \brief gameParameters will be an entity object for storring the personal player data.
      */
     GameParameters &gameParameters;
 
     /**
-     * DisplayController reference handles text display on oled screen.
+     * \brief DisplayController reference handles text display on oled screen.
      */
     DisplayController &displayCtrl;
 
     /**
-     * SoundController reference handles sound.
+     * \brief Transmitter reference handles sending data over IR
+     */
+    Transmitter &transmitter;
+    /**
+     * \brief SoundController reference handles sound.
      */
     SoundController &soundCtrl;
 
     /**
-     * RTOS task function.
+     * \briefRTOS task function.
      */
     void main();
 
 public:
     /**
-     * interface function for activating task.
+     * \brief interface function for activating task.A
      */
     void enable();
 
     /**
-     * interface function for receiving a command
-     * /param Command c for encode en decode data.
+     * \brief interface function for receiving a command
+     * \param Command c for encode en decode data.
      */
     void receive(Command c);
 
     /**
-     * interface function for getting controller name.
+     * \brief interface function for getting controller name.
      */
     const char *get_name() {
         return this->name();
     }
 
     /**
-    * button_pressed interface function.
+    * \brief button_pressed interface function.
     */
     void button_pressed();
 
     /**
-     * RunGameController constructor.
-     * /param &gameParam to set or get player game settings.
-     * /param &disCtrl to write text on screen.
+     * \brief Update the oled display with game timer and current health points
+     * \param alive a simple boolean to show a alive display layout or dead layout q
      */
-    RunGameController(GameParameters &gameParam, DisplayController &disCtrl, SoundController &sCtrl);
+    void update_screen_game_parameters(bool alive);
+
+    /**
+     * RunGameController constructor.
+     * \param &gameParam to set or get player game settings.
+     * \param &disCtrl to write text on screen.
+     */
+    RunGameController(GameParameters &gameParam, DisplayController &disCtrl, Transmitter &t, SoundController &sCtrl);
 };
 
 #endif //CODE_RUNEGAMECONTROLLER_H

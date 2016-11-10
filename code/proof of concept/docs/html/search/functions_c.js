@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['valid_5fchecksum',['valid_checksum',['../d9/d71/classCommand.html#a30d9a30665a209559a51687e23ad62d2',1,'Command']]],
-  ['valid_5fid',['valid_id',['../d9/dc3/classInitGameController.html#a7f5eb2d43ccfcce43e5cd5ac65d88f6a',1,'InitGameController']]]
+  ['update_5fscreen_5fgame_5fparameters',['update_screen_game_parameters',['../d6/d75/classRunGameController.html#a87314ee6da6d1f0191eab672a57c729e',1,'RunGameController']]]
 ];

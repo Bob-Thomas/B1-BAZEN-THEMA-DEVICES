@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['add_5frecieved_5fshot',['add_recieved_shot',['../db/ddd/classGameParameters.html#a0fd7f498ff8df2e41c2cdadf53bf4e51',1,'GameParameters']]]
+  ['add_5freceived_5fshot',['add_received_shot',['../db/ddd/classGameParameters.html#a3a16356109360acea190e396f091a47f',1,'GameParameters']]]
 ];
