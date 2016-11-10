@@ -79,6 +79,11 @@ public:
     void enable();
 
     /**
+    * interface function that's not used
+    */
+    void button_pressed(){}
+
+    /**
      * interface function for receiving command
      * /param Command c
      */

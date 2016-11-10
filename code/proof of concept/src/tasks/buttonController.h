@@ -21,9 +21,9 @@
 class ButtonController : public rtos::task<> {
 private:
     /**
-     * runGameController to use interface function
+     * abstract controller to use interface function
      */
-    RunGameController &runGameController;
+    Controller* controller;
     /**
      * pin settings for the button
      */
@@ -42,12 +42,19 @@ private:
 public:
     /**
      * Constructor ButtonController.
-     * /param &rGC reference for using interface
+     * /param ctrl reference for using controller interface
      * /param gnd reference pin requires output pin
      * /param vlt reference pin requires output pin
      * /param b reference pin requires input pin
      */
-    ButtonController(RunGameController &rGC, hwlib::pin_out &gnd, hwlib::pin_out &vlt, hwlib::pin_in &b);
+    ButtonController(Controller *ctrl, hwlib::pin_out &gnd, hwlib::pin_out &vlt, hwlib::pin_in &b);
+
+    /**
+     * Sets the controller the button will send messages to
+     */
+    void set_listener(Controller *ctrl) {
+        this->controller = ctrl;
+    }
 };
 
 

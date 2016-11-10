@@ -25,6 +25,7 @@ struct receive_shot {
 
 };
 
+
 /**
  * \class GameParameters
  * \brief GameParameters entity object will contain the player data.
@@ -55,7 +56,7 @@ public:
      * /param player_id int for player id
      * /param weapon_id int for weapon id
      */
-    void add_recieved_shot(int player_id, int weapon_id);
+    void add_received_shot(int player_id, int weapon_id);
 
     /**
      * int player id
@@ -71,6 +72,11 @@ public:
      * weapon id
      */
     int weapon;
+
+    /**
+     * game time
+     */
+    int game_time;
 };
 
 

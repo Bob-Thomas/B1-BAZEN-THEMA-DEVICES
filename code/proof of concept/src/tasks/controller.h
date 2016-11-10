@@ -26,6 +26,12 @@ public:
      * virtual function to enable the class function task
      */
     virtual void enable() = 0;
+
+    /**
+    * virtual function to use button_pressed function task
+    */
+    virtual void button_pressed() = 0;
+
     /**
      * virtual function for getting class name
      */

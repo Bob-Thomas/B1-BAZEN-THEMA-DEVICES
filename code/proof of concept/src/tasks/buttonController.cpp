@@ -4,7 +4,7 @@
 
 #include "buttonController.h"
 
-ButtonController::ButtonController(RunGameController &rGC, hwlib::pin_out &gnd, hwlib::pin_out &vlt, hwlib::pin_in &b): runGameController(rGC), ground(gnd), voltage(vlt), button(b), clock(this, 150 * rtos::ms, "a clock for button") {
+ButtonController::ButtonController(Controller *ctrl, hwlib::pin_out &gnd, hwlib::pin_out &vlt, hwlib::pin_in &b): task("Button controller"), controller(ctrl), ground(gnd), voltage(vlt), button(b), clock(this, 150 * rtos::ms, "a clock for button") {
     voltage.set(1);
     ground.set(0);
 }
@@ -14,9 +14,9 @@ void ButtonController::main() {
     for(;;) {
 
         wait(clock);
-
-        if(!button.get())
-        runGameController.button_pressed();
+        if(!button.get()) {
+            controller->button_pressed();
+        }
 
     }
 

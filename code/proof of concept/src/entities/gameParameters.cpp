@@ -8,7 +8,18 @@ GameParameters::GameParameters(): shots_taken(0) {
 
 }
 
-void GameParameters::add_recieved_shot(int player_id, int weapon_id) {
+void GameParameters::add_received_shot(int player_id, int weapon_id) {
+    switch(weapon_id) {
+        case 1:
+            health -= 10;
+        break;
+        case 2:
+            health -= 15;
+        break;
+        case 3:
+            health -= 40;
+        break;
+    }
 
     if(shots_taken < 20) {
         // create structure

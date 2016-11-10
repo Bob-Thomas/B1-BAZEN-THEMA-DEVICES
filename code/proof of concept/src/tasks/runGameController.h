@@ -6,10 +6,11 @@
 #define CODE_RUNEGAMECONTROLLER_H
 
 #include "../../../libs/rtos/rtos.hpp"
+#include "../entities/gameParameters.h"
 #include "controller.h"
 #include "../../../libs/hwlib/hwlib-ostream.hpp"
 #include "displayController.h"
-#include "../entities/gameParameters.h"
+#include "soundController.h"
 #include "transmitter.h"
 /**
  * \class RunGameController
@@ -25,6 +26,11 @@ private:
      * rtos flag will be used for detecting button press
      */
     rtos::flag pressed;
+
+    /**
+    * rtos flag will be used for detecting hits
+    */
+    rtos::flag hit;
     /**
      * gameParameters will be an entity object for storring the personal player data.
      */
@@ -34,6 +40,11 @@ private:
      * DisplayController reference handles text display on oled screen.
      */
     DisplayController &displayCtrl;
+
+    /**
+     * SoundController reference handles sound.
+     */
+    SoundController &soundCtrl;
 
     /**
      * RTOS task function.
@@ -69,7 +80,7 @@ public:
      * /param &gameParam to set or get player game settings.
      * /param &disCtrl to write text on screen.
      */
-    RunGameController(GameParameters &gameParam, DisplayController &disCtrl);
+    RunGameController(GameParameters &gameParam, DisplayController &disCtrl, SoundController &sCtrl);
 };
 
 #endif //CODE_RUNEGAMECONTROLLER_H

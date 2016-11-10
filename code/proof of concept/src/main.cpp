@@ -19,6 +19,7 @@
 #include "entities/gameParameters.h"
 #include "tasks/runGameController.h"
 #include "tasks/buttonController.h"
+#include "tasks/soundController.h"
 
 enum States {
     INIT, REGISTER, RUNNING, GAME_END
@@ -40,6 +41,10 @@ class Main : public rtos::task<> {
      */
     Receiver &receiver;
     /**
+    * Reference to a ButtonController task
+    */
+    ButtonController &button_controller;
+    /**
      * Reference to a InitController task
      */
     InitGameController &init_controller;
@@ -51,6 +56,11 @@ class Main : public rtos::task<> {
     * Reference to a RunGameController task
     */
     RunGameController &run_game_controller;
+
+    /**
+     * Reference to a SoundController task;
+     */
+    SoundController &sound_controller;
 
     /**
      * Main loop that the rtos tasks runs and suspends
@@ -78,21 +88,26 @@ class Main : public rtos::task<> {
                     if (receiver.get_controller()->get_name() != register_controller.get_name()) {
                         receiver.suspend();
                         receiver.set_controller(&register_controller);
+                        button_controller.set_listener(&register_controller);
+
                         receiver.resume();
                         init_controller.suspend();
                         register_controller.resume();
                         run_game_controller.suspend();
                     }
-
-
                     register_controller.enable();
 
+                    if(register_controller.state() == 1) {
+                        sound_controller.play_shoot();
+                        current_state = RUNNING;
+                    }
                     break;
                 case RUNNING:
 
                     if (receiver.get_controller()->get_name() != run_game_controller.get_name()) {
                         receiver.suspend();
                         receiver.set_controller(&run_game_controller);
+                        button_controller.set_listener(&run_game_controller);
                         receiver.resume();
                         init_controller.suspend();
                         register_controller.suspend();
@@ -116,8 +131,8 @@ public:
      * \param reg a Reference to a existing instance of a RegisterController task
      * \param run a Reference to a existing instance of a RunGameFController task
      */
-    Main(Receiver &r, InitGameController &i, RegisterController &reg, RunGameController &run) : task("Main"), receiver(r), init_controller(i),
-                                                                        register_controller(reg), run_game_controller(run) { }
+    Main(Receiver &r, ButtonController &b, InitGameController &i, RegisterController &reg, RunGameController &run, SoundController &sound) : task("Main"), receiver(r), button_controller(b), init_controller(i),
+                                                                        register_controller(reg), run_game_controller(run), sound_controller(sound) { }
 };
 
 int main() {
@@ -169,18 +184,20 @@ int main() {
     pin_vcc.set( 1 );
     auto oled = hwlib::glcd_oled_buffered( i2c_bus, 0x3c );
 
+    auto lsp = target::pin_out(target::pins::d13);
     // entities
     auto game_parameter = GameParameters();
     auto transmitter = Transmitter("transmitter", ir);
+    auto sound_controller = SoundController(lsp);
     auto display_controller = DisplayController(oled);
     auto init_game_controller = InitGameController(transmitter, keypad, display_controller);
     auto register_controller = RegisterController(game_parameter, display_controller);
-    auto run_game_controller = RunGameController(game_parameter, display_controller);
+    auto run_game_controller = RunGameController(game_parameter, display_controller, sound_controller);
     auto receiver = Receiver("receiver", tsop_signal, &init_game_controller);
     auto gnd = target::pin_out( target::pins::d49);
     auto vlt = target::pin_out( target::pins::d51);
     auto but = target::pin_in( target::pins::d53);
-    auto button_controller = ButtonController(run_game_controller, gnd, vlt, but);
-    auto main = Main(receiver, init_game_controller, register_controller, run_game_controller);
+    auto button_controller = ButtonController(&register_controller, gnd, vlt, but);
+    auto main = Main(receiver, button_controller, init_game_controller, register_controller, run_game_controller, sound_controller);
     rtos::run();
 }

@@ -22,6 +22,14 @@ class RegisterController : public Controller, public rtos::task<> {
      */
     rtos::flag enabled;
     /**
+    * pressed flag to check for button presses
+    */
+    rtos::flag pressed;
+    /**
+    * command_available flag to check if command is available
+    */
+    rtos::flag command_processed;
+    /**
      * gameParameters reference for get and set player data
      */
     GameParameters &gameParameters;
@@ -32,6 +40,11 @@ class RegisterController : public Controller, public rtos::task<> {
     DisplayController &displayCtrl;
 
     /**
+     *
+     */
+    bool ready_to_receive = false;
+
+    /**
      * RTOS main tas
      */
     void main();
@@ -39,12 +52,17 @@ class RegisterController : public Controller, public rtos::task<> {
     /**
      * char for changing state
      */
-    char next_state = '0';
+    char next_state = 0;
 public:
     /**
      * interface function to activate task function
      */
     void enable();
+
+    /**
+    * interface function to set button_pressed flag
+    */
+    void button_pressed();
 
     /**
      * interface function for receiving data
@@ -62,7 +80,7 @@ public:
     /**
      * function for change stat
      */
-    char state() {
+    int state() {
         return next_state;
     }
 
