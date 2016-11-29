@@ -82,6 +82,8 @@
 /* EL/IX level */
 /* #undef _ELIX_LEVEL */
 /* Newlib version */
+/* _newlib_version.h.  Generated from _newlib_version.hin by configure.  */
+/* Version macros for internal and downstream use. */
 /* C99 formats support (such as %a, %zu, ...) in IO functions like
  * printf/scanf enabled */
 /* #undef _WANT_IO_C99_FORMATS */
@@ -227,7 +229,7 @@
 /*
  *  Written by Joel Sherrill <joel@OARcorp.com>.
  *
- *  COPYRIGHT (c) 1989-2000.
+ *  COPYRIGHT (c) 1989-2014.
  *
  *  On-Line Applications Research Corporation (OAR).
  *
@@ -243,17 +245,154 @@
  *
  *  $Id$
  */
+/* _newlib_version.h.  Generated from _newlib_version.hin by configure.  */
+/* Version macros for internal and downstream use. */
 /* Macro to test version of GCC.  Returns 0 for non-GCC or too old GCC. */
 /* Version with trailing underscores for BSD compatibility. */
+/*
+ * Feature test macros control which symbols are exposed by the system
+ * headers.  Any of these must be defined before including any headers.
+ *
+ * __STRICT_ANSI__ (defined by gcc -ansi, -std=c90, -std=c99, or -std=c11)
+ *	ISO C
+ *
+ * _POSIX_SOURCE (deprecated by _POSIX_C_SOURCE=1)
+ * _POSIX_C_SOURCE >= 1
+ * 	POSIX.1-1990
+ *
+ * _POSIX_C_SOURCE >= 2
+ * 	POSIX.2-1992
+ *
+ * _POSIX_C_SOURCE >= 199309L
+ * 	POSIX.1b-1993 Real-time extensions
+ *
+ * _POSIX_C_SOURCE >= 199506L
+ * 	POSIX.1c-1995 Threads extensions
+ *
+ * _POSIX_C_SOURCE >= 200112L
+ * 	POSIX.1-2001 and C99
+ *
+ * _POSIX_C_SOURCE >= 200809L
+ * 	POSIX.1-2008
+ *
+ * _XOPEN_SOURCE
+ *	POSIX.1-1990 and XPG4
+ *
+ * _XOPEN_SOURCE_EXTENDED
+ *	SUSv1 (POSIX.2-1992 plus XPG4v2)
+ *
+ * _XOPEN_SOURCE >= 500
+ *	SUSv2 (POSIX.1c-1995 plus XSI)
+ *
+ * _XOPEN_SOURCE >= 600
+ *	SUSv3 (POSIX.1-2001 plus XSI) and C99
+ *
+ * _XOPEN_SOURCE >= 700
+ *	SUSv4 (POSIX.1-2008 plus XSI)
+ *
+ * _ISOC99_SOURCE or gcc -std=c99 or g++
+ * 	ISO C99
+ *
+ * _ISOC11_SOURCE or gcc -std=c11 or g++ -std=c++11
+ * 	ISO C11
+ *
+ * _ATFILE_SOURCE (implied by _POSIX_C_SOURCE >= 200809L)
+ *	"at" functions
+ *
+ * _LARGEFILE_SOURCE (deprecated by _XOPEN_SOURCE >= 500)
+ *	fseeko, ftello
+ *
+ * _GNU_SOURCE
+ * 	All of the above plus GNU extensions
+ *
+ * _BSD_SOURCE (deprecated by _DEFAULT_SOURCE)
+ * _SVID_SOURCE (deprecated by _DEFAULT_SOURCE)
+ * _DEFAULT_SOURCE (or none of the above)
+ * 	POSIX-1.2008 with BSD and SVr4 extensions
+ */
+/*
+ * The following private macros are used throughout the headers to control
+ * which symbols should be exposed.  They are for internal use only, as
+ * indicated by the leading double underscore, and must never be used outside
+ * of these headers.
+ *
+ * __POSIX_VISIBLE
+ * 	any version of POSIX.1; enabled by default, or with _POSIX_SOURCE,
+ * 	any value of _POSIX_C_SOURCE, or _XOPEN_SOURCE >= 500.
+ *
+ * __POSIX_VISIBLE >= 2
+ * 	POSIX.2-1992; enabled by default, with _POSIX_C_SOURCE >= 2,
+ * 	or _XOPEN_SOURCE >= 500.
+ *
+ * __POSIX_VISIBLE >= 199309
+ * 	POSIX.1b-1993; enabled by default, with _POSIX_C_SOURCE >= 199309L,
+ * 	or _XOPEN_SOURCE >= 500.
+ *
+ * __POSIX_VISIBLE >= 199506
+ * 	POSIX.1c-1995; enabled by default, with _POSIX_C_SOURCE >= 199506L,
+ * 	or _XOPEN_SOURCE >= 500.
+ *
+ * __POSIX_VISIBLE >= 200112
+ * 	POSIX.1-2001; enabled by default, with _POSIX_C_SOURCE >= 200112L,
+ * 	or _XOPEN_SOURCE >= 600.
+ *
+ * __POSIX_VISIBLE >= 200809
+ * 	POSIX.1-2008; enabled by default, with _POSIX_C_SOURCE >= 200809L,
+ * 	or _XOPEN_SOURCE >= 700.
+ *
+ * __XSI_VISIBLE
+ *	XPG4 XSI extensions; enabled with any version of _XOPEN_SOURCE.
+ *
+ * __XSI_VISIBLE >= 4
+ *	SUSv1 XSI extensions; enabled with both _XOPEN_SOURCE and
+ * 	_XOPEN_SOURCE_EXTENDED together.
+ *
+ * __XSI_VISIBLE >= 500
+ *	SUSv2 XSI extensions; enabled with _XOPEN_SOURCE >= 500.
+ *
+ * __XSI_VISIBLE >= 600
+ *	SUSv3 XSI extensions; enabled with _XOPEN_SOURCE >= 600.
+ *
+ * __XSI_VISIBLE >= 700
+ *	SUSv4 XSI extensions; enabled with _XOPEN_SOURCE >= 700.
+ *
+ * __ISO_C_VISIBLE >= 1999
+ * 	ISO C99; enabled with gcc -std=c99 or newer (on by default since GCC 5),
+ * 	any version of C++, or with _ISOC99_SOURCE, _POSIX_C_SOURCE >= 200112L,
+ * 	or _XOPEN_SOURCE >= 600.
+ *
+ * __ISO_C_VISIBLE >= 2011
+ * 	ISO C11; enabled with gcc -std=c11 or newer (on by default since GCC 5),
+ * 	g++ -std=c++11 or newer (on by default since GCC 6), or with
+ * 	_ISOC11_SOURCE.
+ *
+ * __ATFILE_VISIBLE
+ *	"at" functions; enabled by default, with _ATFILE_SOURCE,
+ * 	_POSIX_C_SOURCE >= 200809L, or _XOPEN_SOURCE >= 700.
+ *
+ * __LARGEFILE_VISIBLE
+ *	fseeko, ftello; enabled with _LARGEFILE_SOURCE or _XOPEN_SOURCE >= 500.
+ *
+ * __BSD_VISIBLE
+ * 	BSD extensions; enabled by default, or with _BSD_SOURCE.
+ *
+ * __SVID_VISIBLE
+ * 	SVr4 extensions; enabled by default, or with _SVID_SOURCE.
+ *
+ * __MISC_VISIBLE
+ * 	Extensions found in both BSD and SVr4 (shorthand for
+ * 	(__BSD_VISIBLE || __SVID_VISIBLE)), or newlib-specific
+ * 	extensions; enabled by default.
+ *
+ * __GNU_VISIBLE
+ * 	GNU extensions; enabled with _GNU_SOURCE.
+ *
+ * In all cases above, "enabled by default" means either by defining
+ * _DEFAULT_SOURCE, or by not defining any of the public feature test macros.
+ * Defining _GNU_SOURCE makes all of the above avaliable.
+ */
 /* RTEMS adheres to POSIX -- 1003.1b with some features from annexes.  */
 /* XMK loosely adheres to POSIX -- 1003.1 */
-/* Per the permission given in POSIX.1-2008 section 2.2.1, define
- * _POSIX_C_SOURCE if _XOPEN_SOURCE is defined and _POSIX_C_SOURCE is not.
- * (_XOPEN_SOURCE indicates that XSI extensions are desired by an application.)
- * This permission is first granted in 2008, but use it for older ones, also.
- * Allow for _XOPEN_SOURCE to be empty (from the earliest form of it, before it
- * was required to have specific values).
- */
 /* exceptions first */
 /* 16 bit integer machines */
 /* For the PowerPC eabi, force the _impure_ptr to be in .sdata */
@@ -297,7 +436,7 @@
   as the Gnu C 'extern inline'.  */
 /* We're using GCC in C99 mode, or an unknown compiler which
   we just have to hope obeys the C99 semantics of inline.  */
-/* Copyright (C) 1989-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2015 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -392,7 +531,7 @@ typedef unsigned int wchar_t;
    To get a strict ANSI C environment, define macro __STRICT_ANSI__.  This will
    "comment out" the non-ANSI parts of the ANSI header files (non-ANSI header
    files aren't affected).  */
-/* Copyright (C) 1989-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2015 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -485,7 +624,7 @@ typedef struct {
 /*
  *  Written by Joel Sherrill <joel@OARcorp.com>.
  *
- *  COPYRIGHT (c) 1989-2000.
+ *  COPYRIGHT (c) 1989-2014.
  *
  *  On-Line Applications Research Corporation (OAR).
  *
@@ -550,7 +689,7 @@ typedef long _fpos_t; /* XXX must match off_t in <sys/types.h> */
    We simply change "unsigned" to "signed" for this single definition
    to make sure ssize_t and size_t only differ by their signedness. */
 typedef signed int _ssize_t;
-/* Copyright (C) 1989-2014 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2015 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -852,6 +991,212 @@ extern struct _reent *_impure_ptr ;
 extern struct _reent *const _global_impure_ptr ;
 void _reclaim_reent (struct _reent *);
 /* #define _REENT_ONLY define this to get only reentrant routines */
+/* libc/sys/linux/sys/cdefs.h - Helper macros for K&R vs. ANSI C compat. */
+/* Written 2000 by Werner Almesberger */
+/*-
+ * Copyright (c) 1991, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Berkeley Software Design, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)cdefs.h	8.8 (Berkeley) 1/9/95
+ * $FreeBSD$
+ */
+/*
+ *  $Id$
+ */
+/*
+ *  Written by Joel Sherrill <joel@OARcorp.com>.
+ *
+ *  COPYRIGHT (c) 1989-2014.
+ *
+ *  On-Line Applications Research Corporation (OAR).
+ *
+ *  Permission to use, copy, modify, and distribute this software for any
+ *  purpose without fee is hereby granted, provided that this entire notice
+ *  is included in all copies of any software which is or includes a copy
+ *  or modification of this software.
+ *
+ *  THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
+ *  WARRANTY.  IN PARTICULAR,  THE AUTHOR MAKES NO REPRESENTATION
+ *  OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY OF THIS
+ *  SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+ *
+ *  $Id$
+ */
+/* Copyright (C) 1989-2015 Free Software Foundation, Inc.
+
+This file is part of GCC.
+
+GCC is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3, or (at your option)
+any later version.
+
+GCC is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Under Section 7 of GPL version 3, you are granted additional
+permissions described in the GCC Runtime Library Exception, version
+3.1, as published by the Free Software Foundation.
+
+You should have received a copy of the GNU General Public License and
+a copy of the GCC Runtime Library Exception along with this program;
+see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+<http://www.gnu.org/licenses/>.  */
+/*
+ * ISO C Standard:  7.17  Common definitions  <stddef.h>
+ */
+/*
+ * Testing against Clang-specific extensions.
+ */
+/*
+ * This code has been put in place to help reduce the addition of
+ * compiler specific defines in FreeBSD code.  It helps to aid in
+ * having a compiler-agnostic source tree.
+ */
+/*
+ * Compiler memory barriers, specific to gcc and clang.
+ */
+/* XXX: if __GNUC__ >= 2: not tested everywhere originally, where replaced */
+/*
+ * The __CONCAT macro is used to concatenate parts of symbol names, e.g.
+ * with "#define OLD(foo) __CONCAT(old,foo)", OLD(foo) produces oldfoo.
+ * The __CONCAT macro is a bit tricky to use if it must work in non-ANSI
+ * mode -- there must be no spaces between its arguments, and for nested
+ * __CONCAT's, all the __CONCAT's must be at the left.  __CONCAT can also
+ * concatenate double-quoted strings produced by the __STRING macro, but
+ * this only works with ANSI C.
+ *
+ * __XSTRING is like __STRING, but it expands any macros in its argument
+ * first.  It is only available with ANSI C.
+ */
+/*
+ * Compiler-dependent macros to help declare dead (non-returning) and
+ * pure (no side effects) functions, and unused variables.  They are
+ * null except for versions of gcc that are known to support the features
+ * properly (old versions of gcc-2 supported the dead and pure features
+ * in a different (wrong) way).  If we do not provide an implementation
+ * for a given compiler, let the compile fail if it is told to use
+ * a feature that we cannot live without.
+ */
+/*
+ * Keywords added in C11.
+ */
+/*
+ * Emulation of C11 _Generic().  Unlike the previously defined C11
+ * keywords, it is not possible to implement this using exactly the same
+ * syntax.  Therefore implement something similar under the name
+ * __generic().  Unlike _Generic(), this macro can only distinguish
+ * between a single type, so it requires nested invocations to
+ * distinguish multiple cases.
+ */
+/* XXX: should use `#if __STDC_VERSION__ < 199901'. */
+/*
+ * GCC 2.95 provides `__restrict' as an extension to C90 to support the
+ * C99-specific `restrict' type qualifier.  We happen to use `__restrict' as
+ * a way to define the `restrict' type qualifier without disturbing older
+ * software that is unaware of C99 keywords.
+ */
+/*
+ * GNU C version 2.96 adds explicit branch prediction so that
+ * the CPU back-end can hint the processor and also so that
+ * code blocks can be reordered such that the predicted path
+ * sees a more linear flow, thus improving cache behavior, etc.
+ *
+ * The following two macros provide us with a way to utilize this
+ * compiler feature.  Use __predict_true() if you expect the expression
+ * to evaluate to true, and __predict_false() if you expect the
+ * expression to evaluate to false.
+ *
+ * A few notes about usage:
+ *
+ *	* Generally, __predict_false() error condition checks (unless
+ *	  you have some _strong_ reason to do otherwise, in which case
+ *	  document it), and/or __predict_true() `no-error' condition
+ *	  checks, assuming you want to optimize for the no-error case.
+ *
+ *	* Other than that, if you don't know the likelihood of a test
+ *	  succeeding from empirical or other `hard' evidence, don't
+ *	  make predictions.
+ *
+ *	* These are meant to be used in places that are run `a lot'.
+ *	  It is wasteful to make predictions in code that is run
+ *	  seldomly (e.g. at subsystem initialization time) as the
+ *	  basic block reordering that this affects can often generate
+ *	  larger code.
+ */
+/*
+ * Given the pointer x to the member m of the struct s, return
+ * a pointer to the containing structure.  When using GCC, we first
+ * assign pointer x to a local variable, to check that its type is
+ * compatible with member m.
+ */
+/*
+ * Compiler-dependent macros to declare that functions take printf-like
+ * or scanf-like arguments.  They are null except for versions of gcc
+ * that are known to support the features properly (old versions of gcc-2
+ * didn't permit keeping the keywords out of the application namespace).
+ */
+/*
+ * FORTIFY_SOURCE, and perhaps other compiler-specific features, require
+ * the use of non-standard inlining.  In general we should try to avoid
+ * using these but GCC-compatible compilers tend to support the extensions
+ * well enough to use them in limited cases.
+ */
+/* Compiler-dependent macros that rely on FreeBSD-specific extensions. */
+/*
+ * Type Safety Checking
+ *
+ * Clang provides additional attributes to enable checking type safety
+ * properties that cannot be enforced by the C type system. 
+ */
+/*
+ * Lock annotations.
+ *
+ * Clang provides support for doing basic thread-safety tests at
+ * compile-time, by marking which locks will/should be held when
+ * entering/leaving a functions.
+ *
+ * Furthermore, it is also possible to annotate variables and structure
+ * members to enforce that they are only accessed when certain locks are
+ * held.
+ */
+/* Structure implements a lock. */
+/* Function acquires an exclusive or shared lock. */
+/* Function attempts to acquire an exclusive or shared lock. */
+/* Function releases a lock. */
+/* Function asserts that an exclusive or shared lock is held. */
+/* Function requires that an exclusive or shared lock is or is not held. */
+/* Function should not be analyzed. */
+/* Guard variables and structure members by lock. */
 /* place holder so platforms may add stdlib.h extensions */
 
 typedef struct
@@ -893,28 +1238,47 @@ ldiv_t ldiv (long __numer, long __denom);
 void * malloc (size_t __size) ;
 int mblen (const char *, size_t);
 int _mblen_r (struct _reent *, const char *, size_t, _mbstate_t *);
-int mbtowc (wchar_t *__restrict, const char *__restrict, size_t);
-int _mbtowc_r (struct _reent *, wchar_t *__restrict, const char *__restrict, size_t, _mbstate_t *);
+int mbtowc (wchar_t *restrict, const char *restrict, size_t);
+int _mbtowc_r (struct _reent *, wchar_t *restrict, const char *restrict, size_t, _mbstate_t *);
 int wctomb (char *, wchar_t);
 int _wctomb_r (struct _reent *, char *, wchar_t, _mbstate_t *);
-size_t mbstowcs (wchar_t *__restrict, const char *__restrict, size_t);
-size_t _mbstowcs_r (struct _reent *, wchar_t *__restrict, const char *__restrict, size_t, _mbstate_t *);
-size_t wcstombs (char *__restrict, const wchar_t *__restrict, size_t);
-size_t _wcstombs_r (struct _reent *, char *__restrict, const wchar_t *__restrict, size_t, _mbstate_t *);
+size_t mbstowcs (wchar_t *restrict, const char *restrict, size_t);
+size_t _mbstowcs_r (struct _reent *, wchar_t *restrict, const char *restrict, size_t, _mbstate_t *);
+size_t wcstombs (char *restrict, const wchar_t *restrict, size_t);
+size_t _wcstombs_r (struct _reent *, char *restrict, const wchar_t *restrict, size_t, _mbstate_t *);
+char * _mkdtemp_r (struct _reent *, char *);
+int _mkostemp_r (struct _reent *, char *, int);
+int _mkostemps_r (struct _reent *, char *, int, int);
+int _mkstemp_r (struct _reent *, char *);
+int _mkstemps_r (struct _reent *, char *, int);
+char * _mktemp_r (struct _reent *, char *) __attribute__ ((__deprecated__("the use of `mktemp' is dangerous; use `mkstemp' instead")));
 void qsort (void * __base, size_t __nmemb, size_t __size, __compar_fn_t _compar);
 int rand (void);
 void * realloc (void * __r, size_t __size) ;
 void srand (unsigned __seed);
-double strtod (const char *__restrict __n, char **__restrict __end_PTR);
-double _strtod_r (struct _reent *,const char *__restrict __n, char **__restrict __end_PTR);
-float strtof (const char *__restrict __n, char **__restrict __end_PTR);
-long strtol (const char *__restrict __n, char **__restrict __end_PTR, int __base);
-long _strtol_r (struct _reent *,const char *__restrict __n, char **__restrict __end_PTR, int __base);
-unsigned long strtoul (const char *__restrict __n, char **__restrict __end_PTR, int __base);
-unsigned long _strtoul_r (struct _reent *,const char *__restrict __n, char **__restrict __end_PTR, int __base);
+double strtod (const char *restrict __n, char **restrict __end_PTR);
+double _strtod_r (struct _reent *,const char *restrict __n, char **restrict __end_PTR);
+float strtof (const char *restrict __n, char **restrict __end_PTR);
+long strtol (const char *restrict __n, char **restrict __end_PTR, int __base);
+long _strtol_r (struct _reent *,const char *restrict __n, char **restrict __end_PTR, int __base);
+unsigned long strtoul (const char *restrict __n, char **restrict __end_PTR, int __base);
+unsigned long _strtoul_r (struct _reent *,const char *restrict __n, char **restrict __end_PTR, int __base);
 int system (const char *__string);
-long long strtoll (const char *__restrict __n, char **__restrict __end_PTR, int __base);
-unsigned long long strtoull (const char *__restrict __n, char **__restrict __end_PTR, int __base);
+void _Exit (int __status) __attribute__ ((__noreturn__));
+int _putenv_r (struct _reent *, char *__string);
+void * _reallocf_r (struct _reent *, void *, size_t);
+int _setenv_r (struct _reent *, const char *__string, const char *__value, int __overwrite);
+char * __itoa (int, char *, int);
+char * __utoa (unsigned, char *, int);
+long long atoll (const char *__nptr);
+long long _atoll_r (struct _reent *, const char *__nptr);
+long long llabs (long long);
+lldiv_t lldiv (long long __numer, long long __denom);
+long long strtoll (const char *restrict __n, char **restrict __end_PTR, int __base);
+long long _strtoll_r (struct _reent *, const char *restrict __n, char **restrict __end_PTR, int __base);
+unsigned long long strtoull (const char *restrict __n, char **restrict __end_PTR, int __base);
+unsigned long long _strtoull_r (struct _reent *, const char *restrict __n, char **restrict __end_PTR, int __base);
+int _unsetenv_r (struct _reent *, const char *__string);
 char * _dtoa_r (struct _reent *, double, int, int, int *, int*, char**);
 void * _malloc_r (struct _reent *, size_t) ;
 void * _calloc_r (struct _reent *, size_t, size_t) ;
@@ -923,8 +1287,21 @@ void * _realloc_r (struct _reent *, void *, size_t) ;
 void _mstats_r (struct _reent *, char *);
 int _system_r (struct _reent *, const char *);
 void __eprintf (const char *, const char *, unsigned int, const char *);
+/* There are two common qsort_r variants.  If you request
+   _BSD_SOURCE, you get the BSD version; otherwise you get the GNU
+   version.  We want that #undef qsort_r will still let you
+   invoke the underlying function, but that requires gcc support. */
 /* On platforms where long double equals double.  */
-extern long double strtold (const char *__restrict, char **__restrict);
+extern long double _strtold_r (struct _reent *, const char *restrict, char **restrict);
+extern long double strtold (const char *restrict, char **restrict);
+/*
+ * If we're in a mode greater than C99, expose C11 functions.
+ */
+void * aligned_alloc(size_t, size_t) __attribute__((__malloc__)) __attribute__((__alloc_align__(1)))
+     __attribute__((__alloc_size__(2)));
+int at_quick_exit(void (*)(void));
+_Noreturn void
+ quick_exit(int);
 
 unsigned char bmptk_stack[ 81920 ]
    __attribute__ (( section( ".bmptk_stack" )));

@@ -1,7 +1,60 @@
 // simple IR signal detector
 
-#include <rtos.hpp>
-#include "hwlib.hpp"
+#include "../../../libs/hwlib/hwlib.hpp"
+#include "../../../libs/rtos/rtos.hpp"
+#include "applicationLogic/command.h"
+
+class test : public rtos::task<> {
+    private:
+        int highs = 0;
+        short bits = 0;
+        int amount_bits_found = 0;
+        Command received[20];
+        int counter = 0;
+        hwlib::target::pin_in &pin;
+        void main(){
+            for(;;) {
+                hwlib::wait_ms(100);
+                if(counter >= 20) {
+                    int correct = 0;
+                    for(int i = 0; i < 20; i++) {
+                        Command k = received[i];
+                        hwlib::cout << "\n";
+                        hwlib::cout << i << ": ";
+                        k.print_command();
+                        hwlib::cout << "\n";
+                    }
+                    counter = 0;
+                    hwlib::cout << correct << "/20 - correct \n";
+                } else {
+                    while (amount_bits_found < 16) {
+                        if (!pin.get()) {
+                            while (!pin.get()) {
+                                highs++;
+                            }
+                            if (highs > 1600) {
+                                bits |= 1 << (15 - amount_bits_found);
+                                amount_bits_found++;
+                            } else {
+                                if (amount_bits_found != 0) {
+                                    amount_bits_found++;
+                                }
+                            }
+                            highs = 0;
+                        }
+                    }
+                    received[counter] = Command(bits);
+                    counter++;
+                    bits = 0;
+                    amount_bits_found = 0;
+                    hwlib::wait_ms(3);
+                }
+            }
+        }
+
+    public:
+        test(hwlib::target::pin_in &pin) : task("test"), pin(pin){}
+};
 
 int main(void) {
 
@@ -16,28 +69,8 @@ int main(void) {
     auto tsop_vdd = target::pin_out(target::pins::d10);
     tsop_gnd.set(0);
     tsop_vdd.set(1);
-    int highs = 0;
-    int amount_bits_found = 0;
-    for (; ;) {
-        hwlib::wait_ms(100);
-        while (amount_bits_found < 16)
-            if (!tsop_signal.get()) {
-                while (!tsop_signal.get()) {
-                    highs++;
-                }
-                if (highs > 4000) {
-                    amount_bits_found++ ;
-                    hwlib::cout << "1";
-                } else {
-                    if(amount_bits_found != 0) {
-                        amount_bits_found++;
-                        hwlib::cout << "0";
-                    }
-                }
-                highs = 0;
-            }
-        hwlib::cout << "\n";
-        amount_bits_found = 0;
-        hwlib::wait_ms(3);
-    }
+
+    auto kek = test(tsop_signal);
+
+    rtos::run();
 }
