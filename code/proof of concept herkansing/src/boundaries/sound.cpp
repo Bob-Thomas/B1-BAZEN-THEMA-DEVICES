@@ -38,3 +38,11 @@ void Sound::play_shoot() {
     }
     play_sound.set();
 }
+
+void Sound::play_hit() {
+    for (int i = 0; i < 20; i++) {
+        sounds.write({1000 - 100 * i, 10000});
+    }
+    play_sound.set();
+}
+

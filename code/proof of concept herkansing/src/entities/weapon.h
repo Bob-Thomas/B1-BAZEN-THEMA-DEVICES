@@ -11,6 +11,7 @@ class Weapon {
         int damage;
         char * name;
     public:
+        Weapon(): id(-1), cooldown(-1), damage(-1), name((char*) "UNDEFINED"){}
         Weapon(int id, int cooldown, int damage, char * name);
 
         int get_id() const;

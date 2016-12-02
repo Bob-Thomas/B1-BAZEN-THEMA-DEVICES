@@ -5,7 +5,7 @@
 #ifndef CODE_TRANSMITTER_H
 #define CODE_TRANSMITTER_H
 
-#include "../../../libs/hwlib/hwlib-due.hpp"
+#include "../../../libs/hwlib/hwlib.hpp"
 #include "../../../libs/rtos/rtos.hpp"
 
 class Transmitter  : public rtos::task<> {

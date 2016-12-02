@@ -4,7 +4,7 @@
 
 #include "button.h"
 
-Button::Button(int priority, hwlib::pin_in pin, RunGameController& controller) : task(priority, "Button task"), clock(this, 100 * rtos::ms, "Button clock"), pin(pin), controller(controller) {}
+Button::Button(int priority, hwlib::target::pin_in pin, RunGameController& controller) : task(priority, "Button task"), clock(this, 100 * rtos::ms, "Button clock"), pin(pin), controller(controller) {}
 
 void Button::main() {
 

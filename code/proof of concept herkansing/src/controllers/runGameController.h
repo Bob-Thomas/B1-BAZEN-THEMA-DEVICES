@@ -36,7 +36,7 @@ class RunGameController : public rtos::task<> {
 
         void main();
     public:
-        RunGameController(int priority, Sound sound, Transmitter transmitter, DisplayController display, Arsenal arsenal);
+        RunGameController(int priority, Sound &sound, Transmitter &transmitter, DisplayController &display, Arsenal arsenal);
 
         void ir_received(Command& c);
         void button_pressed();

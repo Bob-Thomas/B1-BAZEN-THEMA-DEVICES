@@ -4,17 +4,13 @@
 
 #include "runGameController.h"
 
-RunGameController::RunGameController(int priority, Sound sound, Transmitter transmitter, DisplayController display, Arsenal arsenal)
+RunGameController::RunGameController(int priority, Sound &sound, Transmitter &transmitter, DisplayController &display, Arsenal arsenal)
         : task(priority, "Rungame task"), game_clock(this, 600000000000, "gameclock")
         , received(this, "Received flag"), pressed(this, "Pressed flag"),
           sound(sound), transmitter(transmitter), display(display), arsenal(arsenal) {}
 
 
 void RunGameController::main() {
-    wait(pressed);
-    wait(received);
-    wait(received);
-    wait(received);
     for(;;) {
         auto evt = wait(game_clock + pressed + received);
 
@@ -26,6 +22,8 @@ void RunGameController::main() {
             if(hwlib::now_us() - last_shot >= gameParameters.get_weapon().get_cooldown() && hwlib::now_us() - last_hit >= invincible_time) {
                 shoot();
             }
+        }
+        else if(evt == received ) {
         }
     }
 
@@ -57,9 +55,10 @@ void RunGameController::ir_received(Command &c) {
     else {
         hit(c.get_sender(), c.get_data());
     }
+    received.set();
 }
 
 
 void RunGameController::button_pressed() {
-
+    pressed.set();
 }

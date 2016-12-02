@@ -10,7 +10,7 @@ Weapon Arsenal::get_weapon_by_id(int id) {
             return weapons[i];
         }
     }
-    return Weapon(0,0,0, "Weapon not found");
+    return Weapon(0,0,0, (char*)"Weapon not found");
 }
 
 void Arsenal::add_weapon(const Weapon& weapon) {

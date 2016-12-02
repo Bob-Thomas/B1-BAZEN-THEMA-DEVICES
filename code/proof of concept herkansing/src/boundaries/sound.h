@@ -6,7 +6,7 @@
 #define CODE_SOUND_H
 
 #include "../../../libs/rtos/rtos.hpp"
-#include "../../../libs/hwlib/hwlib-due.hpp"
+#include "../../../libs/hwlib/hwlib.hpp"
 
 /**
  * \struct Sound

@@ -14,7 +14,9 @@
 #include "entities/weapon.h"
 #include "entities/arsenal.h"
 #include "boundaries/button.h"
-#include "boundaries/sound.h"
+#include "boundaries/receiver.h"
+
+namespace target = hwlib::target;
 
 int main() {
 
@@ -26,24 +28,36 @@ int main() {
     hwlib::cout << " starting laser tag project\n";
 
     Arsenal arsenal;
-    arsenal.add_weapon({1,10, 20, "power beam"});
-    arsenal.add_weapon({2,5, 10, "Sonic beam"});
-    arsenal.add_weapon({3,1, 3, "laser beam"});
+    arsenal.add_weapon({1, 10, 20, (char *) "power beam"});
+    arsenal.add_weapon({2, 5, 10, (char *) "Sonic beam"});
+    arsenal.add_weapon({3, 1, 3, (char *) "laser beam"});
 
 
 #if GAMEMODE == PLAYER
     hwlib::cout << "Enabling the player program\n";
 
-    auto button_pin = target::pin_in(target::pins::d40);
-    auto sound_pin = target::pin_out(target::pins::d10);
+    auto gnd = target::pin_out( target::pins::d49);
+    auto vlt = target::pin_out( target::pins::d51);
+    gnd.set(0);
+    vlt.set(1);
+    auto button_pin = target::pin_in(target::pins::d53);
+
+    auto sound_pin = target::pin_out(target::pins::d11);
     auto ir_pin = target::d2_36kHz();
 
-    Sound sound(3, sound_pin);
-    Transmitter transmitter(0, ir_pin);
-    DisplayController display;
+    auto tsop_signal = target::pin_in(target::pins::d8);
+    auto tsop_gnd = target::pin_out(target::pins::d9);
+    auto tsop_vdd = target::pin_out(target::pins::d10);
+    tsop_gnd.set(0);
+    tsop_vdd.set(1);
 
-    RunGameController runGameController(2, sound, transmitter, display, arsenal);
-    Button button(2, button_pin, runGameController);
+    auto sound = Sound(4, sound_pin);
+    auto transmitter = Transmitter(3, ir_pin);
+    auto display = DisplayController();
+
+    auto runGameController = RunGameController(2, sound, transmitter, display, arsenal);
+    auto receiver = Receiver(1, tsop_signal, runGameController);
+    auto button = Button(0, button_pin, runGameController);
 #else
     hwlib::cout << "Enabling the game master program\n";
 #endif

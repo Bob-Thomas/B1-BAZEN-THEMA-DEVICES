@@ -93,10 +93,6 @@ class GameParameters {
 
         void set_health(int health);
 
-        const Weapon &get_weapon() const {
-            return weapon;
-        }
-
         void set_weapon(const Weapon &weapon);
 
         const Weapon & get_weapon() const;

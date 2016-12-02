@@ -7,18 +7,17 @@
 
 #include "../../../libs/rtos/rtos.hpp"
 #include "../controllers/runGameController.h"
-#include "../../../libs/hwlib/hwlib-due.hpp"
+#include "../../../libs/hwlib/hwlib.hpp"
 
-namespace target = hwlib::target;
 
 class Button : public rtos::task<> {
     private:
         rtos::clock clock;
-        hwlib::pin_in& pin;
+        hwlib::target::pin_in& pin;
         RunGameController &controller;
 
     public:
-        Button(int priority, hwlib::pin_in pin, RunGameController& controller);
+        Button(int priority, hwlib::target::pin_in pin, RunGameController& controller);
 
         void main();
 };

@@ -4,7 +4,7 @@
 
 #include "gameParameters.h"
 
-GameParameters::GameParameters(): shots_taken(0) {
+GameParameters::GameParameters(): hit_amount(0) {
 
 }
 
@@ -13,7 +13,7 @@ void GameParameters::add_received_shot(int player_id, int damage) {
     if(hit_amount < 20) {
         int index = -1;
 
-        for(int i = 0; i < sizeof(shots)/ sizeof(shots[0]); i++) {
+        for(int i = 0; i < int(sizeof(shots)/ sizeof(shots[0])); i++) {
             if(player_id == shots[i].player_id) {
                 index = i;
             }
@@ -54,6 +54,6 @@ void GameParameters::set_weapon(const Weapon &weapon) {
     GameParameters::weapon = weapon;
 }
 
-const Weapon &GameParameters::getWeapon() const {
+const Weapon &GameParameters::get_weapon() const {
     return weapon;
 }
